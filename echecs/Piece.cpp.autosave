@@ -1,3 +1,2 @@
 #include "Piece.h"
 
-std::pair<unsigned,unsigned> Piece::move(const unsigned & x, const unsigned & y);
