@@ -3,6 +3,8 @@
 
 #include <iomanip>
 
+enum Color {blanc, noir};
+
 typedef std::pair<unsigned,unsigned> pairCoord;
 /**
  * @author Laurent
@@ -11,11 +13,22 @@ typedef std::pair<unsigned,unsigned> pairCoord;
  */
 class Piece
 {
-private:
-    enum myColor {blanc, noir};     
+protected:
+    Color      myColor = blanc;
+    pairCoord  myCoord = std::pair<unsigned,unsigned> (0,0);
 public:
-    virtual pairCoord move(const Piece & piece, const unsigned & x, const unsigned & y);
-    virtual ~Piece();
+//    Piece();
+    virtual ~Piece() {}
+    virtual pairCoord move(Piece & piece, const pairCoord & coord) = 0;
+
+    Color     getColor() const {return myColor;}
+    pairCoord getCoord() const {return myCoord;}
+
+    void setCoord(const pairCoord & coord)
+    {
+        myCoord.first  = coord.first;
+        myCoord.second = coord.second;
+    }
 };
 
 #endif // PIECE_H

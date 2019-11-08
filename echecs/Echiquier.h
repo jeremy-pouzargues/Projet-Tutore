@@ -4,21 +4,21 @@
 #include <iostream>
 #include <vector>
 
-
-typedef std::vector<char /* pion */> VLine;
-typedef std::vector<VLine> Matrice;
+#include "Pion.h"
 /**
  * @author Laurent
  * @brief echiquier
  * @class Echiquier Echiquier.h "include Echiquier.h"
  **/
+
+typedef std::vector<std::vector<char>> Matrice;
 class Echiquier
 {
 private:
+
     Matrice myEchiquier;
 public:
      Echiquier();
-
      void show() const;
 };//Echiquier
 

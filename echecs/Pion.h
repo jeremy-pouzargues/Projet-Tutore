@@ -3,16 +3,14 @@
 
 #include "Piece.h"
 
-enum Color {blanc, noir};
 
 class Pion : public Piece
 {
-private:
-    Color myColor;
-    pairCoord myPosition;
+
 public:
-    Pion(const Color & color,const pairCoord & coord);
-    virtual pairCoord move(const Piece & piece, const unsigned & x, const unsigned & y);
+    Pion (const Color & color,const pairCoord & coord);
+//    virtual ~Pion() {}
+    virtual pairCoord move(Piece & piece, const pairCoord & coord);
 };
 
 #endif // PION_H
