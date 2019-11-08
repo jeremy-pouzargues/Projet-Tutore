@@ -12,7 +12,7 @@ typedef std::pair<unsigned,unsigned> pairCoord;
 class Piece
 {
 private:
-    enum myColor {blanc, noir};     
+    //enum myColor {blanc, noir};     
 public:
     virtual pairCoord move(const Piece & piece, const unsigned & x, const unsigned & y);
     virtual ~Piece();

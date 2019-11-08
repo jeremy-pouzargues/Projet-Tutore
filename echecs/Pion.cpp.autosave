@@ -1,0 +1,7 @@
+#include "Pion.h"
+
+Pion::Pion(const Color & color ,const pairCoord & coord ) :myColor(color),myPosition(coord) {    
+
+}// 
+
+Pion::move
