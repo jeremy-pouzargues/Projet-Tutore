@@ -8,8 +8,8 @@
 const char KVIDE  = '_';
 
 //pions
-const char KPIONB = 'p';
-const char KPIONN = '1';
+const char KPAWNB = 'p';
+const char KPAWNN = '1';
 
 
 // couleurs  des pieces
@@ -28,12 +28,11 @@ protected:
     pairCoord  myCoord;
     char       myCarac;
 public:
-
     virtual ~Piece() {}
-    virtual pairCoord move(Piece & piece, const pairCoord & coord) = 0;
+    virtual pairCoord move(const pairCoord & coord) = 0;
 
-    Color     getColor() const {return myColor;}
-    pairCoord getCoord() const {return myCoord;}
+    Color      getColor();
+    pairCoord  getCoord();
 
     void setCoord(const pairCoord & coord);
     char getCarac ();

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-#include "Pion.h"
+#include "Pawn.h"
 
 /**
  * @author Laurent
@@ -12,15 +12,19 @@
  * @class Echiquier Echiquier.h "include Echiquier.h"
  **/
 
-typedef std::vector<std::vector<char>> Matrice;
+typedef std::vector<std::vector<char>> Matrix;
 
-class Echiquier
+class ChessBoard
 {
 private:
-    Matrice myEchiquier;
+    Matrix myChessBoard;
+    std::vector<Piece> myPieces;
 public:
-     Echiquier();
+     ChessBoard(Piece & piece);
+
      void show() const;
+
+     void actualize(Piece & piece, const pairCoord & newCoord);
 };//Echiquier
 
 
