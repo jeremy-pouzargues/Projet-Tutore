@@ -6,6 +6,11 @@ using namespace std;
 Pion::Pion(const Color & color,const pairCoord & coord) {
     myColor = color;
     myCoord = coord;
+
+    if (color == blanc)
+        myCarac = KPIONB;
+    else
+        myCarac = KPIONN;
 }
 
 pairCoord Pion::move(Piece & pion, const pairCoord & coord) {

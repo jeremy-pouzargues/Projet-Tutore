@@ -1,19 +1,22 @@
 #include "Echiquier.h"
 #include <vector>
+#include "Piece.h"
+
 using namespace std;
 
 Echiquier::Echiquier() {
 
     myEchiquier.resize(8,vector<char>(8));
     Pion pion1(blanc, pair<unsigned,unsigned> (0,0));
+
     // toutes les cases sont vides
     for (unsigned i (0); i < 8; ++i) {
         for(unsigned j(0); j < 8; ++j) {
           {
-                myEchiquier[i][j] = 'o';
+                myEchiquier[i][j] = KVIDE;
             }
         }
-        Pion pion1(blanc, pair<unsigned,unsigned> (0,0));
+        Pion pion1(blanc, pair<unsigned,unsigned> (5,3));
         myEchiquier[pion1.getCoord().first][pion1.getCoord().second] = 'p';
      }
 

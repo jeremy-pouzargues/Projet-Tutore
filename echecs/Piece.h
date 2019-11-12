@@ -3,6 +3,16 @@
 
 #include <iomanip>
 
+//constantes des pieces
+
+const char KVIDE  = '_';
+
+//pions
+const char KPIONB = 'p';
+const char KPIONN = '1';
+
+
+// couleurs  des pieces
 enum Color {blanc, noir};
 
 typedef std::pair<unsigned,unsigned> pairCoord;
@@ -14,21 +24,19 @@ typedef std::pair<unsigned,unsigned> pairCoord;
 class Piece
 {
 protected:
-    Color      myColor = blanc;
-    pairCoord  myCoord = std::pair<unsigned,unsigned> (0,0);
+    Color      myColor;
+    pairCoord  myCoord;
+    char       myCarac;
 public:
-//    Piece();
+
     virtual ~Piece() {}
     virtual pairCoord move(Piece & piece, const pairCoord & coord) = 0;
 
     Color     getColor() const {return myColor;}
     pairCoord getCoord() const {return myCoord;}
 
-    void setCoord(const pairCoord & coord)
-    {
-        myCoord.first  = coord.first;
-        myCoord.second = coord.second;
-    }
+    void setCoord(const pairCoord & coord);
+    char getCarac ();
 };
 
 #endif // PIECE_H

@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Pion.h"
+
 /**
  * @author Laurent
  * @brief echiquier
@@ -12,10 +13,10 @@
  **/
 
 typedef std::vector<std::vector<char>> Matrice;
+
 class Echiquier
 {
 private:
-
     Matrice myEchiquier;
 public:
      Echiquier();
