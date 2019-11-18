@@ -2,10 +2,10 @@
 #include "ChessBoard.h"
 #include "CExc.h"
 using namespace std;
-
-
-
-
+/**
+ * @brief play
+ * @param chessBoard
+ */
 void play(ChessBoard & chessBoard) {
 
     bool player (true);
@@ -33,7 +33,6 @@ void play(ChessBoard & chessBoard) {
 //        else
 //            chessBoard.actualize(oldCoord,newCoord,black);
 
-
         player ? chessBoard.actualize(oldCoord,newCoord,white): chessBoard.actualize(oldCoord,newCoord,black);
 
         player = !player;
@@ -43,7 +42,6 @@ void play(ChessBoard & chessBoard) {
 }//play()
 
 int main() {
-
 
     ChessBoard chessBoard;
     chessBoard.show();
@@ -59,4 +57,4 @@ int main() {
     }
 
     cout << "partie finie " << endl;
-}
+}//main()

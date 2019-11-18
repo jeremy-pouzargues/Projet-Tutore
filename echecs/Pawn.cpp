@@ -16,18 +16,16 @@ Pawn::Pawn(const Color & color,const pairCoord & coord) {
 
 pairCoord Pawn::move(const pairCoord & coord) {
     if (this->getColor() == white) {
-        if(coord.first != this->getCoord().first - 1) {
+        if(coord.first != this->getCoord().first - 1)
             throw(CException(BADMOVE , SBADMOVE));
-        }
         else
             this->setCoord(coord);
     }
     else {
-        if(coord.first != this->getCoord().first + 1) {
-             throw(CException(BADMOVE, SBADMOVE));
-            }
-        cout << "pieces noir pas encore implémentées" << endl;
-        // todo throw error
+        if(coord.first != this->getCoord().first + 1)
+            throw(CException(BADMOVE, SBADMOVE));
+        else
+            this->setCoord(coord);
     }
 
 }// move()

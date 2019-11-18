@@ -1,10 +1,15 @@
+/**
+ * @author Laurent
+ * @brief classe abstraite qui definit les pieces avec leur couleur postion et la fonction de mouvement
+ * @class Piece Piece.h "include Piece.h"
+ * @version 1.0
+ */
 #ifndef PIECE_H
 #define PIECE_H
 
 #include <iomanip>
 
-//constantes des pieces
-
+//constantes des pieces pour l'affichage
 const char KVIDE  = '_';
 //pions
 const char KPAWNW = 'p';
@@ -16,11 +21,6 @@ enum Color {white, black};
 
 typedef std::pair<unsigned,unsigned> pairCoord;
 
-/**
- * @author Laurent
- * @brief classe abstraite qui definit les pieces avec leur couleur postion et la fonction de mouvement 
- * @class Echiquier Echiquier.h "include Echiquier.h"
- */
 class Piece {
 protected:
     Color      myColor;
@@ -29,14 +29,25 @@ protected:
 public:
     //Piece() {}
     virtual ~Piece() {}
+
+    /**
+     * @brief fonction abstraite de mouvement des pieces, elle sera derivée et adaptée aux déplacements de la piece
+     * elle verifie que le deplacement respecte les règles
+     * @param pairCoord coord : coordonnées de déplacement
+     * @return pairCoord
+     */
+    /*
+     *elle pourrait être juste un booleen qui confime si le mouvement est legal ou non.
+     */
     virtual pairCoord move(const pairCoord & coord) = 0;
 
 
 
     //getters
+    // il faut qu'on m'explique si on met en const ou pas.
     Color      getColor();
     pairCoord  getCoord();
-    char getCarac ();
+    char       getCarac ();
 
     //setters
     void setCoord(const pairCoord & coord);
