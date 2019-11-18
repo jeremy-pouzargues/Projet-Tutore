@@ -8,7 +8,8 @@ class Pawn : public Piece
 {
 
 public:
-    Pawn (const Color & color,const pairCoord & coord);
+    Pawn() {}
+    Pawn(const Color & color,const pairCoord & coord);
     virtual pairCoord move(const pairCoord & coord);
 };
 

@@ -8,23 +8,29 @@
 
 /**
  * @author Laurent
- * @brief echiquier
- * @class Echiquier Echiquier.h "include Echiquier.h"
+ * @brief  echiquier
+ * @class  Echiquier Echiquier.h "include Echiquier.h"
  **/
-
 typedef std::vector<std::vector<char>> Matrix;
+typedef std::vector<Piece *> VPieces;
 
-class ChessBoard
-{
+class ChessBoard {
 private:
     Matrix myChessBoard;
-    std::vector<Piece> myPieces;
+    VPieces myPiecesW; //vecteur des pieces blanches
+    VPieces myPiecesB; //vecteur des pieces noires
+
 public:
-     ChessBoard(Piece & piece);
+     ChessBoard();
 
      void show() const;
 
-     void actualize(Piece & piece, const pairCoord & newCoord);
+     unsigned find(const pairCoord & coord, const VPieces & vpieces);
+
+     void actualize(const pairCoord & oldCoord, const pairCoord & newCoord,const Color & color);
+
+     VPieces getPieces(const Color & color);
+     void    setPieces(const Color & color, const VPieces & newVPieces);
 };//Echiquier
 
 

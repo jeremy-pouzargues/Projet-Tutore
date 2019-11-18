@@ -13,3 +13,5 @@ void Piece::setCoord(const pairCoord & coord)
 
 char Piece::getCarac () {return myCarac;}
 
+
+

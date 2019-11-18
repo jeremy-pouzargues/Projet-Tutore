@@ -4,12 +4,15 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        CExc.cpp \
         ChessBoard.cpp \
+        Pawn.cpp \
         Piece.cpp \
-        Pion.cpp \
         main.cpp
 
 HEADERS += \
+    CExc.h \
     ChessBoard.h \
+    CteErr.h \
     Pawn.h \
     Piece.h
