@@ -67,5 +67,5 @@ const char KKNIGHTB = 'C';
 /**
  * @brief enumeration des couleurs
  */
-enum Color {white, black};
+enum Color {white, black, empty};
 #endif // CONST_H

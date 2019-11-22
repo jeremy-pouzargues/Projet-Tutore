@@ -7,6 +7,7 @@ Empty::Empty(const pairCoord & coord)
 {
     myCarac = KVIDE;
     myCoord = coord;
+    myColor = empty;
 }
 
 void Empty::move(const pairCoord & coord){}
