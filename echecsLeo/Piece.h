@@ -7,8 +7,6 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-#include <iomanip>
-#include <iostream>
 #include <vector>
 #include <memory>
 #include "Const.h"
@@ -33,8 +31,7 @@ public:
      *elle pourrait être juste un booleen qui confime si le mouvement est legal ou non.
      * TODO CHANGER EN CHECKMOVE
      */
-    virtual void move(const pairCoord & coord) = 0;
-    virtual std::vector<pairCoord> legalMoves(const pairCoord & coord,const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix ) = 0;
+    virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix ) = 0;
 
 
     //getters
