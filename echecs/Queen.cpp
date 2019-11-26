@@ -1,4 +1,4 @@
-#include "Queen.h"
+#include "headers/Queen.h"
 
 #include <iostream>
 using namespace std;

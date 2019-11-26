@@ -1,5 +1,5 @@
-#include "King.h"
-#include "CExc.h"
+#include "headers/King.h"
+#include "headers/CExc.h"
 
 using namespace std;
 

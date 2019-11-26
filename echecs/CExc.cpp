@@ -1,4 +1,4 @@
-#include "CExc.h"
+#include "headers/CExc.h"
 
 CException::CException (const unsigned & codeErr,
                         const std::string & libelle) noexcept : myLibelle(libelle),myCodeErr(codeErr) {}

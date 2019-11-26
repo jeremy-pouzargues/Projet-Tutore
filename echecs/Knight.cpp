@@ -1,6 +1,6 @@
-#include "Knight.h"
+#include "headers/Knight.h"
 
-#include "CExc.h"
+#include "headers/CExc.h"
 
 using namespace std;
 

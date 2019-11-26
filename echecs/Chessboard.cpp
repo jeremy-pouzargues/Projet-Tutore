@@ -1,8 +1,8 @@
 #include <vector>
 #include <iostream>
-#include "Chessboard.h"
-#include "Pawn.h"
-#include "Empty.h"
+#include "headers/Chessboard.h"
+#include "headers/Pawn.h"
+#include "headers/Empty.h"
 
 using namespace std;
 

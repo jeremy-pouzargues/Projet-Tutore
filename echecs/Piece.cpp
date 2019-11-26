@@ -1,4 +1,4 @@
-#include "Piece.h"
+#include "headers/Piece.h"
 
 //getters
 char        Piece::getCarac()      const {return myCarac;}

@@ -1,5 +1,5 @@
-#include "Rook.h"
-#include "CExc.h"
+#include "headers/Rook.h"
+#include "headers/CExc.h"
 
 Rook::Rook(const Color & color,const pairCoord & coord) {
     myColor = color;

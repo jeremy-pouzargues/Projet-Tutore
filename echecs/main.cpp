@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "Piece.h"
-#include "Chessboard.h"
+#include "headers/Piece.h"
+#include "headers/Chessboard.h"
 using namespace std;
 
 

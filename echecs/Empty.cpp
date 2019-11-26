@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Empty.h"
+#include "headers/Empty.h"
 
 using namespace std;
 
@@ -10,4 +10,3 @@ Empty::Empty(const pairCoord & coord)
     myColor = empty;
 }
 
-void Empty::move(const pairCoord & coord){}

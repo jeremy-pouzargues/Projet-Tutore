@@ -1,5 +1,5 @@
-#include "Pawn.h"
-#include "CExc.h"
+#include "headers/Pawn.h"
+#include "headers/CExc.h"
 
 using namespace std;
 

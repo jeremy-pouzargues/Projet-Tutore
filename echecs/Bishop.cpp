@@ -1,4 +1,4 @@
-#include "Bishop.h"
+#include "headers/Bishop.h"
 
 #include <iostream>
 using namespace std;
