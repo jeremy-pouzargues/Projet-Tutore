@@ -21,16 +21,6 @@ ChessBoard::ChessBoard() {
     }
 
 
-//    for (unsigned i(0); i < 8;++i) {
-//        vector<shared_ptr<Piece>> tmp;
-//        for(unsigned j(0); j < 8; ++j)
-//        {
-//            tmp[j] = shared_ptr<Piece>(new Empty(pairCoord(i,j)));
-//        }
-//        myChessBoard.push_back(tmp);
-//    }
-
-
 }//ChessBoard
 
 void ChessBoard::show() const{

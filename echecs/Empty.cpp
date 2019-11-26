@@ -7,7 +7,6 @@ Empty::Empty(const pairCoord & coord)
 {
     myCarac = KVIDE;
     myCoord = coord;
-
     myColor = empty;
 }
 

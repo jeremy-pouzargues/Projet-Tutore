@@ -69,4 +69,3 @@ vector<pairCoord> Pawn::legalMoves(const vector<vector<shared_ptr<Piece>>> & mat
     return VMoves;
 }
 
-

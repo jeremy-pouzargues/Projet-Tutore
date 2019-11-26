@@ -10,8 +10,6 @@
 #include <iomanip>
 #include "Const.h"
 #include <vector>
-#include <memory>
-
 class Piece {
 protected:
     Color           myColor;
@@ -33,7 +31,6 @@ public:
      * TODO CHANGER EN CHECKMOVE
      */
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix ) = 0;
-
 
 
     //getters
