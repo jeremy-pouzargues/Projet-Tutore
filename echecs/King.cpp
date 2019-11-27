@@ -14,5 +14,14 @@ King::King(const Color & color,const pairCoord & coord)
 }
 vector<pairCoord> King::legalMoves(const vector<vector<shared_ptr<Piece>>> & matrix)
 {
-    //à faire
+    vector<pairCoord> VMoves;
+    Color colorOpponent;
+    this->getColor() == white ? colorOpponent = black : colorOpponent = white;
+    unsigned line = this->getCoord().first;
+    unsigned column = this->getCoord().second;
+
+    if(line != 0)
+    {
+        if(column != 0) VMoves.push_back(pairCoord(line-1,column-1));
+    }
 }
