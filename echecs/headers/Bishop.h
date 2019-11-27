@@ -1,3 +1,10 @@
+/**
+ * @file Bishop.h
+ * @author Léo
+ * @brief classe du fou fille de Piece
+ * @class Bishop include "headers/Bishop.h"
+ * @version 1.0
+ */
 #ifndef BISHOP_H
 #define BISHOP_H
 

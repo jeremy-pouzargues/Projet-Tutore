@@ -41,7 +41,7 @@ void play(ChessBoard & chessboard)
             cin  >> x;
             cout << "coord 2 : ";
             cin  >> y;
-            // la piece que l'on souhaite déplacer
+
 
             // si le joueur se trompe de case ou choisit la une mauvaise piece
             if(chessboard.getChessboard()[x][y]->getColor() == empty || chessboard.getChessboard()[x][y]->getColor() == colorOpp)

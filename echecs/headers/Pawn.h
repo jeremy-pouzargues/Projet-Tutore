@@ -1,6 +1,9 @@
 /**
  * @author Jérémy
  * @file Pawn.h
+ * @version 1.1
+ * @brief classe du pion, fille de Piece
+ * @class Pawn include "headers/Pawn.h"
  */
 #ifndef PAWN_H
 #define PAWN_H

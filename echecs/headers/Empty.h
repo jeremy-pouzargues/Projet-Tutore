@@ -1,7 +1,11 @@
 /**
  * @author Leo
- * @file Empty.h
+ * @file   Empty.h
+ * @brief  objet représentant une case vide, fille de la classe Piece
+ * @version 1.0
+ * @class Empty include "headers/Empty.h"
  */
+
 #ifndef EMPTY_H
 #define EMPTY_H
 

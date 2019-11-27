@@ -1,7 +1,7 @@
 /**
  * @author Jérémy
- * @brief  classe de la pièce Cavalier (Knight)
- * @class Knigth.h include "headers/.h"
+ * @brief  classe de la pièce Cavalier (Knight), fille de Piece
+ * @class Knigth  include "headers/Knight.h"
  * @version 1.0
  */
 #ifndef KNIGHT_H
