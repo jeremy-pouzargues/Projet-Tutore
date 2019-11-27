@@ -85,8 +85,8 @@ void ChessBoard::show() const
 
 void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
 {
-
-    if(this->myChessBoard[coordMove.first][coordMove.second]->getCarac() == KVIDE)
+    //Si la case est vide
+    if(this->myChessBoard[coordMove.first][coordMove.second]->getName() == "Empty")
     {
         //On effectue un swap entre la pièce vide et la pièce vide
         shared_ptr<Piece> tmp = this->myChessBoard[coordMove.first][coordMove.second];
