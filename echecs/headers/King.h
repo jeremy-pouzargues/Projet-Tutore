@@ -3,6 +3,7 @@
  * @brief  classe de la piece roi
  * @class Roi.h include "headers/.h"
  * @version 1.0
+ * @date 27/11/19
  */
 
 #ifndef KING_H
