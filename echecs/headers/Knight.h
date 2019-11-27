@@ -1,3 +1,9 @@
+/**
+ * @author Jérémy
+ * @brief  classe de la pièce Cavalier (Knight)
+ * @class Knigth.h include "headers/.h"
+ * @version 1.0
+ */
 #ifndef KNIGHT_H
 #define KNIGHT_H
 
