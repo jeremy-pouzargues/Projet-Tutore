@@ -6,7 +6,7 @@
  *
  * \version  1.1
  *
- * \brief   les differentes constantes et typedefs
+ * \brief   les differentes constantes, typedefs et
  *
  **/
 #ifndef CONST_H
@@ -26,13 +26,13 @@ typedef std::pair<unsigned,unsigned> pairCoord;
 enum Error{
     NOERR   = 0,
     BADMOVE = 1,
-    NOPIECE = 2
+    BADPIECE = 2
 };
 
 // libelle des erreurs
 // S pour string
-const std::string SBADMOVE = " Mouvement illégal, vous ne pouvez pas faire ce déplacement pour cette pièce, voir les règles du jeu. ";
-const std::string SNOPIECE = " Vous avez choisit la mauvaise pièce ";
+const std::string SBADMOVE  = " Mouvement illégal, vous ne pouvez pas faire ce déplacement pour cette pièce, voir les règles du jeu. ";
+const std::string SBADPIECE = " Vous avez choisit la mauvaise pièce ";
 
 
 /*
@@ -40,7 +40,7 @@ const std::string SNOPIECE = " Vous avez choisit la mauvaise pièce ";
  */
 
 //constantes des pieces pour l'affichage
-const char KVIDE  = '_';
+const char KEMPTY = '_';
 //pion
 const char KPAWNW = 'p';
 const char KPAWNB = 'P';

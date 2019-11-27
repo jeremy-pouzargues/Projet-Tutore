@@ -52,6 +52,9 @@ public:
       */
      void actualize(const pairCoord & oldCoord, const pairCoord & newCoord,const Color & color);
 
+     //getter
+     Matrix getChessboard() const;
+
 };//Echiquier
 
 

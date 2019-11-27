@@ -21,7 +21,7 @@ std::vector<pairCoord> Rook::legalMoves(const std::vector<std::vector<std::share
 
     column  = this->getCoord().second;
 
-      //Si la reine est en haut elle ne pourra pas aller en haut
+      //Si la tour est en haut elle ne pourra pas aller en haut
       if(this->getCoord().first != 0) {
           line = this->getCoord().first - 1;
 
@@ -33,7 +33,7 @@ std::vector<pairCoord> Rook::legalMoves(const std::vector<std::vector<std::share
           }
       }
 
-      //Si la reine est en bas elle ne pourra pas aller en haut
+      //Si la tour est en bas elle ne pourra pas aller en haut
       if(this->getCoord().first != 7) {
           line = this->getCoord().first + 1;
 
@@ -49,7 +49,7 @@ std::vector<pairCoord> Rook::legalMoves(const std::vector<std::vector<std::share
        line = this->getCoord().first;
 
       // tests horizontaux
-      //Si la reine est à gauche elle ne pourra pas aller à gauche
+      //Si la tour est à gauche elle ne pourra pas aller à gauche
       if(this->getCoord().second != 0) {
           column  = this->getCoord().second - 1;
           // vers la droite

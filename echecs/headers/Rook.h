@@ -1,4 +1,3 @@
-
 /**
 * @author Laurent
 * @file   Rook.h

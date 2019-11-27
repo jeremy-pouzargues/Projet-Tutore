@@ -1,3 +1,9 @@
+/**
+ * @author Leo
+ * @brief  classe de la piece reine
+ * @class Queen.h include "headers/Queen.h"
+ * @version 1.0
+ */
 #ifndef QUEEN_H
 #define QUEEN_H
 

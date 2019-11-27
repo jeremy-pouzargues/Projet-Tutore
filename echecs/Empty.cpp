@@ -5,7 +5,7 @@ using namespace std;
 
 Empty::Empty(const pairCoord & coord)
 {
-    myCarac = KVIDE;
+    myCarac = KEMPTY;
     myCoord = coord;
     myColor = empty;
 }
