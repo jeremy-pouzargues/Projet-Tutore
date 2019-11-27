@@ -1,8 +1,8 @@
 /**
  * @file CExc.h
- * @author Marc Laporte, D Mathieu, Laurent Vouriot
+ * @author Marc Laporte, D Mathieu, Laurent
  * @version 1.1
- * @brief Classe d'exception des tp modifiée pour le jeu d'échecs
+ * @brief Classe d'exception des tp modifiée pour le jeu d'échecs, dérive de exception
  **/
 
 #ifndef CEXC_H
@@ -20,6 +20,11 @@ class CException : public std::exception
         unsigned  myCodeErr;
 
       public :
+        /**
+         * @brief CException : constructeur d'une exception personnalisée
+         * @param unsigned codeErr : numéro de l'erreur, voir fichier Const.h
+         * @param string libelle : libelle détaillé de l'erreur avec le cas d'usage
+         */
         CException (const unsigned    & codeErr     = NOERR,
                     const std::string & libelle = std::string())     noexcept;
         virtual ~CException (void)                                   noexcept;

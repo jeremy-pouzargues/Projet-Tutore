@@ -1,8 +1,11 @@
 /**
- * @author Laurent
- * @brief classe abstraite qui definit les pieces avec leur couleur postion et la fonction de mouvement
- * @class Piece Piece.h "include Piece.h"
- * @version 1.0
+ * @author Jérémy, Laurent, Leo
+ * @brief classe abstraite qui definit les pièces avec leur couleur, postion, caractère d'affichage.
+ * La fonction virtuelle legalMoves constitue un vecteur de paires de coordonnées, qui représente toutes les cases accessibles par cette pièce
+ * selon sa position.
+ * @class Piece  "include headers/Piece.h"
+ * @version 1.1
+ * @file Piece.h
  */
 #ifndef PIECE_H
 #define PIECE_H

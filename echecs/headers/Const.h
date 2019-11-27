@@ -1,13 +1,8 @@
 /**
- *
- * \file    Const.h
- *
- * \authors  Laurent Vouriot
- *
- * \version  1.1
- *
- * \brief   les differentes constantes, typedefs et
- *
+ * @file     Const.h
+ * @authors  Laurent
+ * @version  1.2
+ * @brief   les differentes constantes, typedefs et enums
  **/
 #ifndef CONST_H
 #define CONST_H
@@ -21,12 +16,12 @@ typedef std::pair<unsigned,unsigned> pairCoord;
  */
 
 /**
- *@enum enumeration des erreurs
+ *@enum Error : enumeration des erreurs
  */
 enum Error{
-    NOERR   = 0,
-    BADMOVE = 1,
-    BADPIECE = 2
+    NOERR     = 0,
+    BADMOVE   = 1,
+    BADPIECE  = 2
 };
 
 // libelle des erreurs
@@ -36,7 +31,7 @@ const std::string SBADPIECE = " Vous avez choisit la mauvaise pièce ";
 
 
 /*
- * AFFICHAGE
+ * CARACTERES D'AFFICHAGE
  */
 
 //constantes des pieces pour l'affichage
@@ -65,7 +60,8 @@ const char KKNIGHTB = 'C';
  */
 
 /**
- * @brief enumeration des couleurs
+ * @brief Color  enumeration des couleurs
  */
 enum Color {white, black, empty};
+
 #endif // CONST_H
