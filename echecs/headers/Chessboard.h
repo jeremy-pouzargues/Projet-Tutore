@@ -20,6 +20,7 @@ typedef std::vector<std::vector<std::shared_ptr<Piece>>> Matrix;
 class ChessBoard {
 private:
     Matrix myChessBoard;
+    Matrix myDeadPiece;
     //VPieces myPiecesW; //vecteur des pieces blanches
     //VPieces myPiecesB; //vecteur des pieces noires
 
@@ -51,6 +52,8 @@ public:
       * @param Color color : permet de savoir quel vecteur de pieces on manipule
       */
      void actualize(const pairCoord & oldCoord, const pairCoord & newCoord,const Color & color);
+
+     void move(const pairCoord & coordMove,const pairCoord & coordPiece);
 
 };//Echiquier
 

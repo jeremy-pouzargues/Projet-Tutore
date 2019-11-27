@@ -1,4 +1,5 @@
 #include "headers/Piece.h"
+using namespace std;
 
 //getters
 char        Piece::getCarac()      const {return myCarac;}
@@ -8,3 +9,5 @@ std::string Piece::getName()       const {return myName;}
 
 //setters
 void Piece::setCoord(const pairCoord &coord) {myCoord = coord;}
+
+
