@@ -29,7 +29,7 @@ public:
      */
     /*
      *elle pourrait être juste un booleen qui confime si le mouvement est legal ou non.
-     * TODO CHANGER EN CHECKMOVE
+     *
      */
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix ) = 0;
 
