@@ -8,6 +8,7 @@
 #define CONST_H
 #include <iostream>
 
+
 typedef std::pair<unsigned,unsigned> pairCoord;
 
 
