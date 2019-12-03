@@ -99,6 +99,8 @@ void play(ChessBoard & chessboard)
 
             //cout << " TODO MOVE " << endl;
 
+            chessboard.show();
+
             player = !player;
         } catch(CException & cexc ) {
             cexc.display();
