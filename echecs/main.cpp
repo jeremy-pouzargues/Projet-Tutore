@@ -61,13 +61,16 @@ void play(ChessBoard & chessboard)
             }
 
 
+            pairCoord pieceChosen(x,y);
+
             // si le joueur se trompe de case ou choisit la une mauvaise piece
-            if(chessboard.getChessboard()[x][y]->getColor() == empty || chessboard.getChessboard()[x][y]->getColor() == colorOpp)
+            if(chessboard.getChessboard()[x][y]->getColor() != color)
                 throw CException(BADPIECE,SBADPIECE);
 
             cout << "joueur " << playerName << " choisissez une case " << endl;
             cout << "coord 1 : ";
             cin  >> x;
+
             if(!cin)
             {
                 cin.clear();
@@ -82,9 +85,14 @@ void play(ChessBoard & chessboard)
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 throw CException(BADINPUT,SBADINPUT);
             }
+            pairCoord movePiece(x,y);
 
 
-            cout << " TODO MOVE " << endl;
+            chessboard.move(movePiece,pieceChosen);
+
+
+
+            chessboard.show();
 
             player = !player;
         } catch(CException & cexc ) {
