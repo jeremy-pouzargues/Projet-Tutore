@@ -21,13 +21,15 @@ typedef std::pair<unsigned,unsigned> pairCoord;
 enum Error{
     NOERR     = 0,
     BADMOVE   = 1,
-    BADPIECE  = 2
+    BADPIECE  = 2,
+    BADINPUT  = 3
 };
 
 // libelle des erreurs
 // S pour string
 const std::string SBADMOVE  = " Mouvement illégal, vous ne pouvez pas faire ce déplacement pour cette pièce, voir les règles du jeu. ";
 const std::string SBADPIECE = " Vous avez choisit la mauvaise pièce ";
+const std::string SBADINPUT = " Veuillez entrer des chiffres pour les mouvements";
 
 
 /*

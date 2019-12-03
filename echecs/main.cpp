@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <limits>
 #include "headers/Piece.h"
 #include "headers/Chessboard.h"
 #include "headers/CExc.h"
@@ -39,8 +40,25 @@ void play(ChessBoard & chessboard)
             cout << "joueur " << playerName << " choisissez une pièce " << endl;
             cout << "coord 1 : ";
             cin  >> x;
+
+
+            // TEMPORAIRE TANT QUE L'ON A PAS L'IHM
+            if(!cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw CException(BADINPUT,SBADINPUT);
+            }
             cout << "coord 2 : ";
+
+
             cin  >> y;
+            if(!cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw CException(BADINPUT,SBADINPUT);
+            }
 
 
             // si le joueur se trompe de case ou choisit la une mauvaise piece
