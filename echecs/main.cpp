@@ -73,9 +73,10 @@ void play(ChessBoard & chessboard)
             if(chessboard.getChessboard()[x][y]->getColor() != color)
                 throw CException(BADPIECE,SBADPIECE);
 
-
-
-
+            for(shared_ptr<Piece> piece : chessboard.getPiecesB())
+            {
+                cout << piece->getCoord().first << piece->getCoord().second << " - ";
+            }
 
 //============================  Choix de la case de sur laquelle on va déplacer la pièce ===============
 

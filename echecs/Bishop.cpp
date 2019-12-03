@@ -19,12 +19,12 @@ vector<pairCoord> Bishop::legalMoves(const vector<vector<shared_ptr<Piece>>> & m
 
     //Test diagonale haut gauche
     //Impossible si le fou est situé tout en haut ou à gauche de l'échiquiuer
-    if(this->myCoord.first != 0 || this->myCoord.second != 0)
+    if(this->myCoord.first != 0 && this->myCoord.second != 0)
     {
-        unsigned line = this->myCoord.first;
-        unsigned column = this->myCoord.second;
+        unsigned line = this->myCoord.first - 1;
+        unsigned column = this->myCoord.second - 1;
         //Tant qu'on est pas sur un allié
-        while(matrix[line][column]->getColor() != this->getColor())
+        while(this->getColor() != matrix[line][column]->getColor())
         {
             VMoves.push_back(pairCoord(line,column));
             if(line == 0 || column == 0)break; //Si on est à la fin
@@ -36,12 +36,12 @@ vector<pairCoord> Bishop::legalMoves(const vector<vector<shared_ptr<Piece>>> & m
 
     //Test diagonale haut droite
     //Impossible si le fou est situé tout en haut ou à droite de l'échiquiuer
-    if(this->myCoord.first != 0 || this->myCoord.second != 7)
+    if(this->myCoord.first != 0 && this->myCoord.second != 7)
     {
-        unsigned line = this->myCoord.first;
-        unsigned column = this->myCoord.second;
+        unsigned line = this->myCoord.first - 1;
+        unsigned column = this->myCoord.second + 1;
 
-        while(matrix[line][column]->getColor() != this->getColor())
+        while(this->getColor() != matrix[line][column]->getColor())
         {
             VMoves.push_back(pairCoord(line,column));
             if(line == 0 || column == 0)break;
@@ -53,12 +53,12 @@ vector<pairCoord> Bishop::legalMoves(const vector<vector<shared_ptr<Piece>>> & m
 
     //Test diagonale bas droite
     //Impossible si le fou est situé tout en bas ou à droite de l'échiquiuer
-    if(this->myCoord.first != 7 || this->myCoord.second != 7)
+    if(this->myCoord.first != 7 && this->myCoord.second != 7)
     {
-        unsigned line = this->myCoord.first;
-        unsigned column = this->myCoord.second;
+        unsigned line = this->myCoord.first + 1;
+        unsigned column = this->myCoord.second + 1;
 
-        while(matrix[line][column]->getColor() != this->getColor())
+        while(this->getColor() != matrix[line][column]->getColor())
         {
             VMoves.push_back(pairCoord(line,column));
             if(line == 0 || column == 0)break;
@@ -70,12 +70,12 @@ vector<pairCoord> Bishop::legalMoves(const vector<vector<shared_ptr<Piece>>> & m
 
     //Test diagonale bas gauche
     //Impossible si le fou est situé tout en bas ou à gauche de l'échiquiuer
-    if(this->myCoord.first != 7 || this->myCoord.second != 0)
+    if(this->myCoord.first != 7 && this->myCoord.second != 0)
     {
-        unsigned line = this->myCoord.first;
-        unsigned column = this->myCoord.second;
+        unsigned line = this->myCoord.first + 1;
+        unsigned column = this->myCoord.second - 1;
 
-        while(matrix[line][column]->getColor() != this->getColor())
+        while(this->getColor() != matrix[line][column]->getColor())
         {
             VMoves.push_back(pairCoord(line,column));
             if(line == 0 || column == 0)break;

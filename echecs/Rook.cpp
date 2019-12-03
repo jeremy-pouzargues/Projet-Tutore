@@ -33,7 +33,7 @@ std::vector<pairCoord> Rook::legalMoves(const std::vector<std::vector<std::share
           }
       }
 
-      //Si la tour est en bas elle ne pourra pas aller en haut
+      //Si la tour est en bas elle ne pourra pas aller en bas
       if(this->getCoord().first != 7) {
           line = this->getCoord().first + 1;
 
