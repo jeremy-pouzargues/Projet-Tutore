@@ -65,11 +65,23 @@ void play(ChessBoard & chessboard)
             if(chessboard.getChessboard()[x][y]->getColor() == empty || chessboard.getChessboard()[x][y]->getColor() == colorOpp)
                 throw CException(BADPIECE,SBADPIECE);
 
-            cout << "joueur " << playerName << " choisissez une case à bouger " << endl;
+            cout << "joueur " << playerName << " choisissez une case " << endl;
             cout << "coord 1 : ";
             cin  >> x;
+            if(!cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw CException(BADINPUT,SBADINPUT);
+            }
             cout << "coord 2 : ";
             cin  >> y;
+            if(!cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw CException(BADINPUT,SBADINPUT);
+            }
 
 
             cout << " TODO MOVE " << endl;
