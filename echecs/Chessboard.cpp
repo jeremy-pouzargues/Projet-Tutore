@@ -14,6 +14,7 @@ using namespace std;
 ChessBoard::ChessBoard() {
 
     myChessBoard.resize(8,vector<shared_ptr<Piece>>(8));
+    myDeadPiece.resize(30);
 
     for (unsigned i(0); i < 8;++i) {
         for(unsigned j(0); j < 8; ++j)

@@ -106,6 +106,8 @@ void play(ChessBoard & chessboard)
                 throw CException(BADMOVE,SBADMOVE);
 
 
+            chessboard.show();
+
             player = !player;
         } catch(CException & cexc ) {
             cexc.display();
