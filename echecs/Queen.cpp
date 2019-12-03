@@ -1,6 +1,6 @@
 #include "headers/Queen.h"
 
-#include <iostream>
+//#include <iostream>
 using namespace std;
 
 

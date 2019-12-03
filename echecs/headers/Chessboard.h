@@ -20,7 +20,9 @@ typedef std::vector<std::vector<std::shared_ptr<Piece>>> Matrix;
 class ChessBoard {
 private:
     Matrix myChessBoard;
-
+    Matrix myDeadPiece;
+    //VPieces myPiecesW; //vecteur des pieces blanches
+    //VPieces myPiecesB; //vecteur des pieces noires
 
 public:
      ChessBoard();
@@ -33,6 +35,8 @@ public:
 
      //getter
      Matrix getChessboard() const;
+
+     void move(const pairCoord & coordMove,const pairCoord & coordPiece);
 
 };//Echiquier
 
