@@ -15,14 +15,16 @@
 #include "Piece.h"
 
 typedef std::vector<std::vector<std::shared_ptr<Piece>>> Matrix;
+typedef std::vector<std::shared_ptr<Piece>> VPieces;
+
 //typedef std::vector<Piece *> VPieces;
 
 class ChessBoard {
 private:
     Matrix myChessBoard;
     Matrix myDeadPiece;
-    //VPieces myPiecesW; //vecteur des pieces blanches
-    //VPieces myPiecesB; //vecteur des pieces noires
+    VPieces myPiecesW; //vecteur des pieces blanches
+    VPieces myPiecesB; //vecteur des pieces noires
 
 public:
      ChessBoard();
@@ -39,6 +41,9 @@ public:
      void move(const pairCoord & coordMove,const pairCoord & coordPiece);
 
      bool find (const std::vector<pairCoord> & legalMoves, const pairCoord & moveChosen);
+
+     VPieces getPiecesW () const;
+     VPieces getPiecesB () const;
 
 };//Echiquier
 

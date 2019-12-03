@@ -22,6 +22,7 @@ public:
     /*virtual*/ std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
                                               const std::vector<std::vector<pairCoord>> listMovesOpponent);
     bool find(const pairCoord & coordPiece,const std::vector<std::vector<pairCoord>> & listMovesOpponent);
+
 };
 
 #endif // KING_H
