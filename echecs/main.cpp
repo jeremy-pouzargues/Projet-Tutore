@@ -66,7 +66,7 @@ void play(ChessBoard & chessboard)
                 throw CException(BADINPUT,SBADINPUT);
             }
 
-            if( x > 7 || x < 7 || y > 7 || x < 7 )
+            if( x > 7 || x < 0 || y > 7 || y < 0 )
                 throw CException(OUTOFRANGE,SOUTOFRANGE);
 
             // si le joueur se trompe de case ou choisit la une mauvaise piece
@@ -98,7 +98,7 @@ void play(ChessBoard & chessboard)
                 throw CException(BADINPUT,SBADINPUT);
             }
 
-            if( u > 7 || u < 7 || v > 7 || v < 7 )
+            if( u > 7 || u < 0 || v > 7 || v < 0 )
                 throw CException(OUTOFRANGE,SOUTOFRANGE);
 
 
