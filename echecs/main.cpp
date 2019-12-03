@@ -38,13 +38,12 @@ void play(ChessBoard & chessboard)
                 playerName = "noir";
             }
 
-
+//============================  Choix de la pièce que l'on veut déplacer  ==============================
             cout << "joueur " << playerName << " choisissez une pièce " << endl;
             cout << "coord 1 : ";
             cin  >> x;
-
-
             // TEMPORAIRE TANT QUE L'ON A PAS L'IHM
+            // on test si on entre des chiffres et pas autre chose dans le flux
             if(!cin)
             {
                 cin.clear();
@@ -52,8 +51,6 @@ void play(ChessBoard & chessboard)
                 throw CException(BADINPUT,SBADINPUT);
             }
             cout << "coord 2 : ";
-
-
             cin  >> y;
             if(!cin)
             {
@@ -62,21 +59,13 @@ void play(ChessBoard & chessboard)
                 throw CException(BADINPUT,SBADINPUT);
             }
 
-
-            pairCoord pieceChosen(x,y);
-
             // si le joueur se trompe de case ou choisit la une mauvaise piece
             if(chessboard.getChessboard()[x][y]->getColor() != color)
                 throw CException(BADPIECE,SBADPIECE);
 
-
-
-
-
+//============================  Choix de la case de sur laquelle on va déplacer la pièce ==============================
             cout << "joueur " << playerName << " choisissez une case " << endl;
             cout << "coord 1 : ";
-
-
             cin  >> u;
             if(!cin)
             {
@@ -94,11 +83,14 @@ void play(ChessBoard & chessboard)
             }
 
 
+
             // Coordonnées de la pièce choisie
             pairCoord coordPiece (x,y);
             // Coordonnées de destination
             pairCoord coordMove (u,v);
-            if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove)) {
+
+            if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove))
+            {
                 chessboard.move(coordMove, coordPiece);
                 chessboard.show();
             }

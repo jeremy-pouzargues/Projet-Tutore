@@ -15,7 +15,7 @@ King::King(const Color & color,const pairCoord & coord)
 vector<pairCoord> King::legalMoves(const vector<vector<shared_ptr<Piece>>> & matrix,
                                    const vector<vector<pairCoord>> listMovesOpponent)
 {
-    vector<pairCoord> VMoves;
+    vector<pairCoord> VMoves (0);
     Color colorPiece = this->getColor();
     unsigned line = this->getCoord().first;
     unsigned column = this->getCoord().second;
