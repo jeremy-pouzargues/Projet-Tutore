@@ -22,6 +22,10 @@ public:
     Pawn() {}
     Pawn(const Color & color,const pairCoord & coord);
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix);
+
+
+    virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
+                                              const std::vector<std::shared_ptr<Piece>> & VPiecesOpponent) {}
 };
 
 #endif // PAWN_H

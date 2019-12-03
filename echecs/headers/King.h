@@ -18,9 +18,10 @@ private:
 public:
     King() {}
     King(const Color & color,const pairCoord & coord);
-    virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix){}
-    /*virtual*/ std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
-                                              const std::vector<std::vector<pairCoord>> listMovesOpponent);
+    virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix) {}
+    virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
+                                              const std::vector<std::shared_ptr<Piece>> & VPiecesOpponent);
+
     bool find(const pairCoord & coordPiece,const std::vector<std::vector<pairCoord>> & listMovesOpponent);
 
 };
