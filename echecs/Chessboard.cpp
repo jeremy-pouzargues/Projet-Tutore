@@ -76,13 +76,19 @@ ChessBoard::ChessBoard() {
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
 
-    //Roi Blanc
-    myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
-    myPiecesW.push_back(myChessBoard[7][4]);
+//    //Roi Blanc
+//    myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
+//    myPiecesW.push_back(myChessBoard[7][4]);
 
     //Roi noir
     myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
     myPiecesB.push_back(myChessBoard[0][4]);
+
+
+    //debug
+    myChessBoard[4][4] = shared_ptr<Piece>(new King(white,pairCoord(4,4)));
+    myPiecesW.push_back(myChessBoard[4][4]);
+
 
 }//ChessBoard ()
 
