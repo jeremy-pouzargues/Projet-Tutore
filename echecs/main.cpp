@@ -47,7 +47,11 @@ void play(ChessBoard & chessboard)
             if(chessboard.getChessboard()[x][y]->getColor() == empty || chessboard.getChessboard()[x][y]->getColor() == colorOpp)
                 throw CException(BADPIECE,SBADPIECE);
 
-            cout << " TODO MOVE " << endl;
+            for(shared_ptr<Piece> piece : chessboard.getPiecesB())
+            {
+                cout << piece->getCoord().first << piece->getCoord().second << " - ";
+            }
+
 
             player = !player;
         } catch(CException & cexc ) {
