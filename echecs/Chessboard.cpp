@@ -22,14 +22,14 @@ ChessBoard::ChessBoard() {
             myChessBoard[i][j] = shared_ptr<Piece>(new Empty(pairCoord(i,j)));
         }
     }
-    for (unsigned i(0); i < 8;++i)
-    {
-        // pions blancs
-        myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
-        // pions noirs
-        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
+//    for (unsigned i(0); i < 8;++i)
+//    {
+//        // pions blancs
+//        myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
+//        // pions noirs
+//        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
 
-    }
+//    }
 
     // tours blancs
     myChessBoard[7][0] = shared_ptr<Piece>(new Rook(white,pairCoord(7,0)));
@@ -68,7 +68,7 @@ ChessBoard::ChessBoard() {
 void ChessBoard::show() const
 {
 
-    cout << " a b c d e f g h"<< endl;
+    cout << " 0 1 2 3 4 5 6 7"<< endl;
     for (unsigned i(0); i < 8; ++i)
     {
         for (unsigned j(0); j < 8; ++j)
@@ -77,7 +77,7 @@ void ChessBoard::show() const
                 cout << '|';
             cout << myChessBoard[i][j]->getCarac() << '|';
             if ( j == 7)
-                cout << i+1;
+                cout << i;
         }
         cout << endl;
     }
@@ -100,7 +100,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
     {
         unsigned indiceColorOpponent;
         this->myChessBoard[coordMove.first][coordMove.second]->getColor() == white ? indiceColorOpponent = 0 : indiceColorOpponent = 1;
-        //On la place dans lal iste des pièces mortes
+        //On la place dans la liste des pièces mortes
         this->myDeadPiece[indiceColorOpponent].push_back(myChessBoard[coordMove.first][coordMove.second]);
         //On remplace la piece mangé par la pièce bougé
         this->myChessBoard[coordMove.first][coordMove.second] = this->myChessBoard[coordPiece.first][coordPiece.second];

@@ -94,15 +94,14 @@ void play(ChessBoard & chessboard)
             }
 
 
-
-
-
             // Coordonnées de la pièce choisie
             pairCoord coordPiece (x,y);
             // Coordonnées de destination
             pairCoord coordMove (u,v);
-            if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove))
+            if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove)) {
                 chessboard.move(coordMove, coordPiece);
+                chessboard.show();
+            }
             else
                 throw CException(BADMOVE,SBADMOVE);
 
