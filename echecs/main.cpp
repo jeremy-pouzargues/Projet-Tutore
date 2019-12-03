@@ -21,7 +21,9 @@ void play(ChessBoard & chessboard)
             Color  color;
             Color  colorOpp; // couleur de l'adversaire
             string playerName;
-            unsigned x,y;
+            unsigned x,y,u,v;
+
+            vector<pairCoord> myMoves;
 
             if (player)
             {
@@ -67,10 +69,15 @@ void play(ChessBoard & chessboard)
             if(chessboard.getChessboard()[x][y]->getColor() != color)
                 throw CException(BADPIECE,SBADPIECE);
 
+
+
+
+
             cout << "joueur " << playerName << " choisissez une case " << endl;
             cout << "coord 1 : ";
-            cin  >> x;
 
+
+            cin  >> u;
             if(!cin)
             {
                 cin.clear();
@@ -78,21 +85,27 @@ void play(ChessBoard & chessboard)
                 throw CException(BADINPUT,SBADINPUT);
             }
             cout << "coord 2 : ";
-            cin  >> y;
+            cin  >> v;
             if(!cin)
             {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 throw CException(BADINPUT,SBADINPUT);
             }
-            pairCoord movePiece(x,y);
-
-
-            chessboard.move(movePiece,pieceChosen);
 
 
 
-            chessboard.show();
+
+
+            // Coordonnées de la pièce choisie
+            pairCoord coordPiece (x,y);
+            // Coordonnées de destination
+            pairCoord coordMove (u,v);
+            if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove))
+                chessboard.move(coordMove, coordPiece);
+            else
+                throw CException(BADMOVE,SBADMOVE);
+
 
             player = !player;
         } catch(CException & cexc ) {

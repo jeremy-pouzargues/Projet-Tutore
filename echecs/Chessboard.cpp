@@ -111,6 +111,16 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
     }
 }//move()
 
+bool ChessBoard::find(const std::vector<pairCoord> &legalMoves, const pairCoord &moveChosen)
+{
+    for(pairCoord pieceCoord : legalMoves)
+    {
+        if (pieceCoord == moveChosen)
+            return true;
+    }
+    return false;
+}
+
 
 Matrix ChessBoard::getChessboard() const {return myChessBoard;}
 
