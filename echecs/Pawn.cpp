@@ -40,16 +40,16 @@ vector<pairCoord> Pawn::legalMoves(const vector<vector<shared_ptr<Piece>>> & mat
     //condition qui va initialiser nos variables
     if (this->getColor() == white)
     {
-        newLine = line + 1;
-        newJumpMove = line + 2;
-        startLine = 1;
+        newLine = line - 1;
+        newJumpMove = line - 2;
+        startLine = 6;
         colorOpponent = black;
     }
     else
     {
-        newLine = line - 1;
-        newJumpMove = line - 2;
-        startLine = 6;
+        newLine = line + 1;
+        newJumpMove = line + 2;
+        startLine = 1;
         colorOpponent = white;
     }
     // On regarde si la case qui suit la notre est vide ou pas
@@ -57,13 +57,13 @@ vector<pairCoord> Pawn::legalMoves(const vector<vector<shared_ptr<Piece>>> & mat
     {
         VMoves.push_back(matrix[newLine][column]->getCoord());
         //On regarde si le pion est sur sa ligne de départ et si on peut l'autoriser à faire un 2eme déplacement;
-        if (line == startLine && matrix[line + (newJumpMove)][column]->getColor() == empty)
-            VMoves.push_back(matrix[line + (newJumpMove)][column]->getCoord());
+        if (line == startLine && matrix[newJumpMove][column]->getColor() == empty)
+            VMoves.push_back(matrix[newJumpMove][column]->getCoord());
     }
     //Ces deux conditions vont regarder si des pièces sont dans les diagonales directes de notre pion afin de pouvoir éventuellement les manger
-    if (column != 7 && matrix[newLine][column + 1]->getColor() == colorOpponent && line == startLine)
+    if (column != 7 && matrix[newLine][column + 1]->getColor() == colorOpponent)
         VMoves.push_back(matrix[newLine][column + 1]->getCoord());
-    if (column != 0 && matrix[newLine][column - 1]->getColor() == colorOpponent && line == startLine)
+    if (column != 0 && matrix[newLine][column - 1]->getColor() == colorOpponent)
         VMoves.push_back(matrix[newLine][column - 1]->getCoord());
 
     return VMoves;

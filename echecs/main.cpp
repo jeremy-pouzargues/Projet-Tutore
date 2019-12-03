@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <limits>
 #include "headers/Piece.h"
 #include "headers/Chessboard.h"
 #include "headers/CExc.h"
@@ -20,7 +21,9 @@ void play(ChessBoard & chessboard)
             Color  color;
             Color  colorOpp; // couleur de l'adversaire
             string playerName;
-            unsigned x,y;
+            unsigned x,y,u,v;
+
+            vector<pairCoord> myMoves;
 
             if (player)
             {
@@ -39,8 +42,25 @@ void play(ChessBoard & chessboard)
             cout << "joueur " << playerName << " choisissez une pièce " << endl;
             cout << "coord 1 : ";
             cin  >> x;
+
+
+            // TEMPORAIRE TANT QUE L'ON A PAS L'IHM
+            if(!cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw CException(BADINPUT,SBADINPUT);
+            }
             cout << "coord 2 : ";
+
+
             cin  >> y;
+            if(!cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw CException(BADINPUT,SBADINPUT);
+            }
 
 
             // si le joueur se trompe de case ou choisit la une mauvaise piece
@@ -52,6 +72,35 @@ void play(ChessBoard & chessboard)
                 cout << piece->getCoord().first << piece->getCoord().second << " - ";
             }
 
+            cout << "joueur " << playerName << " choisissez une case " << endl;
+            cout << "coord 1 : ";
+            cin  >> u;
+            if(!cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw CException(BADINPUT,SBADINPUT);
+            }
+            cout << "coord 2 : ";
+            cin  >> v;
+            if(!cin)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw CException(BADINPUT,SBADINPUT);
+            }
+            // Coordonnées de la pièce choisie
+            pairCoord coordPiece (x,y);
+            // Coordonnées de destination
+            pairCoord coordMove (u,v);
+            if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove))
+                chessboard.move(coordMove, coordPiece);
+            else
+                throw CException(BADMOVE,SBADMOVE);
+
+            //cout << " TODO MOVE " << endl;
+
+            chessboard.show();
 
             player = !player;
         } catch(CException & cexc ) {

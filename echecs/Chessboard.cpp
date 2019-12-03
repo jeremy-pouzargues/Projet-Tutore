@@ -141,8 +141,6 @@ bool ChessBoard::find(const std::vector<pairCoord> &legalMoves, const pairCoord 
     }
     return false;
 }
-
-
 Matrix ChessBoard::getChessboard() const {return myChessBoard;}
 
 VPieces ChessBoard::getPiecesW() const {return myPiecesW;}
