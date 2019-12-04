@@ -25,7 +25,12 @@ ChessBoard::ChessBoard() {
             myChessBoard[i][j] = shared_ptr<Piece>(new Empty(pairCoord(i,j)));
         }
     }
+<<<<<<< HEAD
     for (unsigned i(0); i < 7;++i)
+=======
+
+    for (unsigned i(0); i < 8;++i)
+>>>>>>> develop
     {
         // pions blancs
         myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
@@ -33,7 +38,6 @@ ChessBoard::ChessBoard() {
         // pions noirs
         myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
         myPiecesB.push_back(myChessBoard[1][i]);
-
     }
 
     // tours blancs
@@ -78,20 +82,26 @@ ChessBoard::ChessBoard() {
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
 
-    //Roi Blanc
-    myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
-    myPiecesW.push_back(myChessBoard[7][4]);
+//    //Roi Blanc
+//    myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
+//    myPiecesW.push_back(myChessBoard[7][4]);
 
     //Roi noir
     myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
     myPiecesB.push_back(myChessBoard[0][4]);
+
+
+    //debug
+    myChessBoard[4][4] = shared_ptr<Piece>(new King(white,pairCoord(4,4)));
+    myPiecesW.push_back(myChessBoard[4][4]);
+
 
 }//ChessBoard ()
 
 void ChessBoard::show() const
 {
 
-    cout << " a b c d e f g h"<< endl;
+    cout << " 0 1 2 3 4 5 6 7"<< endl;
     for (unsigned i(0); i < 8; ++i)
     {
         for (unsigned j(0); j < 8; ++j)
@@ -100,7 +110,7 @@ void ChessBoard::show() const
                 cout << '|';
             cout << myChessBoard[i][j]->getCarac() << '|';
             if ( j == 7)
-                cout << i+1;
+                cout << i;
         }
         cout << endl;
     }

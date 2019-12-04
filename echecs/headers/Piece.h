@@ -37,6 +37,23 @@ public:
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix ) = 0;
 
 
+    /**
+     * @author Léo, Jérémy
+     * @brief redefinition de legalMoves nécéssaire pour le roi uniquement
+     * @param matrix, matrice qui represente l'échiquier
+     * @param VPiecesOpponent vecteurs des pièces ennemies
+     * @return vecteur de pairCoord qui contient les coordonnées des mouvements possibles pour le roi
+     *
+     * Il est nécéssaire de rédéfinir legalMoves car le roi à un traitement différent des autres pièce,
+     * il est interdit pour le roi de se mettre en échec on doit donc faire une double verification. Pour
+     * ne pas rentrer dans une boucle infinie nous avons dû redefinir legalMoves() afin  que le roi adverse
+     * ait un traitement spécial.
+     *
+     */
+    virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
+                                              const std::vector<std::shared_ptr<Piece>> & VPiecesOpponent) = 0;
+
+
     //getters
     // il faut qu'on m'explique si on met en const ou pas.
     Color      getColor() const;

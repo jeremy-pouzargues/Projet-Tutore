@@ -22,17 +22,19 @@ typedef std::pair<unsigned,unsigned> pairCoord;
  *@enum Error : enumeration des erreurs
  */
 enum Error{
-    NOERR     = 0,
-    BADMOVE   = 1,
-    BADPIECE  = 2,
-    BADINPUT  = 3
+    NOERR       = 0,
+    BADMOVE     = 1,
+    BADPIECE    = 2,
+    BADINPUT    = 3,
+    OUTOFRANGE  = 4
 };
 
 // libelle des erreurs
 // S pour string
-const std::string SBADMOVE  = " Mouvement illégal, vous ne pouvez pas faire ce déplacement pour cette pièce, voir les règles du jeu. ";
-const std::string SBADPIECE = " Vous avez choisit la mauvaise pièce ";
-const std::string SBADINPUT = " Veuillez entrer des chiffres pour les mouvements";
+const std::string SBADMOVE    = " Mouvement illégal, vous ne pouvez pas faire ce déplacement pour cette pièce, voir les règles du jeu. ";
+const std::string SBADPIECE   = " Vous avez choisi la mauvaise pièce ";
+const std::string SBADINPUT   = " Veuillez entrer des chiffres pour les mouvements";
+const std::string SOUTOFRANGE = " Vous avez saisi des coordonnés qui ne sont pas sur l'echiquer";
 
 
 /*

@@ -10,33 +10,38 @@ using namespace std;
 
 void play(ChessBoard & chessboard)
 {
-    // le joueur en true et le joueurs en blanc
+    // le joueur en true est le joueurs en blanc
     bool player (true);
     bool end(false);
 
-    // tant que la partie n'est pas finiee
+    // tant que la partie n'est pas finie
     while(!end)
     {
        try {
             Color  color;
-            Color  colorOpp; // couleur de l'adversaire
+
             string playerName;
+            vector<shared_ptr<Piece>> vPiecesOpponent;
             unsigned x,y,u,v;
 
             vector<pairCoord> myMoves;
 
             if (player)
             {
-                color      = white;
-                colorOpp   = black;
-                playerName = "blanc";
+                color           = white;
+
+                playerName      = "blanc";
+                vPiecesOpponent = chessboard.getPiecesB();
             }
             else
             {
-                color      = black;
-                colorOpp   = white;
-                playerName = "noir";
+                color           = black;
+
+                playerName      = "noir";
+                vPiecesOpponent = chessboard.getPiecesW();
             }
+
+//============================  Choix de la pièce que l'on veut déplacer  ==============================
 
 
             cout << "joueur " << playerName << " choisissez une pièce " << endl;
@@ -45,6 +50,7 @@ void play(ChessBoard & chessboard)
 
 
             // TEMPORAIRE TANT QUE L'ON A PAS L'IHM
+            // on test si on entre des chiffres et pas autre chose dans le flux
             if(!cin)
             {
                 cin.clear();
@@ -52,8 +58,6 @@ void play(ChessBoard & chessboard)
                 throw CException(BADINPUT,SBADINPUT);
             }
             cout << "coord 2 : ";
-
-
             cin  >> y;
             if(!cin)
             {
@@ -62,11 +66,15 @@ void play(ChessBoard & chessboard)
                 throw CException(BADINPUT,SBADINPUT);
             }
 
+            if( x > 7 || x < 0 || y > 7 || y < 0 )
+                throw CException(OUTOFRANGE,SOUTOFRANGE);
 
             // si le joueur se trompe de case ou choisit la une mauvaise piece
-            if(chessboard.getChessboard()[x][y]->getColor() == empty || chessboard.getChessboard()[x][y]->getColor() == colorOpp)
+            if(chessboard.getChessboard()[x][y]->getColor() != color)
                 throw CException(BADPIECE,SBADPIECE);
 
+
+//============================  Choix de la case de sur laquelle on va déplacer la pièce ===============
 
             cout << "joueur " << playerName << " choisissez une case " << endl;
             cout << "coord 1 : ";
@@ -85,16 +93,33 @@ void play(ChessBoard & chessboard)
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 throw CException(BADINPUT,SBADINPUT);
             }
+
+            if( u > 7 || u < 0 || v > 7 || v < 0 )
+                throw CException(OUTOFRANGE,SOUTOFRANGE);
+
+
             // Coordonnées de la pièce choisie
             pairCoord coordPiece (x,y);
             // Coordonnées de destination
             pairCoord coordMove (u,v);
-            if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove))
+
+            // si le joueur déplace le roi le traitement est à part on prend un argument supplementaire
+
+            if(chessboard.getChessboard()[x][y]->getName() == "King")
+            {
+                if(chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),vPiecesOpponent), coordMove))
+                    chessboard.move(coordMove, coordPiece);
+                else
+                    throw CException(BADMOVE,SBADMOVE);
+            }
+
+            else if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove))
+            {
                 chessboard.move(coordMove, coordPiece);
+            }
             else
                 throw CException(BADMOVE,SBADMOVE);
 
-            //cout << " TODO MOVE " << endl;
 
             chessboard.show();
 
