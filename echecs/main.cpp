@@ -74,7 +74,10 @@ void play(ChessBoard & chessboard)
                 throw CException(BADPIECE,SBADPIECE);
 
 
+
+
 //============================  Choix de la case de sur laquelle on va déplacer la pièce ===============
+
 
             cout << "joueur " << playerName << " choisissez une case " << endl;
             cout << "coord 1 : ";
@@ -104,7 +107,6 @@ void play(ChessBoard & chessboard)
             pairCoord coordMove (u,v);
 
             // si le joueur déplace le roi le traitement est à part on prend un argument supplementaire
-
             if(chessboard.getChessboard()[x][y]->getName() == "King")
             {
                 if(chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),vPiecesOpponent), coordMove))
