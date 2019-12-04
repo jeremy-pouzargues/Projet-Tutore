@@ -67,10 +67,6 @@ void play(ChessBoard & chessboard)
             if(chessboard.getChessboard()[x][y]->getColor() == empty || chessboard.getChessboard()[x][y]->getColor() == colorOpp)
                 throw CException(BADPIECE,SBADPIECE);
 
-            for(shared_ptr<Piece> piece : chessboard.getChessboard())
-            {
-                cout << piece->getCoord().first << piece->getCoord().second << " - ";
-            }
 
             cout << "joueur " << playerName << " choisissez une case " << endl;
             cout << "coord 1 : ";
