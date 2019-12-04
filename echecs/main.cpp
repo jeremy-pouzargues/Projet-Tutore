@@ -76,7 +76,6 @@ void play(ChessBoard & chessboard)
 
 
 
-
 //============================  Choix de la case de sur laquelle on va déplacer la pièce ===============
 
 
