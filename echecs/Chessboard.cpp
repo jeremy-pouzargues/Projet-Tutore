@@ -59,8 +59,8 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][6]);
 
     // fous blancs
-    myChessBoard[7][2] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,2)));
-    myPiecesW.push_back(myChessBoard[7][2]);
+    myChessBoard[4][4] = shared_ptr<Piece>(new Bishop(white,pairCoord(4,4)));
+    myPiecesW.push_back(myChessBoard[4][4]);
     myChessBoard[7][5] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,5)));
     myPiecesW.push_back(myChessBoard[7][5]);
     // fous noirs
