@@ -25,7 +25,7 @@ ChessBoard::ChessBoard() {
             myChessBoard[i][j] = shared_ptr<Piece>(new Empty(pairCoord(i,j)));
         }
     }
-    for (unsigned i(0); i < 8;++i)
+    for (unsigned i(0); i < 7;++i)
     {
         // pions blancs
         myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
@@ -44,8 +44,10 @@ ChessBoard::ChessBoard() {
     // tours noirs
     myChessBoard[0][0] = shared_ptr<Piece>(new Rook(black,pairCoord(0,0)));
     myPiecesB.push_back(myChessBoard[0][0]);
-    myChessBoard[0][7] = shared_ptr<Piece>(new Rook(black,pairCoord(0,7)));
-    myPiecesB.push_back(myChessBoard[0][7]);
+//    myChessBoard[0][7] = shared_ptr<Piece>(new Rook(black,pairCoord(0,7)));
+//    myPiecesB.push_back(myChessBoard[0][7]);
+    myChessBoard[1][7] = shared_ptr<Piece>(new Pawn(white,pairCoord(1,7)));
+    myPiecesW.push_back(myChessBoard[1][7]);
 
     // cavaliers blancs
     myChessBoard[7][1] = shared_ptr<Piece>(new Knight(white,pairCoord(7,1)));
@@ -107,29 +109,65 @@ void ChessBoard::show() const
 void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
 {
     //Si la case est vide
-    if(this->myChessBoard[coordMove.first][coordMove.second]->getName() == "Empty")
+    if(this->getChessboard()[coordMove.first][coordMove.second]->getName() == "Empty")
     {
         //On effectue un swap entre la pièce vide et la pièce vide
-        shared_ptr<Piece> tmp = this->myChessBoard[coordMove.first][coordMove.second];
-        this->myChessBoard[coordMove.first][coordMove.second] = this->myChessBoard[coordPiece.first][coordPiece.second];
-        this->myChessBoard[coordPiece.first][coordPiece.second] = tmp;
+        shared_ptr<Piece> tmp = this->getChessboard()[coordMove.first][coordMove.second];
+        this->getChessboard()[coordMove.first][coordMove.second] = this->getChessboard()[coordPiece.first][coordPiece.second];
+        this->getChessboard()[coordPiece.first][coordPiece.second] = tmp;
         //On set les coordonées à leur nouvelle coordonée
-        this->myChessBoard[coordMove.first][coordMove.second]->setCoord(coordMove);
-        this->myChessBoard[coordPiece.first][coordPiece.second]->setCoord(coordPiece);
+        this->getChessboard()[coordMove.first][coordMove.second]->setCoord(coordMove);
+        this->getChessboard()[coordPiece.first][coordPiece.second]->setCoord(coordPiece);
     }
     else //Si on "mange" une pièce adverse
     {
         unsigned indiceColorOpponent;
-        this->myChessBoard[coordMove.first][coordMove.second]->getColor() == white ? indiceColorOpponent = 0 : indiceColorOpponent = 1;
-        //On la place dans lal iste des pièces mortes
-        this->myDeadPiece[indiceColorOpponent].push_back(myChessBoard[coordMove.first][coordMove.second]);
+        this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white ? indiceColorOpponent = 0 : indiceColorOpponent = 1;
+        //On la place dans la liste des pièces mortes
+        this->getMyDeadPiece()[indiceColorOpponent].push_back(myChessBoard[coordMove.first][coordMove.second]);
         //On remplace la piece mangé par la pièce bougé
-        this->myChessBoard[coordMove.first][coordMove.second] = this->myChessBoard[coordPiece.first][coordPiece.second];
+        this->getChessboard()[coordMove.first][coordMove.second] = this->getChessboard()[coordPiece.first][coordPiece.second];
         //On actualise ses coordonées
-        this->myChessBoard[coordMove.first][coordMove.second]->setCoord(coordMove);
+        this->getChessboard()[coordMove.first][coordMove.second]->setCoord(coordMove);
         //On créer un objet vide à son ancienne place
-        this->myChessBoard[coordPiece.first][coordPiece.second] = shared_ptr<Piece>(new Empty(coordPiece));
+        this->getChessboard()[coordPiece.first][coordPiece.second] = shared_ptr<Piece>(new Empty(coordPiece));
     }
+
+     //Un pion noir ne pourra jamais être à la ligne 0 et un pion blanc jamais à la ligne 7
+//    if(this->getChessboard()[coordMove.first][coordMove.second]->getName() == "Pawn" &&
+//       (this->getChessboard()[coordMove.first][coordMove.second]->getCoord().first == 0 ||
+//        this->getChessboard()[coordMove.first][coordMove.second]->getCoord().first == 7))
+//    {
+//        unsigned indiceColor;
+//        this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white ? indiceColor = 0 : indiceColor = 1;
+//        cout << "Choisisser une pièce à faire revivre:" << endl;
+//        for(shared_ptr<Piece> piece : getMyDeadPiece()[indiceColor])
+//        {
+//            if(piece->getName() != "Pawn")
+//            {
+//                cout << piece->getName() << "  ";
+//            }
+//        }
+//        string pieceChosen;
+//        unsigned cpt;
+//        while(true)
+//        {
+//            cin >> pieceChosen;
+//            cpt = 0;
+//            while(cpt < getMyDeadPiece()[indiceColor].size() && getMyDeadPiece()[indiceColor][cpt]->getName() != pieceChosen)
+//            {
+//                ++cpt;
+//            }
+//            if (getMyDeadPiece()[indiceColor][cpt]->getName() == pieceChosen && pieceChosen != "Pawn") break;
+//            else
+//            {
+//                cout << "Pièce entrée incorrecte, veuillez réessayer" << endl;
+//            }
+//        }
+//        this->getChessboard()[coordMove.first][coordMove.second] = this->getMyDeadPiece()[indiceColor][cpt];
+//        this->getMyDeadPiece()[indiceColor].erase(this->getMyDeadPiece()[indiceColor].begin()+cpt);
+
+//    }
 }//move()
 
 bool ChessBoard::find(const std::vector<pairCoord> &legalMoves, const pairCoord &moveChosen)
@@ -142,6 +180,8 @@ bool ChessBoard::find(const std::vector<pairCoord> &legalMoves, const pairCoord 
     return false;
 }
 Matrix ChessBoard::getChessboard() const {return myChessBoard;}
+
+Matrix ChessBoard::getMyDeadPiece() const {return myDeadPiece;}
 
 VPieces ChessBoard::getPiecesW() const {return myPiecesW;}
 
