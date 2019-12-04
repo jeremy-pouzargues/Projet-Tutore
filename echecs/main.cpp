@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 void play(ChessBoard & chessboard)
 {
     // le joueur en true est le joueurs en blanc
@@ -113,7 +112,12 @@ void play(ChessBoard & chessboard)
 
             if(chessboard.getChessboard()[x][y]->getName() == "King")
             {
-                if(chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),vPiecesOpponent), coordMove))
+
+                //vector<vector<pairCoord>> ((chessboard.ChessBoard::getVEatOpponent)(vector<shared_ptr<Piece>>));
+                //vector<vector<pairCoord>> ((*f)(vector<shared_ptr<Piece>>));
+                //f = chessboard.getVEatOpponent();
+
+                if(chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(vPiecesOpponent)), coordMove))
                     chessboard.move(coordMove, coordPiece);
                 else
                     throw CException(BADMOVE,SBADMOVE);

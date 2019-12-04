@@ -133,7 +133,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
         this->myChessBoard[coordMove.first][coordMove.second] = this->myChessBoard[coordPiece.first][coordPiece.second];
         //On actualise ses coordonées
         this->myChessBoard[coordMove.first][coordMove.second]->setCoord(coordMove);
-        //On créer un objet vide à son ancienne place
+        //On créer un objet vide à son ancienne 
         this->myChessBoard[coordPiece.first][coordPiece.second] = shared_ptr<Piece>(new Empty(coordPiece));
     }
 }//move()
@@ -147,6 +147,93 @@ bool ChessBoard::find(const std::vector<pairCoord> &legalMoves, const pairCoord 
     }
     return false;
 }
+
+
+vector<vector<pairCoord>> ChessBoard::getVEatOpponent(const VPieces & VPiecesOpponent)
+{
+    // on va récuếrer la liste de tous les coups possibles des adversaires et les mettres dans un vecteur
+    vector<vector<pairCoord>> VEatOpponent;
+    // pour chaque piece adverse
+    for (shared_ptr<Piece> piece : VPiecesOpponent)
+    {
+        // si c'est un roi traitement particulier pour eviter une boucle infinie
+        // on va récupérer les coord de tous les mouvements qu'il pourrait hypothetiquement réaliser
+        // et les ajouter dans la matrice VMovesOpponent
+        if(piece->getName() == "King")
+        {
+            vector<pairCoord> VMovesKing;
+            unsigned line   = piece->getCoord().first;
+            unsigned column = piece->getCoord().second;
+            Color colorPiece = piece->getColor();
+
+
+            // si le roi n'est pas tout en haut
+            if(line != 0)
+            {
+                if(column != 0 && this->getChessboard()[line-1][column-1]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line-1,column-1));
+                if(this->getChessboard()[line-1][column]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line-1,column));
+                if(column != 7 && this->getChessboard()[line-1][column+1]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line-1,column+1));
+            }
+
+            // pas tout à droite et si le pion à sa droite n'est pas de la même couleur
+            if(column !=7 && this->getChessboard()[line][column+1]->getColor() != colorPiece )
+                VMovesKing.push_back(pairCoord(line,column+1));
+
+            //tout en bas
+            if(line != 7)
+            {
+                if(column != 7 && this->getChessboard()[line+1][column+1]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line+1,column+1));
+                if(this->getChessboard()[line+1][column]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line+1,column));
+                if(column != 0 && this->getChessboard()[line+1][column-1]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line+1, column-1));
+            }
+
+            // de même qu'à droite mais à gauche merci.
+            if(column != 0 && this->getChessboard()[line][column-1]->getColor() != colorPiece )
+                VMovesKing.push_back(pairCoord(line,column-1));
+
+            VEatOpponent.push_back(VMovesKing);
+        }
+        else if(piece->getName() == "Pawn")
+        {
+            vector<pairCoord> VEatPawn;
+            unsigned line   = piece->getCoord().first;
+            unsigned column = piece->getCoord().second;
+            //newLine va etre égal la ligne de notre pion avec un déplacement vers le haut ou le bas selon la couleur
+            unsigned newLine;
+            Color colorOpponent;
+            if (piece->getColor() == white)
+            {
+                newLine = line - 1;
+                colorOpponent = black;
+            }
+            else
+            {
+                newLine = line + 1;
+                colorOpponent = white;
+            }
+            //Ces deux conditions vont regarder si des pièces sont dans les diagonales directes de notre pion afin de pouvoir éventuellement les manger
+            if (column != 7 && this->getChessboard()[newLine][column + 1]->getColor() == colorOpponent)
+                VEatPawn.push_back(this->getChessboard()[newLine][column + 1]->getCoord());
+            if (column != 0 && this->getChessboard()[newLine][column - 1]->getColor() == colorOpponent)
+                VEatPawn.push_back(this->getChessboard()[newLine][column - 1]->getCoord());
+            VEatOpponent.push_back(VEatPawn);
+        }
+        // sinon on ajoute à la matrice les mouvements legaux de toutes les autres pieces
+        else
+        {
+            VEatOpponent.push_back(piece->legalMoves(this->getChessboard()));
+        }
+    }
+    return VEatOpponent;
+}//getVEatOpponent()
+
+
 Matrix ChessBoard::getChessboard() const {return myChessBoard;}
 
 VPieces ChessBoard::getPiecesW() const {return myPiecesW;}

@@ -14,6 +14,7 @@
 #include "Const.h"
 #include <vector>
 #include <memory>
+
 class Piece {
 protected:
     Color           myColor;
@@ -50,8 +51,9 @@ public:
      * ait un traitement spécial.
      *
      */
+    typedef std::vector<std::shared_ptr<Piece>> VPieces;
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
-                                              const std::vector<std::shared_ptr<Piece>> & VPiecesOpponent) = 0;
+                                              const std::vector<std::vector<pairCoord>> & vEatOpponent) = 0;
 
 
     //getters
