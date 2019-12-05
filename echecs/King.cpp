@@ -8,6 +8,7 @@ King::King(const Color & color,const pairCoord & coord)
     myColor = color;
     myCoord = coord;
     myName = "King";
+    canCastling = true;
 
     color == white ? myCarac = KKINGW : myCarac = KKINGB;
 
@@ -104,7 +105,13 @@ vector<pairCoord> King::legalMoves(const vector<vector<shared_ptr<Piece>>> & mat
 
     if(column != 0 && matrix[line][column-1]->getColor() != colorPiece && ! find(pairCoord(line,column-1), VMovesOpponent))
         VMoves.push_back(pairCoord(line,column-1));
-
+    if(this->canCastling)
+    {
+        if(matrix[this->getCoord().first][this->getCoord().second+1]->getName() == "Empty" &&
+           matrix[this->getCoord().first][this->getCoord().second+2]->getName() == "Empty" &&
+           matrix[this->getCoord().first][this->getCoord().second+3]->getName() == "Rook" &&
+           matrix[this->getCoord().first][this->getCoord().second+3]->getCanCastling())
+    }
     return VMoves;
 
 }//legalMoves()

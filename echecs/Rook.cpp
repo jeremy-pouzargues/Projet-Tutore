@@ -4,6 +4,7 @@
 Rook::Rook(const Color & color,const pairCoord & coord) {
     myColor = color;
     myCoord = coord;
+    canCastling = true;
 
     color == white ? myCarac = KROOKW : myCarac = KROOKB;
 }//Rook()
@@ -75,3 +76,9 @@ std::vector<pairCoord> Rook::legalMoves(const std::vector<std::vector<std::share
 
     return VMoves;
 }//legalMove()
+
+
+bool Rook::getCanCastling()
+{
+    return this->canCastling;
+}//getCanCastling

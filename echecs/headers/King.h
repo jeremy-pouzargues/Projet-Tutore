@@ -15,6 +15,7 @@
 class King : public Piece
 {
 private:
+    bool canCastling;
 public:
     King() {}
     King(const Color & color,const pairCoord & coord);
