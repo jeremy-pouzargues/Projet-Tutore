@@ -126,7 +126,11 @@ void play(ChessBoard & chessboard)
             // Coordonnées de destination
             pairCoord coordMove (u,v);
 
-            ChessBoard tmp = chessboard;
+
+//======================= A FINIR ===========================
+            VPieces tmpVPiecesPlayer = vPiecesPlayer;
+            VPieces tmpVPiecesOpponent = vPiecesOpponent;
+            /*Matrix tmpVDeadPieces = */
 
             // si le joueur déplace le roi le traitement est à part on prend un argument supplementaire
             if(chessboard.getChessboard()[x][y]->getName() == "King")
@@ -156,7 +160,6 @@ void play(ChessBoard & chessboard)
 
             if (chessboard.find(chessboard.matrixToVector(chessboard.getVEatOpponent(vPiecesOpponent)),vPiecesPlayer[0]->getCoord()))
             {
-                chessboard = tmp;
                 throw CException(CHECK,SCHECK);
             }
 
