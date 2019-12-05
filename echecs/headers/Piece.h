@@ -42,7 +42,7 @@ public:
      * @author Léo, Jérémy
      * @brief redefinition de legalMoves nécéssaire pour le roi uniquement
      * @param matrix, matrice qui represente l'échiquier
-     * @param VPiecesOpponent vecteurs des pièces ennemies
+     * @param vEatOpponent matrice des mouvements létaux de l'adversaire
      * @return vecteur de pairCoord qui contient les coordonnées des mouvements possibles pour le roi
      *
      * Il est nécéssaire de rédéfinir legalMoves car le roi à un traitement différent des autres pièce,
