@@ -26,6 +26,13 @@ ChessBoard::ChessBoard() {
         }
     }
 
+    //Roi Blanc
+    myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
+    myPiecesW.push_back(myChessBoard[7][4]);
+    //Roi noir
+    myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
+    myPiecesB.push_back(myChessBoard[0][4]);
+
     for (unsigned i(0); i < 8;++i)
     {
         // pions blancs
@@ -76,12 +83,7 @@ ChessBoard::ChessBoard() {
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
 
-    //Roi Blanc
-    myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
-    myPiecesW.push_back(myChessBoard[7][4]);
-    //Roi noir
-    myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
-    myPiecesB.push_back(myChessBoard[0][4]);
+
 
 
 }//ChessBoard ()
@@ -226,6 +228,18 @@ vector<vector<pairCoord>> ChessBoard::getVEatOpponent(const VPieces & VPiecesOpp
     }
     return VEatOpponent;
 }//getVEatOpponent()
+
+vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & matrixCoord)
+{
+    vector<pairCoord> newVector;
+    for (unsigned i (0); i < matrixCoord.size(); ++i)
+    {
+        for (unsigned j(0); j < matrixCoord[i].size(); ++j)
+            newVector.push_back(matrixCoord[i][j]);
+    }
+    return newVector;
+}
+
 
 
 Matrix ChessBoard::getChessboard() const {return myChessBoard;}

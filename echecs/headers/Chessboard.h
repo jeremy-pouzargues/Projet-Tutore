@@ -44,6 +44,8 @@ public:
      
      std::vector<std::vector<pairCoord>> getVEatOpponent(const VPieces & VPiecesOpponent);
 
+    std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
+
      VPieces getPiecesW () const;
      VPieces getPiecesB () const;
 

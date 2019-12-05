@@ -25,6 +25,7 @@ public:
 
     bool find(const pairCoord & coordPiece,const std::vector<std::vector<pairCoord>> & listMovesOpponent);
 
+
 };
 
 #endif // KING_H
