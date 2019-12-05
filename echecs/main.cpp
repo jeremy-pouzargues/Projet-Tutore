@@ -73,6 +73,11 @@ void play(ChessBoard & chessboard)
             if(chessboard.getChessboard()[x][y]->getColor() != color)
                 throw CException(BADPIECE,SBADPIECE);
 
+            for (pairCoord coord : chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()))
+            {
+                  cout << coord.first << coord.second << "  ";
+            }
+            cout << endl;
 
 
 
