@@ -41,9 +41,8 @@ public:
      void move(const pairCoord & coordMove,const pairCoord & coordPiece);
 
      bool find (const std::vector<pairCoord> & legalMoves, const pairCoord & moveChosen);
-     
      std::vector<std::vector<pairCoord>> getVEatOpponent(const VPieces & VPiecesOpponent);
-
+     Matrix getMyDeadPiece () const;
      VPieces getPiecesW () const;
      VPieces getPiecesB () const;
 
