@@ -23,6 +23,7 @@ public:
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
                                               const std::vector<std::shared_ptr<Piece>> & VPiecesOpponent) {}
     bool getCanCastling();
+                                              const std::vector<std::vector<pairCoord>> & vEatOpponent) {}
 };
 
 #endif // ROOK_H
