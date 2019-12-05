@@ -130,6 +130,18 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
         this->myChessBoard[coordMove.first][coordMove.second]->setCoord(coordMove);
         //On créer un objet vide à son ancienne 
         this->myChessBoard[coordPiece.first][coordPiece.second] = shared_ptr<Piece>(new Empty(coordPiece));
+
+        unsigned cpt = 0;
+        if(this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white)
+        {
+            while(coordMove != myPiecesB[cpt]->getCoord()) {++cpt;}
+            myPiecesB.erase(myPiecesW.begin()+cpt);
+        }
+        else
+        {
+            while(coordMove != myPiecesW[cpt]->getCoord()) {++cpt;}
+            myPiecesW.erase(myPiecesW.begin()+cpt);
+        }
     }
 
 
