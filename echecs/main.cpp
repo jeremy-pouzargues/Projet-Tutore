@@ -88,11 +88,13 @@ void play(ChessBoard & chessboard)
             if(chessboard.getChessboard()[x][y]->getColor() != color)
                 throw CException(BADPIECE,SBADPIECE);
 
-//            for(pairCoord coord: chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()))
-//            {
-//                cout << coord.first << coord.second << " - ";
-//            }
-//            cout << endl;
+            for (pairCoord coord : chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()))
+            {
+                  cout << coord.first << coord.second << "  ";
+            }
+            cout << endl;
+
+
 
 //============================  Choix de la case de sur laquelle on va déplacer la pièce ===============
 
@@ -127,7 +129,6 @@ void play(ChessBoard & chessboard)
             ChessBoard tmp = chessboard;
 
             // si le joueur déplace le roi le traitement est à part on prend un argument supplementaire
-
             if(chessboard.getChessboard()[x][y]->getName() == "King")
             {
 
