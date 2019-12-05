@@ -90,6 +90,7 @@ ChessBoard::ChessBoard() {
     myPiecesW.push_back(myChessBoard[4][4]);
 
 
+
 }//ChessBoard ()
 
 void ChessBoard::show() const
