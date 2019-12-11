@@ -14,6 +14,7 @@
 #include "Const.h"
 #include <vector>
 #include <memory>
+
 class Piece {
 protected:
     Color           myColor;
@@ -41,7 +42,7 @@ public:
      * @author Léo, Jérémy
      * @brief redefinition de legalMoves nécéssaire pour le roi uniquement
      * @param matrix, matrice qui represente l'échiquier
-     * @param VPiecesOpponent vecteurs des pièces ennemies
+     * @param vEatOpponent matrice des mouvements létaux de l'adversaire
      * @return vecteur de pairCoord qui contient les coordonnées des mouvements possibles pour le roi
      *
      * Il est nécéssaire de rédéfinir legalMoves car le roi à un traitement différent des autres pièce,
@@ -50,8 +51,9 @@ public:
      * ait un traitement spécial.
      *
      */
+    typedef std::vector<std::shared_ptr<Piece>> VPieces;
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
-                                              const std::vector<std::shared_ptr<Piece>> & VPiecesOpponent) = 0;
+                                              const std::vector<std::vector<pairCoord>> & vEatOpponent) = 0;
 
 
     //getters

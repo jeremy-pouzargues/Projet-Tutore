@@ -44,7 +44,7 @@ vector<pairCoord> Bishop::legalMoves(const vector<vector<shared_ptr<Piece>>> & m
         while(this->getColor() != matrix[line][column]->getColor())
         {
             VMoves.push_back(pairCoord(line,column));
-            if(line == 0 || column == 0)break;
+            if(line == 0 || column == 7)break;
             if (matrix[line][column]->getColor() == colorOpponent)break;
             --line;
             ++column;
@@ -61,7 +61,7 @@ vector<pairCoord> Bishop::legalMoves(const vector<vector<shared_ptr<Piece>>> & m
         while(this->getColor() != matrix[line][column]->getColor())
         {
             VMoves.push_back(pairCoord(line,column));
-            if(line == 0 || column == 0)break;
+            if(line == 7 || column == 7)break;
             if (matrix[line][column]->getColor() == colorOpponent)break;
             ++line;
             ++column;
@@ -78,9 +78,9 @@ vector<pairCoord> Bishop::legalMoves(const vector<vector<shared_ptr<Piece>>> & m
         while(this->getColor() != matrix[line][column]->getColor())
         {
             VMoves.push_back(pairCoord(line,column));
-            if(line == 0 || column == 0)break;
+            if(line == 7 || column == 0)break;
             if (matrix[line][column]->getColor() == colorOpponent)break;
-            ++line += 1;
+            ++line;
             --column;
         }
     }

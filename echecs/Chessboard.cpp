@@ -26,6 +26,13 @@ ChessBoard::ChessBoard() {
         }
     }
 
+    //Roi Blanc
+    myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
+    myPiecesW.push_back(myChessBoard[7][4]);
+    //Roi noir
+    myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
+    myPiecesB.push_back(myChessBoard[0][4]);
+
     for (unsigned i(0); i < 8;++i)
     {
         // pions blancs
@@ -44,14 +51,16 @@ ChessBoard::ChessBoard() {
     // tours noirs
     myChessBoard[0][0] = shared_ptr<Piece>(new Rook(black,pairCoord(0,0)));
     myPiecesB.push_back(myChessBoard[0][0]);
-    myChessBoard[0][7] = shared_ptr<Piece>(new Rook(black,pairCoord(0,7)));
-    myPiecesB.push_back(myChessBoard[0][7]);
+        myChessBoard[0][7] = shared_ptr<Piece>(new Rook(black,pairCoord(0,7)));
+        myPiecesB.push_back(myChessBoard[0][7]);
+    myChessBoard[1][7] = shared_ptr<Piece>(new Pawn(white,pairCoord(1,7)));
+    myPiecesW.push_back(myChessBoard[1][7]);
 
     // cavaliers blancs
-    myChessBoard[7][1] = shared_ptr<Piece>(new Knight(white,pairCoord(7,1)));
-    myPiecesW.push_back(myChessBoard[7][1]);
-    myChessBoard[7][6] = shared_ptr<Piece>(new Knight(white,pairCoord(7,6)));
-    myPiecesW.push_back(myChessBoard[7][6]);
+//    myChessBoard[7][1] = shared_ptr<Piece>(new Knight(white,pairCoord(7,1)));
+//    myPiecesW.push_back(myChessBoard[7][1]);
+//    myChessBoard[7][6] = shared_ptr<Piece>(new Knight(white,pairCoord(7,6)));
+//    myPiecesW.push_back(myChessBoard[7][6]);
     // cavaliers noirs
     myChessBoard[0][1] = shared_ptr<Piece>(new Knight(black,pairCoord(0,1)));
     myPiecesB.push_back(myChessBoard[0][1]);
@@ -59,8 +68,8 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][6]);
 
     // fous blancs
-    myChessBoard[7][2] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,2)));
-    myPiecesW.push_back(myChessBoard[7][2]);
+    myChessBoard[4][4] = shared_ptr<Piece>(new Bishop(white,pairCoord(4,4)));
+    myPiecesW.push_back(myChessBoard[4][4]);
     myChessBoard[7][5] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,5)));
     myPiecesW.push_back(myChessBoard[7][5]);
     // fous noirs
@@ -70,24 +79,13 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][5]);
 
     //Reine blanche
-    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
-    myPiecesW.push_back(myChessBoard[7][3]);
+//    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
+//    myPiecesW.push_back(myChessBoard[7][3]);
     //Reine noire
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
 
-//    //Roi Blanc
-//    myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
-//    myPiecesW.push_back(myChessBoard[7][4]);
 
-    //Roi noir
-    myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
-    myPiecesB.push_back(myChessBoard[0][4]);
-
-
-    //debug
-    myChessBoard[4][4] = shared_ptr<Piece>(new King(white,pairCoord(4,4)));
-    myPiecesW.push_back(myChessBoard[4][4]);
 
 
 
@@ -114,7 +112,7 @@ void ChessBoard::show() const
 void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
 {
     //Si la case est vide
-    if(this->myChessBoard[coordMove.first][coordMove.second]->getName() == "Empty")
+    if(this->getChessboard()[coordMove.first][coordMove.second]->getName() == "Empty")
     {
         //On effectue un swap entre la pièce vide et la pièce vide
         shared_ptr<Piece> tmp = this->myChessBoard[coordMove.first][coordMove.second];
@@ -134,8 +132,72 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
         this->myChessBoard[coordMove.first][coordMove.second] = this->myChessBoard[coordPiece.first][coordPiece.second];
         //On actualise ses coordonées
         this->myChessBoard[coordMove.first][coordMove.second]->setCoord(coordMove);
-        //On créer un objet vide à son ancienne place
+        //On créer un objet vide à son ancienne 
         this->myChessBoard[coordPiece.first][coordPiece.second] = shared_ptr<Piece>(new Empty(coordPiece));
+
+        unsigned cpt = 0;
+        if(this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white)
+        {
+            while(coordMove != myPiecesB[cpt]->getCoord()) {++cpt;}
+            myPiecesB.erase(myPiecesW.begin()+cpt);
+        }
+        else
+        {
+            while(coordMove != myPiecesW[cpt]->getCoord()) {++cpt;}
+            myPiecesW.erase(myPiecesW.begin()+cpt);
+        }
+    }
+
+
+
+    //Un pion noir ne pourra jamais être à la ligne 0 et un pion blanc jamais à la ligne 7
+    if(this->getChessboard()[coordMove.first][coordMove.second]->getName() == "Pawn" &&
+            (this->getChessboard()[coordMove.first][coordMove.second]->getCoord().first == 0 ||
+             this->getChessboard()[coordMove.first][coordMove.second]->getCoord().first == 7))
+    {
+        Color color;
+        this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white ? color = white : color = black;
+        string pieceChosen;
+        while(true)
+        {
+            cout << "Choisisser une pièce à faire revivre: Tour, Cavalier, Fou, Reine" << endl;
+            getline(cin,pieceChosen);
+            if("Reine" == pieceChosen)
+            {
+                myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Queen(color,pairCoord(coordMove.first,coordMove.second)));
+                break;
+            }
+            else if("Tour" == pieceChosen)
+            {
+                myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Rook(color,pairCoord(coordMove.first,coordMove.second)));
+                break;
+            }
+            else if("Cavalier" == pieceChosen)
+            {
+                myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Knight(color,pairCoord(coordMove.first,coordMove.second)));
+                break;
+            }
+            else if("Fou" == pieceChosen)
+            {
+                myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Bishop(color,pairCoord(coordMove.first,coordMove.second)));
+                break;
+            }
+            else
+            {
+                cout << "Rentrer une pièce valide!" << endl;
+            }
+        }
+        unsigned cpt = 0;
+        if(color == white)
+        {
+            while(coordMove != myPiecesW[cpt]->getCoord()) {++cpt;}
+            myPiecesW[cpt] = myChessBoard[coordMove.first][coordMove.second];
+        }
+        else
+        {
+            while(coordMove != myPiecesB[cpt]->getCoord()) {++cpt;}
+            myPiecesB[cpt] = myChessBoard[coordMove.first][coordMove.second];
+        }
     }
 }//move()
 
@@ -148,7 +210,108 @@ bool ChessBoard::find(const std::vector<pairCoord> &legalMoves, const pairCoord 
     }
     return false;
 }
+
+
+vector<vector<pairCoord>> ChessBoard::getVEatOpponent(const VPieces & VPiecesOpponent)
+{
+    // on va récuếrer la liste de tous les coups possibles des adversaires et les mettres dans un vecteur
+    vector<vector<pairCoord>> VEatOpponent;
+    // pour chaque piece adverse
+    for (shared_ptr<Piece> piece : VPiecesOpponent)
+    {
+        // si c'est un roi traitement particulier pour eviter une boucle infinie
+        // on va récupérer les coord de tous les mouvements qu'il pourrait hypothetiquement réaliser
+        // et les ajouter dans la matrice VMovesOpponent
+        if(piece->getName() == "King")
+        {
+            vector<pairCoord> VMovesKing;
+            unsigned line   = piece->getCoord().first;
+            unsigned column = piece->getCoord().second;
+            Color colorPiece = piece->getColor();
+
+
+            // si le roi n'est pas tout en haut
+            if(line != 0)
+            {
+                if(column != 0 && this->getChessboard()[line-1][column-1]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line-1,column-1));
+                if(this->getChessboard()[line-1][column]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line-1,column));
+                if(column != 7 && this->getChessboard()[line-1][column+1]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line-1,column+1));
+            }
+
+            // pas tout à droite et si le pion à sa droite n'est pas de la même couleur
+            if(column !=7 && this->getChessboard()[line][column+1]->getColor() != colorPiece )
+                VMovesKing.push_back(pairCoord(line,column+1));
+
+            //tout en bas
+            if(line != 7)
+            {
+                if(column != 7 && this->getChessboard()[line+1][column+1]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line+1,column+1));
+                if(this->getChessboard()[line+1][column]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line+1,column));
+                if(column != 0 && this->getChessboard()[line+1][column-1]->getColor() != colorPiece )
+                    VMovesKing.push_back(pairCoord(line+1, column-1));
+            }
+
+            // de même qu'à droite mais à gauche merci.
+            if(column != 0 && this->getChessboard()[line][column-1]->getColor() != colorPiece )
+                VMovesKing.push_back(pairCoord(line,column-1));
+
+            VEatOpponent.push_back(VMovesKing);
+        }
+        else if(piece->getName() == "Pawn")
+        {
+            vector<pairCoord> VEatPawn;
+            unsigned line   = piece->getCoord().first;
+            unsigned column = piece->getCoord().second;
+            //newLine va etre égal la ligne de notre pion avec un déplacement vers le haut ou le bas selon la couleur
+            unsigned newLine;
+            Color colorOpponent;
+            if (piece->getColor() == white)
+            {
+                newLine = line - 1;
+                colorOpponent = black;
+            }
+            else
+            {
+                newLine = line + 1;
+                colorOpponent = white;
+            }
+            //Ces deux conditions vont regarder si des pièces sont dans les diagonales directes de notre pion afin de pouvoir éventuellement les manger
+            if (column != 7 && this->getChessboard()[newLine][column + 1]->getColor() == colorOpponent)
+                VEatPawn.push_back(this->getChessboard()[newLine][column + 1]->getCoord());
+            if (column != 0 && this->getChessboard()[newLine][column - 1]->getColor() == colorOpponent)
+                VEatPawn.push_back(this->getChessboard()[newLine][column - 1]->getCoord());
+            VEatOpponent.push_back(VEatPawn);
+        }
+        // sinon on ajoute à la matrice les mouvements legaux de toutes les autres pieces
+        else
+        {
+            VEatOpponent.push_back(piece->legalMoves(this->getChessboard()));
+        }
+    }
+    return VEatOpponent;
+}//getVEatOpponent()
+
+vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & matrixCoord)
+{
+    vector<pairCoord> newVector;
+    for (unsigned i (0); i < matrixCoord.size(); ++i)
+    {
+        for (unsigned j(0); j < matrixCoord[i].size(); ++j)
+            newVector.push_back(matrixCoord[i][j]);
+    }
+    return newVector;
+}
+
+
+
 Matrix ChessBoard::getChessboard() const {return myChessBoard;}
+
+Matrix ChessBoard::getMyDeadPiece() const {return myDeadPiece;}
 
 VPieces ChessBoard::getPiecesW() const {return myPiecesW;}
 
