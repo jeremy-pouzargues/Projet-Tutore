@@ -1,7 +1,16 @@
+#ifndef MINMAX_HPP
+#define MINMAX_HPP
+
 #include <iostream>
 #include <limits.h>
-#include "headers/minmax.h"
+#include "headers/Chessboard.h"
 
+
+int evaluation(const ChessBoard chessboard)
+{
+    //std::cout << "dans evaluation" << std::endl;
+    return 1;
+}
 
 int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlayer)
 {
@@ -13,6 +22,7 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
     int maxEval;
     int minEval;
 
+
     if (maximizingPlayer)
     {
         maxEval = INT_MIN;//pseudo -infini
@@ -21,22 +31,25 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
         for(std::shared_ptr<Piece> piece : chessboard.getPiecesW())
         {
 
-            // pour chaque coup possible par pièce
-            for (pairCoord possibleMove : piece->legalMoves(chessboard.getChessboard()))
-            {
 
-                // on garde les coordonées actuelles de la pîece
-                pairCoord actualCoord = piece->getCoord();
-                // on la deplace
-                chessboard.move(possibleMove,actualCoord);
-                // on réévalue l'echiquier après ce déplacement
-                int eval = minmax(chessboard,depth-1,!maximizingPlayer);
-                // on regarde si le score est plus élevé que le score max actuelle
-                // si oui ce coup est plus intéréssant
-                maxEval  = std::max(maxEval,eval);
-                // on remet la pièce à sa position d'origine
-                chessboard.move(actualCoord,piece->getCoord());
-            }
+            if(piece->getName() != "King")
+            {
+                // pour chaque coup possible par pièce
+                for (pairCoord possibleMove : piece->legalMoves(chessboard.getChessboard()))
+                {
+                    // on garde les coordonées actuelles de la pîece
+                    pairCoord actualCoord = piece->getCoord();
+                    // on la deplace
+                    chessboard.move(possibleMove,actualCoord);
+                    // on réévalue l'echiquier après ce déplacement
+                    int eval = minmax(chessboard,depth-1,!maximizingPlayer);
+                    // on regarde si le score est plus élevé que le score max actuelle
+                    // si oui ce coup est plus intéréssant
+                    maxEval  = std::max(maxEval,eval);
+                    // on remet la pièce à sa position d'origine
+                    chessboard.move(actualCoord,piece->getCoord());
+                }
+           }
         }
         return maxEval;
     }
@@ -50,7 +63,8 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
            for(std::shared_ptr<Piece> piece : chessboard.getPiecesB())
            {
 
-
+             if(piece->getName() != "King")
+             {
                for (pairCoord possibleMove : piece->legalMoves(chessboard.getChessboard()))
                {
                    pairCoord actualCoord = piece->getCoord();
@@ -59,8 +73,11 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                    minEval  = std::min(minEval,eval);
                    chessboard.move(actualCoord,piece->getCoord());
                }
+             }
            }
            return minEval;
     }
 }//minmax()
 
+
+#endif // MINMAX_HPP

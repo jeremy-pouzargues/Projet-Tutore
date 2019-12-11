@@ -5,6 +5,9 @@
 #include "headers/Chessboard.h"
 #include "headers/CExc.h"
 
+#include "headers/minmax.hpp"
+
+
 using namespace std;
 
 void play(ChessBoard & chessboard)
@@ -40,7 +43,7 @@ void play(ChessBoard & chessboard)
                 color           = black;
 
                 playerName      = "noir";
-                vPiecesPlayer = chessboard.getPiecesB();
+                vPiecesPlayer   = chessboard.getPiecesB();
                 vPiecesOpponent = chessboard.getPiecesW();
             }
 
@@ -136,6 +139,13 @@ void play(ChessBoard & chessboard)
             pairCoord coordPiece (x,y);
             // Coordonnées de destination
             pairCoord coordMove (u,v);
+
+
+
+//======================= TESTS MINMAX ======================
+
+
+            cout << " =====MINMAX==== " << minmax(chessboard,1,true) << endl;
 
 
 //======================= A FINIR ===========================

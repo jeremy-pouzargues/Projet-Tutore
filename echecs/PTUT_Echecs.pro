@@ -14,8 +14,7 @@ SOURCES += \
         Piece.cpp \
         Queen.cpp \
         Rook.cpp \
-        main.cpp \
-        minmax.cpp
+        main.cpp
 
 DISTFILES += \
     echecsV1.mdj
@@ -43,4 +42,4 @@ HEADERS += \
     Piece.h \
     Queen.h \
     Rook.h \
-    headers/minmax.h
+    headers/minmax.hpp
