@@ -309,7 +309,7 @@ vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & m
 
 
 
-Matrix ChessBoard::getChessboard() const {return myChessBoard;}
+const Matrix & ChessBoard::getChessboard() const {return myChessBoard;}
 
 Matrix ChessBoard::getMyDeadPiece() const {return myDeadPiece;}
 

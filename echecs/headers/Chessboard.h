@@ -36,18 +36,18 @@ public:
 
 
      //getter
-     Matrix getChessboard() const;
+     const Matrix & getChessboard() const;
 
      void move(const pairCoord & coordMove,const pairCoord & coordPiece);
 
      bool find (const std::vector<pairCoord> & legalMoves, const pairCoord & moveChosen);
      std::vector<std::vector<pairCoord>> getVEatOpponent(const VPieces & VPiecesOpponent);
 
-    std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
+     std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
 
-     Matrix getMyDeadPiece () const;
-     VPieces getPiecesW () const;
-     VPieces getPiecesB () const;
+     const Matrix  & getMyDeadPiece () const;
+     const VPieces & getPiecesW () const;
+     const VPieces & getPiecesB () const;
 
 };//Echiquier
 

@@ -58,10 +58,10 @@ public:
 
     //getters
     // il faut qu'on m'explique si on met en const ou pas.
-    Color      getColor() const;
-    pairCoord  getCoord() const;
-    char       getCarac () const;
-    std::string getName () const;
+    const Color       & getColor() const;
+    const pairCoord   & getCoord() const;
+    const char        & getCarac () const;
+    const std::string & getName () const;
 
     //setters
     void setCoord(const pairCoord & coord);
