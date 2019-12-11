@@ -44,23 +44,23 @@ ChessBoard::ChessBoard() {
     }
 
     // tours blancs
-    myChessBoard[6][6] = shared_ptr<Piece>(new Rook(black,pairCoord(6,6)));
-    myPiecesW.push_back(myChessBoard[6][6]);
+    myChessBoard[7][0] = shared_ptr<Piece>(new Rook(white,pairCoord(7,0)));
+    myPiecesW.push_back(myChessBoard[7][0]);
     myChessBoard[7][7] = shared_ptr<Piece>(new Rook(white,pairCoord(7,7)));
     myPiecesW.push_back(myChessBoard[7][7]);
     // tours noirs
     myChessBoard[0][0] = shared_ptr<Piece>(new Rook(black,pairCoord(0,0)));
     myPiecesB.push_back(myChessBoard[0][0]);
-    //    myChessBoard[0][7] = shared_ptr<Piece>(new Rook(black,pairCoord(0,7)));
-    //    myPiecesB.push_back(myChessBoard[0][7]);
+        myChessBoard[0][7] = shared_ptr<Piece>(new Rook(black,pairCoord(0,7)));
+        myPiecesB.push_back(myChessBoard[0][7]);
     myChessBoard[1][7] = shared_ptr<Piece>(new Pawn(white,pairCoord(1,7)));
     myPiecesW.push_back(myChessBoard[1][7]);
 
     // cavaliers blancs
-    myChessBoard[7][1] = shared_ptr<Piece>(new Knight(white,pairCoord(7,1)));
-    myPiecesW.push_back(myChessBoard[7][1]);
-    myChessBoard[7][6] = shared_ptr<Piece>(new Knight(white,pairCoord(7,6)));
-    myPiecesW.push_back(myChessBoard[7][6]);
+//    myChessBoard[7][1] = shared_ptr<Piece>(new Knight(white,pairCoord(7,1)));
+//    myPiecesW.push_back(myChessBoard[7][1]);
+//    myChessBoard[7][6] = shared_ptr<Piece>(new Knight(white,pairCoord(7,6)));
+//    myPiecesW.push_back(myChessBoard[7][6]);
     // cavaliers noirs
     myChessBoard[0][1] = shared_ptr<Piece>(new Knight(black,pairCoord(0,1)));
     myPiecesB.push_back(myChessBoard[0][1]);
@@ -79,8 +79,8 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][5]);
 
     //Reine blanche
-    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
-    myPiecesW.push_back(myChessBoard[7][3]);
+//    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
+//    myPiecesW.push_back(myChessBoard[7][3]);
     //Reine noire
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
