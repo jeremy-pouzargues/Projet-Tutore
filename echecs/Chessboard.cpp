@@ -30,11 +30,9 @@ ChessBoard::ChessBoard() {
     myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
     myPiecesW.push_back(myChessBoard[7][4]);
     //Roi noir
-//    myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
-//    myPiecesB.push_back(myChessBoard[0][4]);
-    //Roi noir temporaire
-    myChessBoard[2][4] = shared_ptr<Piece>(new King(black,pairCoord(2,4)));
-    myPiecesB.push_back(myChessBoard[2][4]);
+    myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
+    myPiecesB.push_back(myChessBoard[0][4]);
+
 
     for (unsigned i(0); i < 8;++i)
     {
@@ -42,9 +40,39 @@ ChessBoard::ChessBoard() {
         myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
         myPiecesW.push_back(myChessBoard[6][i]);
         // pions noirs
-        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
-        myPiecesB.push_back(myChessBoard[1][i]);
+//        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
+//        myPiecesB.push_back(myChessBoard[1][i]);
     }
+
+    // pions noirs temporaires
+    myChessBoard[1][0] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,0)));
+    myPiecesB.push_back(myChessBoard[1][0]);
+    // pions noirs temporaires
+    myChessBoard[1][1] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,1)));
+    myPiecesB.push_back(myChessBoard[1][1]);
+    // pions noirs temporaires
+    myChessBoard[1][2] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,2)));
+    myPiecesB.push_back(myChessBoard[1][2]);
+    // pions noirs temporaires
+    myChessBoard[1][4] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,4)));
+    myPiecesB.push_back(myChessBoard[1][4]);
+    // pions noirs temporaires
+    myChessBoard[1][5] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,5)));
+    myPiecesB.push_back(myChessBoard[1][5]);
+    // pions noirs temporaires
+    myChessBoard[1][6] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,6)));
+    myPiecesB.push_back(myChessBoard[1][6]);
+    // pions noirs temporaires
+    myChessBoard[1][7] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,7)));
+    myPiecesB.push_back(myChessBoard[1][7]);
+
+
+
+
+
+
+
+
 
     // tours blancs
     myChessBoard[7][0] = shared_ptr<Piece>(new Rook(white,pairCoord(7,0)));
@@ -80,15 +108,15 @@ ChessBoard::ChessBoard() {
     myChessBoard[0][5] = shared_ptr<Piece>(new Bishop(black,pairCoord(0,5)));
     myPiecesB.push_back(myChessBoard[0][5]);
 
-    //Reine blanche
-    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
-    myPiecesW.push_back(myChessBoard[7][3]);
+//    //Reine blanche
+//    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
+//    myPiecesW.push_back(myChessBoard[7][3]);
     //Reine noire
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
     //Reine blanche temporaire
-    myChessBoard[3][0] = shared_ptr<Piece>(new Queen(white,pairCoord(3,0)));
-    myPiecesW.push_back(myChessBoard[3][0]);
+    myChessBoard[5][1] = shared_ptr<Piece>(new Queen(white,pairCoord(5,1)));
+    myPiecesW.push_back(myChessBoard[5][1]);
 
 
 
