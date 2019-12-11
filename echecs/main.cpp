@@ -20,8 +20,10 @@ void play(ChessBoard & chessboard)
             Color  color;
 
             string playerName;
+            vector<shared_ptr<Piece>> vPiecesPlayer;
             vector<shared_ptr<Piece>> vPiecesOpponent;
             unsigned x,y,u,v;
+            bool isEchec (false);
 
             vector<pairCoord> myMoves;
 
@@ -30,6 +32,7 @@ void play(ChessBoard & chessboard)
                 color           = white;
 
                 playerName      = "blanc";
+                vPiecesPlayer = chessboard.getPiecesW();
                 vPiecesOpponent = chessboard.getPiecesB();
             }
             else
@@ -37,8 +40,21 @@ void play(ChessBoard & chessboard)
                 color           = black;
 
                 playerName      = "noir";
+                vPiecesPlayer = chessboard.getPiecesB();
                 vPiecesOpponent = chessboard.getPiecesW();
             }
+
+//============================  Vérifier l'échec ou non du roi =========================================
+
+
+            if (chessboard.find(chessboard.matrixToVector(chessboard.getVEatOpponent(vPiecesOpponent)),vPiecesPlayer[0]->getCoord()))
+                isEchec = true;
+            cout << isEchec;
+//            //On n'autorise le mouvement seulement si le roi ne se met pas en danger
+//            if(chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(vPiecesOpponent)), coordMove))
+//                chessboard.move(coordMove, coordPiece);
+//            else
+//                throw CException(BADMOVE,SBADMOVE);
 
 //============================  Choix de la pièce que l'on veut déplacer  ==============================
 
@@ -110,14 +126,21 @@ void play(ChessBoard & chessboard)
             // Coordonnées de destination
             pairCoord coordMove (u,v);
 
+
+//======================= A FINIR ===========================
+            VPieces tmpVPiecesPlayer = vPiecesPlayer;
+            VPieces tmpVPiecesOpponent = vPiecesOpponent;
+            /*Matrix tmpVDeadPieces = */
+
             // si le joueur déplace le roi le traitement est à part on prend un argument supplementaire
             if(chessboard.getChessboard()[x][y]->getName() == "King")
             {
 
-                //vector<vector<pairCoord>> ((chessboard.ChessBoard::getVEatOpponent)(vector<shared_ptr<Piece>>));
-                //vector<vector<pairCoord>> ((*f)(vector<shared_ptr<Piece>>));
-                //f = chessboard.getVEatOpponent();
-
+//                for (pairCoord coord : chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(vPiecesOpponent)))
+//                {
+//                    cout << coord.first << coord.second << " ";
+//                }
+                //On n'autorise le mouvement seulement si le roi ne se met pas en danger
                 if(chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(vPiecesOpponent)), coordMove))
                     chessboard.move(coordMove, coordPiece);
                 else
@@ -126,11 +149,19 @@ void play(ChessBoard & chessboard)
 
             else if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove))
             {
+//                for (pairCoord coord : chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()))
+//                {
+//                    cout << coord.first << coord.second << " ";
+//                }
                 chessboard.move(coordMove, coordPiece);
             }
             else
                 throw CException(BADMOVE,SBADMOVE);
 
+            if (chessboard.find(chessboard.matrixToVector(chessboard.getVEatOpponent(vPiecesOpponent)),vPiecesPlayer[0]->getCoord()))
+            {
+                throw CException(CHECK,SCHECK);
+            }
 
             chessboard.show();
 
