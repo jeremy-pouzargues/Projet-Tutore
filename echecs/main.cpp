@@ -87,12 +87,23 @@ void play(ChessBoard & chessboard)
             // si le joueur se trompe de case ou choisit la une mauvaise piece
             if(chessboard.getChessboard()[x][y]->getColor() != color)
                 throw CException(BADPIECE,SBADPIECE);
-
-            for (pairCoord coord : chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()))
+            if(chessboard.getChessboard()[x][y]->getName() != "King")
             {
-                  cout << coord.first << coord.second << "  ";
+                for (pairCoord coord : chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()))
+                {
+                      cout << coord.first << coord.second << "  ";
+                }
+                cout << endl;
             }
-            cout << endl;
+            else
+            {
+                for (pairCoord coord : chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(vPiecesOpponent)))
+                {
+                      cout << coord.first << coord.second << "  ";
+                }
+                cout << endl;
+            }
+
 
 
 
