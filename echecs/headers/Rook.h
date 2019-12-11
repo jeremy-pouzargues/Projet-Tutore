@@ -12,6 +12,8 @@
 #include "Piece.h"
 
 class Rook : public Piece {
+private:
+    bool canCastling;
 public:
     Rook() {}
     Rook(const Color & color,const pairCoord & coord);
@@ -19,6 +21,8 @@ public:
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix);
 
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
+                                              const std::vector<std::shared_ptr<Piece>> & VPiecesOpponent) {}
+    bool getCanCastling();
                                               const std::vector<std::vector<pairCoord>> & vEatOpponent) {}
 };
 
