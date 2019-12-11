@@ -139,18 +139,15 @@ void play(ChessBoard & chessboard)
 
 
 //======================= A FINIR ===========================
-            VPieces tmpVPiecesPlayer = vPiecesPlayer;
-            VPieces tmpVPiecesOpponent = vPiecesOpponent;
-            /*Matrix tmpVDeadPieces = */
+            VPieces tmpVPiecesW = chessboard.getPiecesW();
+            VPieces tmpVPiecesB = chessboard.getPiecesB();
+            Matrix tmpVDeadPieces = chessboard.getDeadPiece();
+            Matrix tmpChessboard = chessboard.getChessboard();
 
             // si le joueur déplace le roi le traitement est à part on prend un argument supplementaire
             if(chessboard.getChessboard()[x][y]->getName() == "King")
             {
 
-//                for (pairCoord coord : chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(vPiecesOpponent)))
-//                {
-//                    cout << coord.first << coord.second << " ";
-//                }
                 //On n'autorise le mouvement seulement si le roi ne se met pas en danger
                 if(chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(vPiecesOpponent)), coordMove))
                     chessboard.move(coordMove, coordPiece);
@@ -160,17 +157,29 @@ void play(ChessBoard & chessboard)
 
             else if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove))
             {
-//                for (pairCoord coord : chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()))
-//                {
-//                    cout << coord.first << coord.second << " ";
-//                }
+
                 chessboard.move(coordMove, coordPiece);
             }
             else
                 throw CException(BADMOVE,SBADMOVE);
 
+            if (player)
+            {
+                vPiecesPlayer = chessboard.getPiecesW();
+                vPiecesOpponent = chessboard.getPiecesB();
+            }
+            else
+            {
+                vPiecesPlayer = chessboard.getPiecesB();
+                vPiecesOpponent = chessboard.getPiecesW();
+            }
+
             if (chessboard.find(chessboard.matrixToVector(chessboard.getVEatOpponent(vPiecesOpponent)),vPiecesPlayer[0]->getCoord()))
             {
+                chessboard.setPiecesB(tmpVPiecesB);
+                chessboard.setPiecesW(tmpVPiecesW);
+                chessboard.setDeadPiece(tmpVDeadPieces);
+                chessboard.setChessboard(tmpChessboard);
                 throw CException(CHECK,SCHECK);
             }
 
