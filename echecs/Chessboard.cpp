@@ -57,10 +57,10 @@ ChessBoard::ChessBoard() {
     myPiecesW.push_back(myChessBoard[1][7]);
 
     // cavaliers blancs
-//    myChessBoard[7][1] = shared_ptr<Piece>(new Knight(white,pairCoord(7,1)));
-//    myPiecesW.push_back(myChessBoard[7][1]);
-//    myChessBoard[7][6] = shared_ptr<Piece>(new Knight(white,pairCoord(7,6)));
-//    myPiecesW.push_back(myChessBoard[7][6]);
+    myChessBoard[7][1] = shared_ptr<Piece>(new Knight(white,pairCoord(7,1)));
+    myPiecesW.push_back(myChessBoard[7][1]);
+    myChessBoard[7][6] = shared_ptr<Piece>(new Knight(white,pairCoord(7,6)));
+    myPiecesW.push_back(myChessBoard[7][6]);
     // cavaliers noirs
     myChessBoard[0][1] = shared_ptr<Piece>(new Knight(black,pairCoord(0,1)));
     myPiecesB.push_back(myChessBoard[0][1]);
@@ -68,8 +68,8 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][6]);
 
     // fous blancs
-    myChessBoard[4][4] = shared_ptr<Piece>(new Bishop(white,pairCoord(4,4)));
-    myPiecesW.push_back(myChessBoard[4][4]);
+    myChessBoard[7][2] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,2)));
+    myPiecesW.push_back(myChessBoard[7][2]);
     myChessBoard[7][5] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,5)));
     myPiecesW.push_back(myChessBoard[7][5]);
     // fous noirs
@@ -79,8 +79,8 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][5]);
 
     //Reine blanche
-//    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
-//    myPiecesW.push_back(myChessBoard[7][3]);
+    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
+    myPiecesW.push_back(myChessBoard[7][3]);
     //Reine noire
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
@@ -123,7 +123,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
 {
     if(getChessboard()[coordPiece.first][coordPiece.second]->getCanCastling() &&
             getChessboard()[coordPiece.first][coordPiece.second]->getName() == "King" &&
-           abs(int(coordMove.first) - int(coordPiece.first)) != 1)
+           abs(int(coordMove.second) - int(coordPiece.second)) > 1)
     {
         if(coordMove.second == 1)
         {
@@ -218,11 +218,10 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
             myPiecesB[cpt] = myChessBoard[coordMove.first][coordMove.second];
         }
 
-        if(getChessboard()[coordMove.first][coordMove.second]->getName() == "King" || getChessboard()[coordMove.first][coordMove.second]->getName() == "Rook")
-        {
-            getChessboard()[coordMove.first][coordMove.second]->turnOffCastling();
-        }
-
+    }
+    if(getChessboard()[coordMove.first][coordMove.second]->getName() == "King" || getChessboard()[coordMove.first][coordMove.second]->getName() == "Rook")
+    {
+        getChessboard()[coordMove.first][coordMove.second]->turnOffCastling();
     }
 }//move()
 
