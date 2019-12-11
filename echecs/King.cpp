@@ -8,7 +8,7 @@ King::King(const Color & color,const pairCoord & coord)
     myColor = color;
     myCoord = coord;
     myName = "King";
-
+    canCastling = true;
     color == white ? myCarac = KKINGW : myCarac = KKINGB;
 
 }
@@ -49,6 +49,23 @@ vector<pairCoord> King::legalMoves(const vector<vector<shared_ptr<Piece>>> & mat
 
     if(column != 0 && matrix[line][column-1]->getColor() != colorPiece && ! find(pairCoord(line,column-1), vEatOpponent))
         VMoves.push_back(pairCoord(line,column-1));
+
+
+    if(this->canCastling)
+    {
+        if (matrix[line][0]->getCanCastling() && matrix[line][1]->getName() == "Empty" &&
+                matrix[line][2]->getName() == "Empty" && matrix[line][3]->getName() == "Empty" &&
+                ! find (pairCoord(line,1), vEatOpponent))
+        {
+            VMoves.push_back(pairCoord(line,1));
+        }
+        if (matrix[line][7]->getCanCastling() && matrix[line][6]->getName() == "Empty" &&
+                 matrix[line][5]->getName() == "Empty"&&
+                 ! find (pairCoord(line,6), vEatOpponent))
+        {
+            VMoves.push_back(pairCoord(line,6));
+        }
+    }
 
     return VMoves;
 
