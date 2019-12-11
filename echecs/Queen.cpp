@@ -85,7 +85,7 @@ vector <pairCoord> Queen::legalMoves(const vector<vector<shared_ptr<Piece>>> & m
             VMoves.push_back(pairCoord(line,column));
             if(line == 7 || column == 0)break;
             if (matrix[line][column]->getColor() == colorOpponent)break;
-            ++line += 1;
+            ++line;
             --column;
         }
     }
