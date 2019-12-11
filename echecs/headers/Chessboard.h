@@ -1,4 +1,4 @@
-/**
+7/**
  * @file   ChessBoard.h
  * @author Leo, Laurent
  * @brief  classe echiquier avec un vecteur de vecteur de Piece, un matrice, qui represente l'echiquier
