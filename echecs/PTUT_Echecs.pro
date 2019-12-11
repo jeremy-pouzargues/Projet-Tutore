@@ -14,7 +14,8 @@ SOURCES += \
         Piece.cpp \
         Queen.cpp \
         Rook.cpp \
-        main.cpp
+        main.cpp \
+        minmax.cpp
 
 DISTFILES += \
     echecsV1.mdj
