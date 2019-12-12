@@ -45,7 +45,10 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
 
                     // on garde dans un tampon l'échiquier actuel
                     Matrix    actualChessboard  = chessboard.getChessboard();
-                    Matrix    actualDeadPiece   = chessboard.getMyDeadPiece();
+                    VPieces    actualDeadPieceB   = chessboard.getMyDeadPieceB();
+                    VPieces    actualDeadPieceW   = chessboard.getMyDeadPieceW();
+                    VPieces actualPieceB = chessboard.getPiecesB();
+                    VPieces actualPieceW = chessboard.getPiecesW();
                     // on la deplace
                     chessboard.move(possibleMove,piece->getCoord());
                     // on réévalue l'echiquier après ce déplacement
@@ -55,7 +58,10 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                     maxEval  = std::max(maxEval,eval);
                     // on remet l'echiquier à sa position d'origine
                     chessboard.setChessboard(actualChessboard);
-                    chessboard.setDeadPiece(actualDeadPiece);
+                    chessboard.setDeadPieceB(actualDeadPieceB);
+                    chessboard.setDeadPieceW(actualDeadPieceW);
+                    chessboard.setPiecesB(actualPieceB);
+                    chessboard.setPiecesW(actualPieceW);
 
                 }
            }
@@ -77,13 +83,15 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                for (pairCoord possibleMove : piece->legalMoves(chessboard.getChessboard()))
                {
                    Matrix    actualChessboard  = chessboard.getChessboard();
-                   Matrix    actualDeadPiece   = chessboard.getMyDeadPiece();
+                   VPieces    actualDeadPieceB   = chessboard.getMyDeadPieceB();
+                   VPieces    actualDeadPieceW   = chessboard.getMyDeadPieceW();
                    chessboard.move(possibleMove,piece->getCoord());
                    int eval = minmax(chessboard,depth-1,maximizingPlayer);
                    minEval  = std::min(minEval,eval);
 
                    chessboard.setChessboard(actualChessboard);
-                   chessboard.setDeadPiece(actualDeadPiece);
+                   chessboard.setDeadPieceB(actualDeadPieceB);
+                   chessboard.setDeadPieceW(actualDeadPieceW);
                }
              }
            }
