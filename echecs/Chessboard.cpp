@@ -14,7 +14,7 @@ using namespace std;
 ChessBoard::ChessBoard() {
 
     myChessBoard.resize(8,vector<shared_ptr<Piece>>(8));
-    myDeadPiece.resize(30);
+    myDeadPiece.resize(0);
     myPiecesW.resize(0);
     myPiecesB.resize(0);
 
@@ -51,10 +51,9 @@ ChessBoard::ChessBoard() {
     // tours noirs
     myChessBoard[0][0] = shared_ptr<Piece>(new Rook(black,pairCoord(0,0)));
     myPiecesB.push_back(myChessBoard[0][0]);
-        myChessBoard[0][7] = shared_ptr<Piece>(new Rook(black,pairCoord(0,7)));
-        myPiecesB.push_back(myChessBoard[0][7]);
-    myChessBoard[1][7] = shared_ptr<Piece>(new Pawn(white,pairCoord(1,7)));
-    myPiecesW.push_back(myChessBoard[1][7]);
+    myChessBoard[0][7] = shared_ptr<Piece>(new Rook(black,pairCoord(0,7)));
+    myPiecesB.push_back(myChessBoard[0][7]);
+
 
     // cavaliers blancs
     myChessBoard[7][1] = shared_ptr<Piece>(new Knight(white,pairCoord(7,1)));
