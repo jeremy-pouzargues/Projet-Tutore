@@ -70,20 +70,26 @@ ChessBoard::ChessBoard() {
     // fous blancs
     myChessBoard[7][2] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,2)));
     myPiecesW.push_back(myChessBoard[7][2]);
-    myChessBoard[7][5] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,5)));
-    myPiecesW.push_back(myChessBoard[7][5]);
+//    myChessBoard[7][5] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,5)));
+//    myPiecesW.push_back(myChessBoard[7][5]);
     // fous noirs
     myChessBoard[0][2] = shared_ptr<Piece>(new Bishop(black,pairCoord(0,2)));
     myPiecesB.push_back(myChessBoard[0][2]);
     myChessBoard[0][5] = shared_ptr<Piece>(new Bishop(black,pairCoord(0,5)));
     myPiecesB.push_back(myChessBoard[0][5]);
+    //tmp
+    myChessBoard[4][2] = shared_ptr<Piece>(new Bishop(white,pairCoord(4,2)));
+    myPiecesW.push_back(myChessBoard[4][2]);
 
     //Reine blanche
-    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
-    myPiecesW.push_back(myChessBoard[7][3]);
+//    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
+//    myPiecesW.push_back(myChessBoard[7][3]);
     //Reine noire
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
+    //tmp
+    myChessBoard[3][7] = shared_ptr<Piece>(new Queen(white,pairCoord(3,7)));
+    myPiecesW.push_back(myChessBoard[3][7]);
 
 
 
