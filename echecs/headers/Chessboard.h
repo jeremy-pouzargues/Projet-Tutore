@@ -35,9 +35,6 @@ public:
      void show() const;
 
 
-     //getter
-     const Matrix & getChessboard() const;
-
      void move(const pairCoord & coordMove,const pairCoord & coordPiece);
 
      bool find (const std::vector<pairCoord> & legalMoves, const pairCoord & moveChosen);
@@ -45,12 +42,17 @@ public:
 
      std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
 
-     const Matrix  & getMyDeadPiece () const;
-     const VPieces & getPiecesW () const;
-     const VPieces & getPiecesB () const;
+
+     //getter
+     const Matrix  & getChessboard()     const;
+     const Matrix  & getMyDeadPiece ()  const;
+     const VPieces & getPiecesW ()      const;
+     const VPieces & getPiecesB ()      const;
+
 
 
      void setDeadPiece(const Matrix & deadPiece);
+     void setChessboard(const Matrix & chessboard);
 
 };//Echiquier
 
