@@ -21,7 +21,7 @@ typedef std::vector<std::shared_ptr<Piece>> VPieces;
 
 class ChessBoard {
 private:
-    Matrix myChessBoard;
+    Matrix myChessBoard; // matrice de toutes les cases/pieces
     VPieces myPiecesW; //vecteur des pieces blanches
     VPieces myPiecesB; //vecteur des pieces noires
     VPieces myDeadPiecesW;
@@ -37,19 +37,28 @@ public:
 
 
      //getter
-     Matrix getChessboard() const;
+     const Matrix  & getChessboard() const;
+     const VPieces & getMyDeadPieceB () const;
+     const VPieces & getMyDeadPieceW () const;
+     const VPieces & getPiecesW () const;
+     const VPieces & getPiecesB () const;
+
+
+     //setter
+     void setChessboard (const Matrix & newChessboard);
+     void setDeadPieceW (const VPieces & newVDeadPiece);
+     void setDeadPieceB (const VPieces & newVDeadPiece);
+     void setPiecesW (const VPieces & newVPieceW);
+     void setPiecesB (const VPieces & newVPieceB);
 
      void move(const pairCoord & coordMove,const pairCoord & coordPiece);
      void swap(const pairCoord & coordMove,const pairCoord & coordPiece);
      bool find (const std::vector<pairCoord> & legalMoves, const pairCoord & moveChosen);
      std::vector<std::vector<pairCoord>> getVEatOpponent(const VPieces & VPiecesOpponent);
 
-    std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
+     std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
 
-     VPieces getMyDeadPieceB () const;
-     VPieces getMyDeadPieceW () const;
-     VPieces getPiecesW () const;
-     VPieces getPiecesB () const;
+
 
 };//Echiquier
 

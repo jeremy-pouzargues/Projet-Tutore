@@ -32,6 +32,7 @@ ChessBoard::ChessBoard() {
     myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
     myPiecesB.push_back(myChessBoard[0][4]);
 
+
     for (unsigned i(0); i < 8;++i)
     {
         // pions blancs
@@ -82,7 +83,6 @@ ChessBoard::ChessBoard() {
     //Reine noire
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
-
 
 
 
@@ -163,7 +163,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
         if(this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white)
         {
             while(coordMove != myPiecesB[cpt]->getCoord()) {++cpt;}
-            myPiecesB.erase(myPiecesW.begin()+cpt);
+            myPiecesB.erase(myPiecesB.begin()+cpt);
         }
         else
         {
@@ -337,8 +337,14 @@ vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & m
 
 
 
-Matrix ChessBoard::getChessboard() const {return myChessBoard;}
+const Matrix & ChessBoard::getChessboard() const {return myChessBoard;}
+const VPieces & ChessBoard::getPiecesW() const {return myPiecesW;}
+const VPieces & ChessBoard::getPiecesB() const {return myPiecesB;}
+const VPieces & ChessBoard::getMyDeadPieceB() const { return myDeadPiecesB;}
+const VPieces & ChessBoard::getMyDeadPieceW() const { return myDeadPiecesW;}
 
-VPieces ChessBoard::getPiecesW() const {return myPiecesW;}
-
-VPieces ChessBoard::getPiecesB() const {return myPiecesB;}
+void ChessBoard::setChessboard (const Matrix & newChessboard) { this->myChessBoard = newChessboard; }
+void ChessBoard::setPiecesW (const VPieces & newVPieceW) { this->myPiecesW = newVPieceW; }
+void ChessBoard::setPiecesB (const VPieces & newVPieceB) { this->myPiecesB = newVPieceB; }
+void ChessBoard::setDeadPieceW(const VPieces &newVDeadPiece)  { this->myPiecesW = newVDeadPiece; }
+void ChessBoard::setDeadPieceB(const VPieces&newVDeadPiece)  { this->myPiecesB = newVDeadPiece; }
