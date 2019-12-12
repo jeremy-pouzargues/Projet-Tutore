@@ -5,6 +5,8 @@ Rook::Rook(const Color & color,const pairCoord & coord) {
     myColor = color;
     myCoord = coord;
 
+    myName  = "Rook";
+
     color == white ? myCarac = KROOKW : myCarac = KROOKB;
 }//Rook()
 

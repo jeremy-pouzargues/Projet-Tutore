@@ -145,7 +145,7 @@ void play(ChessBoard & chessboard)
 //======================= TESTS MINMAX ======================
 
 
-            cout << " =====MINMAX==== " << minmax(chessboard,1,true) << endl;
+            cout << " =====MINMAX==== " << "\n" << minmax(chessboard,1,true) << endl;
 
 
 //======================= A FINIR ===========================

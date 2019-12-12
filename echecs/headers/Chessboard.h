@@ -49,6 +49,9 @@ public:
      const VPieces & getPiecesW () const;
      const VPieces & getPiecesB () const;
 
+
+     void setDeadPiece(const Matrix & deadPiece);
+
 };//Echiquier
 
 
