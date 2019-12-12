@@ -14,10 +14,14 @@ using namespace std;
 ChessBoard::ChessBoard() {
 
     myChessBoard.resize(8,vector<shared_ptr<Piece>>(8));
+<<<<<<< HEAD
+=======
+    myDeadPiece.resize(2,vector<shared_ptr<Piece>>(0));
+>>>>>>> origin/laurent
     myPiecesW.resize(0);
     myPiecesB.resize(0);
 
-    for (unsigned i(0); i < 8;++i) {
+    for (unsigned i(1); i < 7;++i) {
         for(unsigned j(0); j < 8; ++j)
         {
             // cases vides
@@ -25,14 +29,22 @@ ChessBoard::ChessBoard() {
         }
     }
 
-    //Roi Blanc
+  /*  //Roi Blanc
     myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
     myPiecesW.push_back(myChessBoard[7][4]);
     //Roi noir
     myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
-    myPiecesB.push_back(myChessBoard[0][4]);
+    myPiecesB.push_back(myChessBoard[0][4]);*/
 
 
+    //===================DEBUG ============================================
+    myChessBoard[0][4] = shared_ptr<Piece>(new Empty(pairCoord(0,4)));
+
+    myChessBoard[7][4] = shared_ptr<Piece>(new Empty(pairCoord(7,4)));
+
+    //===================DEBUG ==============================================
+
+   /* for (unsigned i(0); i < 8;++i)
     for (unsigned i(0); i < 8;++i)
     {
         // pions blancs
@@ -41,7 +53,7 @@ ChessBoard::ChessBoard() {
         // pions noirs
         myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
         myPiecesB.push_back(myChessBoard[1][i]);
-    }
+    }*/
 
     // tours blancs
     myChessBoard[7][0] = shared_ptr<Piece>(new Rook(white,pairCoord(7,0)));
@@ -83,6 +95,8 @@ ChessBoard::ChessBoard() {
     //Reine noire
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
+
+
 
 
 
@@ -167,7 +181,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
         }
         else
         {
-            while(coordMove != myPiecesW[cpt]->getCoord()) {++cpt;}
+            while(coordMove.first != myPiecesW[cpt]->getCoord().first && coordMove.second != myPiecesW[cpt]->getCoord().second && cpt < myPiecesW.size()-1) {++cpt;}
             myPiecesW.erase(myPiecesW.begin()+cpt);
         }
     }
@@ -336,7 +350,6 @@ vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & m
 }
 
 
-
 const Matrix & ChessBoard::getChessboard() const {return myChessBoard;}
 const VPieces & ChessBoard::getPiecesW() const {return myPiecesW;}
 const VPieces & ChessBoard::getPiecesB() const {return myPiecesB;}
@@ -348,3 +361,5 @@ void ChessBoard::setPiecesW (const VPieces & newVPieceW) { this->myPiecesW = new
 void ChessBoard::setPiecesB (const VPieces & newVPieceB) { this->myPiecesB = newVPieceB; }
 void ChessBoard::setDeadPieceW(const VPieces &newVDeadPiece)  { this->myPiecesW = newVDeadPiece; }
 void ChessBoard::setDeadPieceB(const VPieces&newVDeadPiece)  { this->myPiecesB = newVDeadPiece; }
+
+//setters

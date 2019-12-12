@@ -8,6 +8,6 @@ Empty::Empty(const pairCoord & coord)
     myCarac = KEMPTY;
     myCoord = coord;
     myColor = empty;
-    myName = "Empty";
+    myName  = "Empty";
 }
 

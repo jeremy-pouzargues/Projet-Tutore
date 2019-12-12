@@ -41,4 +41,5 @@ HEADERS += \
     Pawn.h \
     Piece.h \
     Queen.h \
-    Rook.h
+    Rook.h \
+    headers/minmax.hpp

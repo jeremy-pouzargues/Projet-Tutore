@@ -52,12 +52,12 @@ public:
      void setPiecesB (const VPieces & newVPieceB);
 
      void move(const pairCoord & coordMove,const pairCoord & coordPiece);
+
      void swap(const pairCoord & coordMove,const pairCoord & coordPiece);
      bool find (const std::vector<pairCoord> & legalMoves, const pairCoord & moveChosen);
      std::vector<std::vector<pairCoord>> getVEatOpponent(const VPieces & VPiecesOpponent);
 
      std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
-
 
 
 };//Echiquier
