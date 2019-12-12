@@ -54,6 +54,9 @@ ChessBoard::ChessBoard() {
     myChessBoard[1][2] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,2)));
     myPiecesB.push_back(myChessBoard[1][2]);
     // pions noirs temporaires
+    myChessBoard[1][3] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,3)));
+    myPiecesB.push_back(myChessBoard[1][3]);
+    // pions noirs temporaires
     myChessBoard[1][4] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,4)));
     myPiecesB.push_back(myChessBoard[1][4]);
     // pions noirs temporaires
@@ -100,13 +103,16 @@ ChessBoard::ChessBoard() {
     // fous blancs
     myChessBoard[7][2] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,2)));
     myPiecesW.push_back(myChessBoard[7][2]);
-    myChessBoard[7][5] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,5)));
-    myPiecesW.push_back(myChessBoard[7][5]);
+//    myChessBoard[7][5] = shared_ptr<Piece>(new Bishop(white,pairCoord(7,5)));
+//    myPiecesW.push_back(myChessBoard[7][5]);
     // fous noirs
     myChessBoard[0][2] = shared_ptr<Piece>(new Bishop(black,pairCoord(0,2)));
     myPiecesB.push_back(myChessBoard[0][2]);
     myChessBoard[0][5] = shared_ptr<Piece>(new Bishop(black,pairCoord(0,5)));
     myPiecesB.push_back(myChessBoard[0][5]);
+    // fous blancs temporaire
+    myChessBoard[4][2] = shared_ptr<Piece>(new Bishop(white,pairCoord(4,2)));
+    myPiecesW.push_back(myChessBoard[4][2]);
 
 //    //Reine blanche
 //    myChessBoard[7][3] = shared_ptr<Piece>(new Queen(white,pairCoord(7,3)));
@@ -115,8 +121,8 @@ ChessBoard::ChessBoard() {
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
     //Reine blanche temporaire
-    myChessBoard[5][1] = shared_ptr<Piece>(new Queen(white,pairCoord(5,1)));
-    myPiecesW.push_back(myChessBoard[5][1]);
+    myChessBoard[3][7] = shared_ptr<Piece>(new Queen(white,pairCoord(3,7)));
+    myPiecesW.push_back(myChessBoard[3][7]);
 
 
 
@@ -190,7 +196,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
         if(this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white)
         {
             while(coordMove != myPiecesB[cpt]->getCoord()) {++cpt;}
-            myPiecesB.erase(myPiecesW.begin()+cpt);
+            myPiecesB.erase(myPiecesB.begin()+cpt);
         }
         else
         {
@@ -374,6 +380,8 @@ bool ChessBoard::isCheckMate(const bool & player)
     Matrix tmpVDeadPieces = this->getDeadPiece();
     Matrix tmpChessboard = this->getChessboard();
 
+    bool isCheckMate (true);
+
     if (player)
     {
         vPieces = this->getPiecesW();
@@ -401,15 +409,36 @@ bool ChessBoard::isCheckMate(const bool & player)
 
     for (unsigned i (0); i < allLegalMoves.size(); ++i)
     {
-        for (unsigned j (0); i < allLegalMoves[i].size(); ++j)
+        for (unsigned j (0); j < allLegalMoves[i].size(); ++j)
         {
+            cout  << vPieces[i]->getCoord().first << vPieces[i]->getCoord().second << "->";
             this->move(allLegalMoves[i][j], vPieces[i]->getCoord());
+            if (player)
+            {
+                vPieces = this->getPiecesW();
+                vPiecesOpponent = this->getPiecesB();
+            }
+            else
+            {
+                vPieces = this->getPiecesB();
+                vPiecesOpponent = this->getPiecesW();
+            }
             if (this->find(this->matrixToVector(this->getVEatOpponent(vPiecesOpponent)),vPieces[0]->getCoord()))
-                return true;
-            this->setPiecesB(tmpVPiecesB);
-            this->setPiecesW(tmpVPiecesW);
-            this->setDeadPiece(tmpVDeadPieces);
-            this->setChessboard(tmpChessboard);
+            {
+                this->setPiecesB(tmpVPiecesB);
+                this->setPiecesW(tmpVPiecesW);
+                this->setDeadPiece(tmpVDeadPieces);
+                this->setChessboard(tmpChessboard);
+            }
+            else
+            {
+                this->setPiecesB(tmpVPiecesB);
+                this->setPiecesW(tmpVPiecesW);
+                this->setDeadPiece(tmpVDeadPieces);
+                this->setChessboard(tmpChessboard);
+                cout << allLegalMoves[i][j].first << allLegalMoves[i][j].second << endl;
+                isCheckMate = false;
+            }
             if (player)
             {
                 vPieces = this->getPiecesW();
@@ -423,7 +452,7 @@ bool ChessBoard::isCheckMate(const bool & player)
         }
     }
 
-    return false;
+    return isCheckMate;
 }
 
 
@@ -436,9 +465,12 @@ const Matrix & ChessBoard::getChessboard() const {return myChessBoard;}
 
 const Matrix & ChessBoard::getDeadPiece() const {return myDeadPiece;}
 
-const VPieces & ChessBoard::getPiecesW() const {return myPiecesW;}
+const VPieces & ChessBoard::getPiecesW() const {
 
-const VPieces & ChessBoard::getPiecesB() const {return myPiecesB;}
+    return myPiecesW;}
+
+const VPieces & ChessBoard::getPiecesB() const {
+    return myPiecesB;}
 
 void ChessBoard::setChessboard (const Matrix & newChessboard) { this->myChessBoard = newChessboard; }
 void ChessBoard::setDeadPiece (const Matrix & newVDeadPiece) { this->myDeadPiece = newVDeadPiece; }

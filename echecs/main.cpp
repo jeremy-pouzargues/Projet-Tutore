@@ -24,8 +24,6 @@ void play(ChessBoard & chessboard)
             vector<shared_ptr<Piece>> vPiecesOpponent;
             unsigned x,y,u,v;
 
-            vector<pairCoord> myMoves;
-
             if (player)
             {
                 color           = white;
@@ -187,8 +185,8 @@ void play(ChessBoard & chessboard)
             cexc.display();
         }
     }
-    string colorPlayer;
-    player ? colorPlayer = "blanc" : "noir";
+//    string colorPlayer;
+//    player ? colorPlayer = "blanc" : "noir";
     cout << "Le joueur " << " est echec et mat et a donc perdu !" << endl;
 }//play()
 
