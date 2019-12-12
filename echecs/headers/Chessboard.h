@@ -22,9 +22,10 @@ typedef std::vector<std::shared_ptr<Piece>> VPieces;
 class ChessBoard {
 private:
     Matrix myChessBoard;
-    Matrix myDeadPiece;
     VPieces myPiecesW; //vecteur des pieces blanches
     VPieces myPiecesB; //vecteur des pieces noires
+    VPieces myDeadPiecesW;
+    VPieces myDeadPiecesB;
 
 public:
      ChessBoard();
@@ -45,7 +46,8 @@ public:
 
     std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
 
-     Matrix getMyDeadPiece () const;
+     VPieces getMyDeadPieceB () const;
+     VPieces getMyDeadPieceW () const;
      VPieces getPiecesW () const;
      VPieces getPiecesB () const;
 

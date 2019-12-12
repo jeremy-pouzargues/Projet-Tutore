@@ -14,7 +14,6 @@ using namespace std;
 ChessBoard::ChessBoard() {
 
     myChessBoard.resize(8,vector<shared_ptr<Piece>>(8));
-    myDeadPiece.resize(0);
     myPiecesW.resize(0);
     myPiecesB.resize(0);
 
@@ -142,10 +141,17 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
     }
     else //Si on "mange" une pièce adverse
     {
-        unsigned indiceColorOpponent;
-        this->myChessBoard[coordMove.first][coordMove.second]->getColor() == white ? indiceColorOpponent = 0 : indiceColorOpponent = 1;
+
         //On la place dans la liste des pièces mortes
-        this->myDeadPiece[indiceColorOpponent].push_back(myChessBoard[coordMove.first][coordMove.second]);
+        if(myChessBoard[coordMove.first][coordMove.second]->getColor() == white)
+        {
+            this->myDeadPiecesW.push_back(myChessBoard[coordMove.first][coordMove.second]);
+        }
+        else
+        {
+            this->myDeadPiecesB.push_back(myChessBoard[coordMove.first][coordMove.second]);
+        }
+
         //On remplace la piece mangé par la pièce bougé
         this->myChessBoard[coordMove.first][coordMove.second] = this->myChessBoard[coordPiece.first][coordPiece.second];
         //On actualise ses coordonées
@@ -165,7 +171,6 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
             myPiecesW.erase(myPiecesW.begin()+cpt);
         }
     }
-
 
 
     //Un pion noir ne pourra jamais être à la ligne 0 et un pion blanc jamais à la ligne 7
@@ -333,8 +338,6 @@ vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & m
 
 
 Matrix ChessBoard::getChessboard() const {return myChessBoard;}
-
-Matrix ChessBoard::getMyDeadPiece() const {return myDeadPiece;}
 
 VPieces ChessBoard::getPiecesW() const {return myPiecesW;}
 
