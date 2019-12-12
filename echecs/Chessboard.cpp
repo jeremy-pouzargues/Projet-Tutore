@@ -7,7 +7,7 @@
 #include "headers/Knight.h"
 #include "headers/Bishop.h"
 #include "headers/Queen.h"
-#include "headers/King.h"
+#include "headers/King.h" 
 
 using namespace std;
 
@@ -42,6 +42,7 @@ ChessBoard::ChessBoard() {
     //===================DEBUG ==============================================
 
    /* for (unsigned i(0); i < 8;++i)
+    for (unsigned i(0); i < 8;++i)
     {
         // pions blancs
         myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
@@ -116,18 +117,38 @@ void ChessBoard::show() const
     }
 }//show()
 
+void ChessBoard::swap(const pairCoord &coordMove, const pairCoord &coordPiece)
+{
+    //On effectue un swap entre la pièce vide et la pièce
+    shared_ptr<Piece> tmp = this->myChessBoard[coordMove.first][coordMove.second];
+    this->myChessBoard[coordMove.first][coordMove.second] = this->myChessBoard[coordPiece.first][coordPiece.second];
+    this->myChessBoard[coordPiece.first][coordPiece.second] = tmp;
+    //On set les coordonées à leur nouvelle coordonée
+    this->myChessBoard[coordMove.first][coordMove.second]->setCoord(coordMove);
+    this->myChessBoard[coordPiece.first][coordPiece.second]->setCoord(coordPiece);
+}
+
 void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
 {
-    //Si la case est vide
-    if(this->getChessboard()[coordMove.first][coordMove.second]->getName() == "Empty")
+    if(getChessboard()[coordPiece.first][coordPiece.second]->getCanCastling() &&
+            getChessboard()[coordPiece.first][coordPiece.second]->getName() == "King" &&
+           abs(int(coordMove.second) - int(coordPiece.second)) > 1)
     {
-        //On effectue un swap entre la pièce vide et la pièce vide
-        shared_ptr<Piece> tmp = this->myChessBoard[coordMove.first][coordMove.second];
-        this->myChessBoard[coordMove.first][coordMove.second] = this->myChessBoard[coordPiece.first][coordPiece.second];
-        this->myChessBoard[coordPiece.first][coordPiece.second] = tmp;
-        //On set les coordonées à leur nouvelle coordonée
-        this->myChessBoard[coordMove.first][coordMove.second]->setCoord(coordMove);
-        this->myChessBoard[coordPiece.first][coordPiece.second]->setCoord(coordPiece);
+        if(coordMove.second == 1)
+        {
+            swap(pairCoord(coordPiece.first,2),pairCoord(coordPiece.first,0));
+            swap(pairCoord(coordPiece.first,1), coordPiece);
+        }
+        else
+        {
+            swap(pairCoord(coordPiece.first,5), pairCoord(coordPiece.first,7));
+            swap(pairCoord(coordPiece.first,6), coordPiece);
+        }
+    }
+    //Si la case est vide
+    else if(this->myChessBoard[coordMove.first][coordMove.second]->getName() == "Empty")
+    {
+        swap(coordMove,coordPiece);
     }
     else //Si on "mange" une pièce adverse
     {
@@ -205,6 +226,11 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
             while(coordMove != myPiecesB[cpt]->getCoord()) {++cpt;}
             myPiecesB[cpt] = myChessBoard[coordMove.first][coordMove.second];
         }
+
+    }
+    if(getChessboard()[coordMove.first][coordMove.second]->getName() == "King" || getChessboard()[coordMove.first][coordMove.second]->getName() == "Rook")
+    {
+        getChessboard()[coordMove.first][coordMove.second]->turnOffCastling();
     }
 }//move()
 
@@ -323,5 +349,8 @@ const VPieces &  ChessBoard::getPiecesB() const {return myPiecesB;}
 
 
 //setters
-void ChessBoard::setDeadPiece(const Matrix & deadPiece) { myDeadPiece = deadPiece;}
+void ChessBoard::setDeadPiece(const Matrix & deadPiece)   { myDeadPiece = deadPiece;}
 void ChessBoard::setChessboard(const Matrix & chessboard) { myChessBoard = chessboard;}
+
+void ChessBoard::setPiecesW (const VPieces & newVPieceW) { myPiecesW = newVPieceW; }
+void ChessBoard::setPiecesB (const VPieces & newVPieceB) { myPiecesB = newVPieceB; }

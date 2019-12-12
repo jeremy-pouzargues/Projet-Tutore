@@ -21,6 +21,7 @@ protected:
     pairCoord       myCoord;
     char            myCarac;
     std::string     myName;
+    bool            canCastling;
 public:
 //    Piece();
     virtual ~Piece() {}
@@ -63,8 +64,11 @@ public:
     const char        & getCarac () const;
     const std::string & getName () const;
 
+    const bool        & getCanCastling() const;
+
     //setters
     void setCoord(const pairCoord & coord);
+    void turnOffCastling();
 
 };
 
