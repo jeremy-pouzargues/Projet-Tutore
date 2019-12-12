@@ -35,13 +35,9 @@ public:
      void show() const;
 
 
-     void move(const pairCoord & coordMove,const pairCoord & coordPiece);
-     void setChessboard (const Matrix & newChessboard);
-     void setDeadPiece (const Matrix & newVDeadPiece);
-     void setPiecesW (const VPieces & newVPieceW);
-     void setPiecesB (const VPieces & newVPieceB);
 
      void move(const pairCoord & coordMove,const pairCoord & coordPiece);
+
      void swap(const pairCoord & coordMove,const pairCoord & coordPiece);
      bool find (const std::vector<pairCoord> & legalMoves, const pairCoord & moveChosen);
      std::vector<std::vector<pairCoord>> getVEatOpponent(const VPieces & VPiecesOpponent);
@@ -50,15 +46,14 @@ public:
 
      //getters 	
      const Matrix  & getChessboard()     const;
-     const Matrix  & getMyDeadPiece ()  const;
+     const Matrix  & getDeadPiece ()  const;
      const VPieces & getPiecesW ()      const;
      const VPieces & getPiecesB ()      const;
-
-
-
-     void setDeadPiece(const Matrix & deadPiece);
-     void setChessboard(const Matrix & chessboard);
-
+     //setters
+     void setChessboard (const Matrix & newChessboard);
+     void setDeadPiece (const Matrix & newVDeadPiece);
+     void setPiecesW (const VPieces & newVPieceW);
+     void setPiecesB (const VPieces & newVPieceB);
 
 };//Echiquier
 

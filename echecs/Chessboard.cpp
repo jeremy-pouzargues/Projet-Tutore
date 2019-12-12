@@ -171,7 +171,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
         }
         else
         {
-            while(coordMove.first != myPiecesW[cpt]->getCoord().first && coordMove.second != myPiecesW[cpt]->getCoord().second ) {++cpt;}
+            while(coordMove.first != myPiecesW[cpt]->getCoord().first && coordMove.second != myPiecesW[cpt]->getCoord().second && cpt < myPiecesW.size()-1) {++cpt;}
             myPiecesW.erase(myPiecesW.begin()+cpt);
         }
     }
@@ -343,7 +343,7 @@ vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & m
 
 // getters
 const Matrix  &  ChessBoard::getChessboard() const {return myChessBoard;}
-const Matrix  &  ChessBoard::getMyDeadPiece() const {return myDeadPiece;}
+const Matrix  &  ChessBoard::getDeadPiece() const {return myDeadPiece;}
 const VPieces &  ChessBoard::getPiecesW() const {return myPiecesW;}
 const VPieces &  ChessBoard::getPiecesB() const {return myPiecesB;}
 
