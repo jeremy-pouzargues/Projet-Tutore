@@ -36,10 +36,10 @@ public:
 
 
      //getter
-     Matrix getChessboard() const;
-     Matrix getDeadPiece () const;
-     VPieces getPiecesW () const;
-     VPieces getPiecesB () const;
+     const Matrix & getChessboard() const;
+     const Matrix & getDeadPiece () const;
+     const VPieces & getPiecesW () const;
+     const VPieces & getPiecesB () const;
 
      //setter
      void setChessboard (const Matrix & newChessboard);
@@ -54,6 +54,7 @@ public:
 
      std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
 
+     bool isCheckMate (const bool & player);
 
 
 };//Echiquier

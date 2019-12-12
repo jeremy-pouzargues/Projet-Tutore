@@ -23,7 +23,6 @@ void play(ChessBoard & chessboard)
             vector<shared_ptr<Piece>> vPiecesPlayer;
             vector<shared_ptr<Piece>> vPiecesOpponent;
             unsigned x,y,u,v;
-            bool isEchec (false);
 
             vector<pairCoord> myMoves;
 
@@ -44,17 +43,15 @@ void play(ChessBoard & chessboard)
                 vPiecesOpponent = chessboard.getPiecesW();
             }
 
-//============================  Vérifier l'échec ou non du roi =========================================
+//============================  Vérifier l'échec et mat si le roi est en echec =========================================
 
 
             if (chessboard.find(chessboard.matrixToVector(chessboard.getVEatOpponent(vPiecesOpponent)),vPiecesPlayer[0]->getCoord()))
-                isEchec = true;
-            cout << isEchec;
-//            //On n'autorise le mouvement seulement si le roi ne se met pas en danger
-//            if(chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(vPiecesOpponent)), coordMove))
-//                chessboard.move(coordMove, coordPiece);
-//            else
-//                throw CException(BADMOVE,SBADMOVE);
+            {
+                if (chessboard.isCheckMate(player))
+                    break;
+            }
+
 
 //============================  Choix de la pièce que l'on veut déplacer  ==============================
 
@@ -190,6 +187,9 @@ void play(ChessBoard & chessboard)
             cexc.display();
         }
     }
+    string colorPlayer;
+    player ? colorPlayer = "blanc" : "noir";
+    cout << "Le joueur " << " est echec et mat et a donc perdu !" << endl;
 }//play()
 
 int main()
