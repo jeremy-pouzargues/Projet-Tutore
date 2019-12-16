@@ -152,7 +152,6 @@ void play(ChessBoard & chessboard)
 
             else if (chessboard.find(chessboard.getChessboard()[x][y]->legalMoves(chessboard.getChessboard()), coordMove))
             {
-
                 chessboard.move(coordMove, coordPiece);
             }
             else
@@ -175,6 +174,7 @@ void play(ChessBoard & chessboard)
                 chessboard.setPiecesW(tmpVPiecesW);
                 chessboard.setDeadPiece(tmpVDeadPieces);
                 chessboard.setChessboard(tmpChessboard);
+                chessboard.getChessboard()[x][y]->setCoord(coordPiece);
                 throw CException(CHECK,SCHECK);
             }
 
