@@ -7,6 +7,7 @@ Bishop::Bishop(const Color & color,const pairCoord & coord)
 {
     myColor = color;
     myCoord = coord;
+    myInitCoord = coord;
     color == white ? myCarac = KBISHOPW : myCarac = KBISHOPB;
     myName = "Bishop";
 }

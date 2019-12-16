@@ -2,10 +2,11 @@
 using namespace std;
 
 //getters
-const char        & Piece::getCarac()      const {return myCarac;}
-const pairCoord   & Piece::getCoord()      const {return myCoord;}
-const Color       & Piece::getColor()      const {return myColor;}
-const std::string & Piece::getName()       const {return myName;}
+const char        & Piece::getCarac()       const {return myCarac;}
+const pairCoord   & Piece::getCoord()       const {return myCoord;}
+const pairCoord   & Piece::getInitCoord()   const {return myInitCoord;}
+const Color       & Piece::getColor()       const {return myColor;}
+const std::string & Piece::getName()        const {return myName;}
 const bool        & Piece::getCanCastling() const {return canCastling;}
 
 //setters

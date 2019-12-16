@@ -7,6 +7,7 @@ Knight::Knight(const Color & color,const pairCoord & coord)
 {
     myColor = color;
     myCoord = coord;
+    myInitCoord = coord;
     myName = "Knight";
 
     color == white ? myCarac = KKNIGHTW : myCarac = KKNIGHTB;

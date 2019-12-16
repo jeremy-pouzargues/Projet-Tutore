@@ -8,7 +8,11 @@
 
 int evaluation(const ChessBoard chessboard)
 {
-    std::cout << "dans evaluation" << std::endl;
+//    int compteur;
+//    if(chessboard.getChessboard()[3][3]->getName() != "Empty")
+//    {
+
+//    }
     return 1;
 }
 

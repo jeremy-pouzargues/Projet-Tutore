@@ -7,6 +7,7 @@ King::King(const Color & color,const pairCoord & coord)
 {
     myColor = color;
     myCoord = coord;
+    myInitCoord = coord;
     myName = "King";
     canCastling = true;
     color == white ? myCarac = KKINGW : myCarac = KKINGB;
