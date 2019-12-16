@@ -45,10 +45,11 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
 
                     // on garde dans un tampon l'échiquier actuel
                     Matrix    actualChessboard  = chessboard.getChessboard();
-                    VPieces    actualDeadPieceB   = chessboard.getMyDeadPieceB();
-                    VPieces    actualDeadPieceW   = chessboard.getMyDeadPieceW();
-                    VPieces actualPieceB = chessboard.getPiecesB();
-                    VPieces actualPieceW = chessboard.getPiecesW();
+                    VPieces   actualDeadPieceB   = chessboard.getMyDeadPieceB();
+                    VPieces   actualDeadPieceW   = chessboard.getMyDeadPieceW();
+                    VPieces   actualPieceB = chessboard.getPiecesB();
+                    VPieces   actualPieceW = chessboard.getPiecesW();
+
                     // on la deplace
                     chessboard.move(possibleMove,piece->getCoord());
                     // on réévalue l'echiquier après ce déplacement
@@ -83,8 +84,12 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                for (pairCoord possibleMove : piece->legalMoves(chessboard.getChessboard()))
                {
                    Matrix    actualChessboard  = chessboard.getChessboard();
+                   //Matrix    actualDeadPiece   = chessboard.getDeadPiece();
                    VPieces    actualDeadPieceB   = chessboard.getMyDeadPieceB();
                    VPieces    actualDeadPieceW   = chessboard.getMyDeadPieceW();
+                   VPieces   actualPieceB = chessboard.getPiecesB();
+                   VPieces   actualPieceW = chessboard.getPiecesW();
+
                    chessboard.move(possibleMove,piece->getCoord());
                    int eval = minmax(chessboard,depth-1,maximizingPlayer);
                    minEval  = std::min(minEval,eval);
@@ -92,6 +97,8 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                    chessboard.setChessboard(actualChessboard);
                    chessboard.setDeadPieceB(actualDeadPieceB);
                    chessboard.setDeadPieceW(actualDeadPieceW);
+                   chessboard.setPiecesB(actualPieceB);
+                   chessboard.setPiecesW(actualPieceW);
                }
              }
            }
