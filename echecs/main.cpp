@@ -5,6 +5,9 @@
 #include "headers/Chessboard.h"
 #include "headers/CExc.h"
 
+#include "headers/minmax.hpp"
+
+
 using namespace std;
 
 void play(ChessBoard & chessboard)
@@ -37,7 +40,7 @@ void play(ChessBoard & chessboard)
                 color           = black;
 
                 playerName      = "noir";
-                vPiecesPlayer = chessboard.getPiecesB();
+                vPiecesPlayer   = chessboard.getPiecesB();
                 vPiecesOpponent = chessboard.getPiecesW();
             }
 
@@ -133,10 +136,19 @@ void play(ChessBoard & chessboard)
             pairCoord coordMove (u,v);
 
 
+
+//======================= TESTS MINMAX ======================
+
+
+            cout << " =====MINMAX==== " << "\n" << minmax(chessboard,1,true) << endl;
+
+
 //======================= A FINIR ===========================
+
             VPieces tmpVPiecesW = chessboard.getPiecesW();
             VPieces tmpVPiecesB = chessboard.getPiecesB();
-            Matrix tmpVDeadPieces = chessboard.getDeadPiece();
+            VPieces tmpVDeadPiecesW = chessboard.getMyDeadPieceW();
+            VPieces tmpVDeadPiecesB = chessboard.getMyDeadPieceB();
             Matrix tmpChessboard = chessboard.getChessboard();
 
             // si le joueur déplace le roi le traitement est à part on prend un argument supplementaire
@@ -172,7 +184,8 @@ void play(ChessBoard & chessboard)
             {
                 chessboard.setPiecesB(tmpVPiecesB);
                 chessboard.setPiecesW(tmpVPiecesW);
-                chessboard.setDeadPiece(tmpVDeadPieces);
+                chessboard.setDeadPieceB(tmpVDeadPiecesB);
+                chessboard.setDeadPieceW(tmpVDeadPiecesW);
                 chessboard.setChessboard(tmpChessboard);
                 chessboard.getChessboard()[x][y]->setCoord(coordPiece);
                 throw CException(CHECK,SCHECK);
@@ -189,7 +202,6 @@ void play(ChessBoard & chessboard)
 //    player ? colorPlayer = "blanc" : "noir";
     cout << "Le joueur " << " est echec et mat et a donc perdu !" << endl;
 }//play()
-
 int main()
 {
     ChessBoard chessboard;
