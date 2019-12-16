@@ -22,9 +22,10 @@ typedef std::vector<std::shared_ptr<Piece>> VPieces;
 class ChessBoard {
 private:
     Matrix myChessBoard; // matrice de toutes les cases/pieces
-    Matrix myDeadPiece; //matrice des pieces mortes
     VPieces myPiecesW; //vecteur des pieces blanches
     VPieces myPiecesB; //vecteur des pieces noires
+    VPieces myDeadPiecesW;
+    VPieces myDeadPiecesB;
 
 public:
      ChessBoard();
@@ -35,6 +36,20 @@ public:
      void show() const;
 
 
+     //getter
+     const Matrix  & getChessboard() const;
+     const VPieces & getMyDeadPieceB () const;
+     const VPieces & getMyDeadPieceW () const;
+     const VPieces & getPiecesW () const;
+     const VPieces & getPiecesB () const;
+
+
+     //setter
+     void setChessboard (const Matrix & newChessboard);
+     void setDeadPieceW (const VPieces & newVDeadPiece);
+     void setDeadPieceB (const VPieces & newVDeadPiece);
+     void setPiecesW (const VPieces & newVPieceW);
+     void setPiecesB (const VPieces & newVPieceB);
 
      void move(const pairCoord & coordMove,const pairCoord & coordPiece);
 
@@ -44,16 +59,6 @@ public:
 
      std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
 
-     //getters 	
-     const Matrix  & getChessboard()     const;
-     const Matrix  & getDeadPiece ()  const;
-     const VPieces & getPiecesW ()      const;
-     const VPieces & getPiecesB ()      const;
-     //setters
-     void setChessboard (const Matrix & newChessboard);
-     void setDeadPiece (const Matrix & newVDeadPiece);
-     void setPiecesW (const VPieces & newVPieceW);
-     void setPiecesB (const VPieces & newVPieceB);
 
 };//Echiquier
 
