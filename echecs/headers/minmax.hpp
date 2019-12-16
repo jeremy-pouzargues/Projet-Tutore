@@ -87,6 +87,10 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                    Matrix    actualChessboard  = chessboard.getChessboard();
                    VPieces    actualDeadPieceB   = chessboard.getMyDeadPieceB();
                    VPieces    actualDeadPieceW   = chessboard.getMyDeadPieceW();
+                   VPieces actualPieceB = chessboard.getPiecesB();
+                   VPieces actualPieceW = chessboard.getPiecesW();
+                   pairCoord actualCoord = piece->getCoord();
+
                    chessboard.move(possibleMove,piece->getCoord());
                    int eval = minmax(chessboard,depth-1,maximizingPlayer);
                    minEval  = std::min(minEval,eval);
@@ -94,6 +98,9 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                    chessboard.setChessboard(actualChessboard);
                    chessboard.setDeadPieceB(actualDeadPieceB);
                    chessboard.setDeadPieceW(actualDeadPieceW);
+                   chessboard.setPiecesB(actualPieceB);
+                   chessboard.setPiecesW(actualPieceW);
+                   piece->setCoord(actualCoord);
                }
              }
            }
