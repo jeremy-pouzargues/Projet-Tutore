@@ -49,6 +49,7 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                     VPieces    actualDeadPieceW   = chessboard.getMyDeadPieceW();
                     VPieces actualPieceB = chessboard.getPiecesB();
                     VPieces actualPieceW = chessboard.getPiecesW();
+                    pairCoord actualCoord = piece->getCoord();
                     // on la deplace
                     chessboard.move(possibleMove,piece->getCoord());
                     // on réévalue l'echiquier après ce déplacement
@@ -62,6 +63,7 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                     chessboard.setDeadPieceW(actualDeadPieceW);
                     chessboard.setPiecesB(actualPieceB);
                     chessboard.setPiecesW(actualPieceW);
+                    piece->setCoord(actualCoord);
 
                 }
            }
