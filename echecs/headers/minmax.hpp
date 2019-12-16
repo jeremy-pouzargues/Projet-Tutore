@@ -45,7 +45,7 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
 
                     // on garde dans un tampon l'échiquier actuel
                     Matrix    actualChessboard  = chessboard.getChessboard();
-                    Matrix    actualDeadPiece   = chessboard.getMyDeadPiece();
+                    Matrix    actualDeadPiece   = chessboard.getDeadPiece();
                     // on la deplace
                     chessboard.move(possibleMove,piece->getCoord());
                     // on réévalue l'echiquier après ce déplacement
@@ -77,7 +77,7 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                for (pairCoord possibleMove : piece->legalMoves(chessboard.getChessboard()))
                {
                    Matrix    actualChessboard  = chessboard.getChessboard();
-                   Matrix    actualDeadPiece   = chessboard.getMyDeadPiece();
+                   Matrix    actualDeadPiece   = chessboard.getDeadPiece();
                    chessboard.move(possibleMove,piece->getCoord());
                    int eval = minmax(chessboard,depth-1,maximizingPlayer);
                    minEval  = std::min(minEval,eval);
