@@ -23,6 +23,7 @@ protected:
     char            myCarac;
     std::string     myName;
     bool            canCastling;
+    int             myValue;
 public:
 //    Piece();
     virtual ~Piece() {}
@@ -65,6 +66,7 @@ public:
     const pairCoord   & getInitCoord()const;
     const char        & getCarac () const;
     const std::string & getName () const;
+    const int         & getValue() const;
 
     const bool        & getCanCastling() const;
 

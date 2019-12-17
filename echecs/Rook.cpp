@@ -5,7 +5,7 @@ Rook::Rook(const Color & color,const pairCoord & coord) {
     myColor = color;
     myCoord = coord;
     myInitCoord = coord;
-
+    myValue = 500;
     myName = "Rook";
     canCastling = true;
     color == white ? myCarac = KROOKW : myCarac = KROOKB;

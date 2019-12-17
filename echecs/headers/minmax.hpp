@@ -8,12 +8,95 @@
 
 int evaluation(const ChessBoard chessboard)
 {
-//    int compteur;
-//    if(chessboard.getChessboard()[3][3]->getName() != "Empty")
+    int compteur = 0;
+    for(std::shared_ptr<Piece> piece : chessboard.getPiecesB())
+    {
+        compteur += piece->getValue();
+    }
+    for(std::shared_ptr<Piece> piece : chessboard.getPiecesW())
+    {
+        compteur -= piece->getValue();
+    }
+
+//##############################Test######################################
+//    //Centre haut gauche
+//    if(chessboard.getChessboard()[3][3]->getColor() == white)
 //    {
+//        compteur -= 20;
+//        if(chessboard.getChessboard()[3][3]->getName() != "Pawn")
+//        {
+//            compteur -= 10;
+//        }
+//    }
+//    else if (chessboard.getChessboard()[3][3]->getColor() == black)
+//    {
+//        compteur += 20;
+//        if(chessboard.getChessboard()[3][3]->getName() != "Pawn")
+//        {
+//            compteur += 10;
+//        }
+//    }
+//    //Centre haut droit
+//    if(chessboard.getChessboard()[3][4]->getColor() == white)
+//    {
+//        compteur -= 20;
+//        if(chessboard.getChessboard()[3][4]->getName() != "Pawn")
+//        {
+//            compteur -= 10;
+//        }
+//    }
+//    else if (chessboard.getChessboard()[3][4]->getColor() == black)
+//    {
+//        compteur += 20;
+//        if(chessboard.getChessboard()[3][4]->getName() != "Pawn")
+//        {
+//            compteur += 10;
+//        }
+//    }
+//    //Centre bas gauche
+//    if(chessboard.getChessboard()[4][3]->getColor() == white)
+//    {
+//        compteur -= 20;
+//        if(chessboard.getChessboard()[4][3]->getName() != "Pawn")
+//        {
+//            compteur -= 10;
+//        }
+//    }
+//    else if (chessboard.getChessboard()[4][3]->getColor() == black)
+//    {
+//        compteur += 20;
+//        if(chessboard.getChessboard()[4][3]->getName() != "Pawn")
+//        {
+//            compteur += 10;
+//        }
+//    }
+//    //Centre bas droit
+//    if(chessboard.getChessboard()[4][4]->getColor() == white)
+//    {
+//        compteur -= 20;
+//        if(chessboard.getChessboard()[4][4]->getName() != "Pawn")
+//        {
+//            compteur -= 10;
+//        }
+//    }
+//    else if (chessboard.getChessboard()[4][4]->getColor() == black)
+//    {
+//        compteur += 20;
+//        if(chessboard.getChessboard()[4][4]->getName() != "Pawn")
+//        {
+//            compteur += 10;
+//        }
+//    }
+
+//    //Pour toutes les pièces noires
+//    for (std::shared_ptr<Piece> piece : chessboard.getPiecesB())
+//    {
+//        if (piece->getCoord() == piece->getInitCoord()){ compteur -= 10;}
 
 //    }
-    return 1;
+
+    //###############################################################
+    return compteur;
 }
 
 int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlayer)
