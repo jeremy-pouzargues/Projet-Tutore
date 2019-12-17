@@ -19,9 +19,11 @@ class Piece {
 protected:
     Color           myColor;
     pairCoord       myCoord;
+    pairCoord       myInitCoord;
     char            myCarac;
     std::string     myName;
     bool            canCastling;
+    int             myValue;
 public:
 //    Piece();
     virtual ~Piece() {}
@@ -61,8 +63,10 @@ public:
     // il faut qu'on m'explique si on met en const ou pas.
     const Color       & getColor() const;
     const pairCoord   & getCoord() const;
+    const pairCoord   & getInitCoord()const;
     const char        & getCarac () const;
     const std::string & getName () const;
+    const int         & getValue() const;
 
     const bool        & getCanCastling() const;
 
