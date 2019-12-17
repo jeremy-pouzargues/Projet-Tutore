@@ -25,20 +25,12 @@ ChessBoard::ChessBoard() {
         }
     }
 
-  //Roi Blanc
+    //Roi Blanc
     myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
     myPiecesW.push_back(myChessBoard[7][4]);
     //Roi noir
     myChessBoard[0][4] = shared_ptr<Piece>(new King(black,pairCoord(0,4)));
     myPiecesB.push_back(myChessBoard[0][4]);
-
-
-    //===================DEBUG ============================================
-//    myChessBoard[0][4] = shared_ptr<Piece>(new Empty(pairCoord(0,4)));
-
-//    myChessBoard[7][4] = shared_ptr<Piece>(new Empty(pairCoord(7,4)));
-
-    //===================DEBUG ==============================================
 
 
     for (unsigned i(0); i < 8;++i)
@@ -346,16 +338,16 @@ vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & m
 }
 
 
-const Matrix & ChessBoard::getChessboard() const {return myChessBoard;}
-const VPieces & ChessBoard::getPiecesW() const {return myPiecesW;}
-const VPieces & ChessBoard::getPiecesB() const {return myPiecesB;}
+const Matrix & ChessBoard::getChessboard()    const {return myChessBoard;}
+const VPieces & ChessBoard::getPiecesW()      const {return myPiecesW;}
+const VPieces & ChessBoard::getPiecesB()      const {return myPiecesB;}
 const VPieces & ChessBoard::getMyDeadPieceB() const { return myDeadPiecesB;}
 const VPieces & ChessBoard::getMyDeadPieceW() const { return myDeadPiecesW;}
 
 void ChessBoard::setChessboard (const Matrix & newChessboard) { this->myChessBoard = newChessboard; }
-void ChessBoard::setPiecesW (const VPieces & newVPieceW) { this->myPiecesW = newVPieceW; }
-void ChessBoard::setPiecesB (const VPieces & newVPieceB) { this->myPiecesB = newVPieceB; }
-void ChessBoard::setDeadPieceW(const VPieces &newVDeadPiece)  { this->myPiecesW = newVDeadPiece; }
-void ChessBoard::setDeadPieceB(const VPieces&newVDeadPiece)  { this->myPiecesB = newVDeadPiece; }
+void ChessBoard::setPiecesW (const VPieces & newVPieceW)      { this->myPiecesW = newVPieceW; }
+void ChessBoard::setPiecesB (const VPieces & newVPieceB)      { this->myPiecesB = newVPieceB; }
+void ChessBoard::setDeadPieceW(const VPieces &newVDeadPiece)  { this->myDeadPiecesW = newVDeadPiece; }
+void ChessBoard::setDeadPieceB(const VPieces&newVDeadPiece)   { this->myDeadPiecesB = newVDeadPiece; }
 
 //setters
