@@ -141,11 +141,10 @@ void play(ChessBoard & chessboard)
             pairCoord coordMove (u,v);
 
 
-
 //======================= TESTS MINMAX ======================
 
 
-            cout << " =====MINMAX==== " << "\n" << minmax(chessboard,3,true) << endl;
+            cout << " =====MINMAX==== " << "\n" << minmax(chessboard,4,true) << endl;
 
 
 //======================= A FINIR ===========================
