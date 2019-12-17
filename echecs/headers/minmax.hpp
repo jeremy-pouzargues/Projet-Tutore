@@ -114,19 +114,19 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
     {
         maxEval = INT_MIN;//pseudo -infini
 
-        // pour chaque pieces blanches, pour l'instant le joueur maximisant est toujours le blanc
-        for(std::shared_ptr<Piece> piece : chessboard.getPiecesW())
+        // pour chaque pieces blanches, pour l'instant le joueur maximisant est toujours le noir
+        for(std::shared_ptr<Piece> piece : chessboard.getPiecesB())
         {
 
 
             if(piece->getName() != "King")
             {
-                // pour chaque coup possible par pièce
+                // pour chaque coup possible par pièce noires, l'IA
                 for (pairCoord possibleMove : piece->legalMoves(chessboard.getChessboard()))
                 {
 
                     std::cout << piece->getName() << " " << piece->getCoord().first  << " " << piece->getCoord().second << " "
-                              << piece->getColor() <<" "  << possibleMove.first << " " << possibleMove.second <<  std::endl;
+                              << possibleMove.first << " " << possibleMove.second <<  std::endl;
 
 
 
@@ -154,6 +154,42 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
 
                 }
            }
+           /*
+            * on doit faire un traitement different pour le roi car son legalMoves est different
+            */
+           else // roi noir
+           {
+
+                for (pairCoord possibleMove : piece->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(chessboard.getPiecesW())))
+                {
+
+                    std::cout << piece->getName() << " coord init " << piece->getCoord().first  << " " << piece->getCoord().second << " possible move "
+                              << possibleMove.first << " " << possibleMove.second <<  std::endl;
+
+                    // on garde dans un tampon l'échiquier actuel
+                    Matrix    actualChessboard  = chessboard.getChessboard();
+                    VPieces   actualDeadPieceB  = chessboard.getMyDeadPieceB();
+                    VPieces   actualDeadPieceW  = chessboard.getMyDeadPieceW();
+                    VPieces   actualPieceB      = chessboard.getPiecesB();
+                    VPieces   actualPieceW      = chessboard.getPiecesW();
+                    pairCoord actualCoord       = piece->getCoord();
+                    // on la deplace
+                    chessboard.move(possibleMove,piece->getCoord());
+                    // on réévalue l'echiquier après ce déplacement
+                    int eval = minmax(chessboard,depth-1,!maximizingPlayer);
+                    // on regarde si le score est plus élevé que le score max actuelle
+                    // si oui ce coup est plus intéréssant
+                    maxEval  = std::max(maxEval,eval);
+                    // on remet l'echiquier à sa position d'origine
+                    chessboard.setChessboard(actualChessboard);
+                    chessboard.setDeadPieceB(actualDeadPieceB);
+                    chessboard.setDeadPieceW(actualDeadPieceW);
+                    chessboard.setPiecesB(actualPieceB);
+                    chessboard.setPiecesW(actualPieceW);
+                    piece->setCoord(actualCoord);
+
+                }
+           }
         }
         return maxEval;
     }
@@ -163,20 +199,24 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
 
           minEval = INT_MAX; //pseudo +infini
 
-           // pour chaque pieces noires
-           for(std::shared_ptr<Piece> piece : chessboard.getPiecesB())
+           // pour chaque pieces blanches, joueur humain
+           for(std::shared_ptr<Piece> piece : chessboard.getPiecesW())
            {
 
              if(piece->getName() != "King")
              {
                for (pairCoord possibleMove : piece->legalMoves(chessboard.getChessboard()))
                {
+                   std::cout << piece->getName() << " coord init " << piece->getCoord().first  << " " << piece->getCoord().second << " possible move "
+                             << possibleMove.first << " " << possibleMove.second <<  std::endl;
+
                    Matrix    actualChessboard  = chessboard.getChessboard();
-                   VPieces    actualDeadPieceB   = chessboard.getMyDeadPieceB();
-                   VPieces    actualDeadPieceW   = chessboard.getMyDeadPieceW();
-                   VPieces actualPieceB = chessboard.getPiecesB();
-                   VPieces actualPieceW = chessboard.getPiecesW();
-                   pairCoord actualCoord = piece->getCoord();
+                   //Matrix    actualDeadPiece   = chessboard.getDeadPiece();
+                   VPieces   actualDeadPieceB  = chessboard.getMyDeadPieceB();
+                   VPieces   actualDeadPieceW  = chessboard.getMyDeadPieceW();
+                   VPieces   actualPieceB      = chessboard.getPiecesB();
+                   VPieces   actualPieceW      = chessboard.getPiecesW();
+                   pairCoord actualCoord       = piece->getCoord();
 
                    chessboard.move(possibleMove,piece->getCoord());
                    int eval = minmax(chessboard,depth-1,maximizingPlayer);
@@ -190,8 +230,42 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                    piece->setCoord(actualCoord);
                }
              }
+             else // roi noir
+             {
+
+                  for (pairCoord possibleMove : piece->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(chessboard.getPiecesB())))
+                  {
+
+                      std::cout << piece->getName() << " coord init " << piece->getCoord().first  << " " << piece->getCoord().second << " possible move "
+                                << possibleMove.first << " " << possibleMove.second <<  std::endl;
+
+                      // on garde dans un tampon l'échiquier actuel
+                      Matrix    actualChessboard  = chessboard.getChessboard();
+                      VPieces   actualDeadPieceB  = chessboard.getMyDeadPieceB();
+                      VPieces   actualDeadPieceW  = chessboard.getMyDeadPieceW();
+                      VPieces   actualPieceB      = chessboard.getPiecesB();
+                      VPieces   actualPieceW      = chessboard.getPiecesW();
+                      pairCoord actualCoord       = piece->getCoord();
+                      // on la deplace
+                      chessboard.move(possibleMove,piece->getCoord());
+                      // on réévalue l'echiquier après ce déplacement
+                      int eval = minmax(chessboard,depth-1,!maximizingPlayer);
+                      // on regarde si le score est plus élevé que le score max actuelle
+                      // si oui ce coup est plus intéréssant
+                      maxEval  = std::max(maxEval,eval);
+                      // on remet l'echiquier à sa position d'origine
+                      chessboard.setChessboard(actualChessboard);
+                      chessboard.setDeadPieceB(actualDeadPieceB);
+                      chessboard.setDeadPieceW(actualDeadPieceW);
+                      chessboard.setPiecesB(actualPieceB);
+                      chessboard.setPiecesW(actualPieceW);
+                      piece->setCoord(actualCoord);
+
+                  }
+             }
+
            }
-           return minEval;
+        return minEval;
     }
 }//minmax()
 
