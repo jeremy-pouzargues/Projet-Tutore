@@ -33,15 +33,15 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][4]);
 
 
-//    for (unsigned i(0); i < 8;++i)
-//    {
-//        // pions blancs
-//        myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
-//        myPiecesW.push_back(myChessBoard[6][i]);
-//        // pions noirs
-//        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
-//        myPiecesB.push_back(myChessBoard[1][i]);
-//    }
+    for (unsigned i(0); i < 8;++i)
+    {
+        // pions blancs
+        myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
+        myPiecesW.push_back(myChessBoard[6][i]);
+        // pions noirs
+        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
+        myPiecesB.push_back(myChessBoard[1][i]);
+    }
 
     // tours blancs
     myChessBoard[7][0] = shared_ptr<Piece>(new Rook(white,pairCoord(7,0)));
@@ -347,7 +347,7 @@ const VPieces & ChessBoard::getMyDeadPieceW() const { return myDeadPiecesW;}
 void ChessBoard::setChessboard (const Matrix & newChessboard) { this->myChessBoard = newChessboard; }
 void ChessBoard::setPiecesW (const VPieces & newVPieceW) { this->myPiecesW = newVPieceW; }
 void ChessBoard::setPiecesB (const VPieces & newVPieceB) { this->myPiecesB = newVPieceB; }
-void ChessBoard::setDeadPieceW(const VPieces &newVDeadPiece)  { this->myPiecesW = newVDeadPiece; }
-void ChessBoard::setDeadPieceB(const VPieces&newVDeadPiece)  { this->myPiecesB = newVDeadPiece; }
+void ChessBoard::setDeadPieceW(const VPieces &newVDeadPiece)  { this->myDeadPiecesW = newVDeadPiece; }
+void ChessBoard::setDeadPieceB(const VPieces&newVDeadPiece)  { this->myDeadPiecesB = newVDeadPiece; }
 
 //setters
