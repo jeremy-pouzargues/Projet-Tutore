@@ -20,7 +20,8 @@ class Pawn : public Piece
 private:
 public:
     Pawn() {}
-    Pawn(const Color & color,const pairCoord & coord);
+    Pawn(const Color & color, const pairCoord & coord);
+    Pawn(const Color & color, const pairCoord & coord, const pairCoord & initCoord);
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix);
 
 

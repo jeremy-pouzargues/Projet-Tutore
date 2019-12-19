@@ -14,6 +14,17 @@ King::King(const Color & color,const pairCoord & coord)
     myValue = 0;
 
 }
+King::King(const Color & color,const pairCoord & coord, const pairCoord & initCoord, const bool & canCastling)
+{
+    myColor = color;
+    myCoord = coord;
+    myInitCoord = initCoord;
+    myName = "King";
+    this->canCastling = canCastling;
+    color == white ? myCarac = KKINGW : myCarac = KKINGB;
+    myValue = 0;
+
+}
 vector<pairCoord> King::legalMoves(const vector<vector<shared_ptr<Piece>>> & matrix, const vector<vector<pairCoord>> & vEatOpponent)
 {
 

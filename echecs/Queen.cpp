@@ -14,6 +14,16 @@ Queen::Queen(const Color & color,const pairCoord & coord)
     myValue = 900;
 }
 
+Queen::Queen(const Color & color,const pairCoord & coord, const pairCoord & initCoord)
+{
+    myColor = color;
+    myCoord = coord;
+    myInitCoord = initCoord;
+    color == white ? myCarac = KQUEENW : myCarac = KQUEENB;
+    myName = "Queen";
+    myValue = 900;
+}
+
 vector <pairCoord> Queen::legalMoves(const vector<vector<shared_ptr<Piece>>> & matrix )
 {
 
