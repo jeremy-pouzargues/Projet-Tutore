@@ -28,7 +28,7 @@ vector<pairCoord> Knight::legalMoves(const vector<vector<shared_ptr<Piece>>> & m
     if (line != 0)
     {
         // Ici on vérifie qu'une deuxième ligne sous le cavalier est disponible pour pouvoir lui autoriser les mouvements
-        // où il se déplace de 2 lignes vers le bas et de 1 colonne vers la gauche ou la droite
+        // où il se déplace de 2 lignes vers le haut et de 1 colonne vers la gauche ou la droite
         if (line != 1)
         {
             // Grâce à thisColor, on vérifie qu'il n'y a pas un allié sur la case où on veut se déplacer
@@ -44,7 +44,7 @@ vector<pairCoord> Knight::legalMoves(const vector<vector<shared_ptr<Piece>>> & m
         if (column != 7 && column != 6 && matrix[line - 1][column + 2]->getColor() != thisColor)
             VMoves.push_back(matrix[line - 1][column + 2]->getCoord());
     }
-    // Rebelote mais avec les lignes vers le haut
+    // Rebelote mais avec les lignes vers le bas
     if (line != 7)
     {
         if (line != 6)

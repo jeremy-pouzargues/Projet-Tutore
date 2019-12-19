@@ -43,6 +43,13 @@ public:
      const VPieces & getPiecesW () const;
      const VPieces & getPiecesB () const;
 
+     const ChessBoard getBuffChessboard (ChessBoard chessboard) const;
+
+     const Matrix  getBuffChessboard (Matrix matrix)const;
+     const VPieces getBuffDeadPieceB (VPieces vDeadPieceB) const;
+     const VPieces getBuffDeadPieceW (VPieces vDeadPieceW) const;
+     const VPieces getBuffPiecesW (VPieces vPiecesW) const;
+     const VPieces getBuffPiecesB (VPieces vPiecesB) const;
 
      //setter
      void setChessboard (const Matrix & newChessboard);
