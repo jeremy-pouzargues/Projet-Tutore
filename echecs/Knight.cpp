@@ -7,11 +7,23 @@ Knight::Knight(const Color & color,const pairCoord & coord)
 {
     myColor = color;
     myCoord = coord;
+    myInitCoord = coord;
     myName = "Knight";
+    myValue = 300;
 
     color == white ? myCarac = KKNIGHTW : myCarac = KKNIGHTB;
 }
 
+Knight::Knight(const Color & color,const pairCoord & coord, const pairCoord & initCoord)
+{
+    myColor = color;
+    myCoord = coord;
+    myInitCoord = initCoord;
+    myName = "Knight";
+    myValue = 300;
+
+    color == white ? myCarac = KKNIGHTW : myCarac = KKNIGHTB;
+}
 vector<pairCoord> Knight::legalMoves(const vector<vector<shared_ptr<Piece>>> & matrix)
 {
     vector<pairCoord> VMoves;

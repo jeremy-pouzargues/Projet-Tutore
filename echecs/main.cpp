@@ -136,7 +136,6 @@ void play(ChessBoard & chessboard)
             pairCoord coordMove (u,v);
 
 
-
 //======================= TESTS MINMAX ======================
 
 
@@ -145,11 +144,11 @@ void play(ChessBoard & chessboard)
 
 //======================= A FINIR ===========================
 
-            VPieces tmpVPiecesW = chessboard.getPiecesW();
-            VPieces tmpVPiecesB = chessboard.getPiecesB();
+            VPieces tmpVPiecesW     = chessboard.getPiecesW();
+            VPieces tmpVPiecesB     = chessboard.getPiecesB();
             VPieces tmpVDeadPiecesW = chessboard.getMyDeadPieceW();
             VPieces tmpVDeadPiecesB = chessboard.getMyDeadPieceB();
-            Matrix tmpChessboard = chessboard.getChessboard();
+            Matrix  tmpChessboard   = chessboard.getChessboard();
 
             // si le joueur déplace le roi le traitement est à part on prend un argument supplementaire
             if(chessboard.getChessboard()[x][y]->getName() == "King")
@@ -191,9 +190,9 @@ void play(ChessBoard & chessboard)
                 throw CException(CHECK,SCHECK);
             }
 
-            chessboard.show();
 
             player = !player;
+            chessboard.show();
         } catch(CException & cexc ) {
             cexc.display();
         }

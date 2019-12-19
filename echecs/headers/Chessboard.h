@@ -29,12 +29,14 @@ private:
 
 public:
      ChessBoard();
+     ChessBoard(const Matrix & chessBoard, const VPieces & piecesW, const VPieces & PiecesB, const VPieces & deadPiecesW, const VPieces & deadPiecesB);
 
      /**
       * @brief affiche la matrice avec les pieces selon leurs coordonnées
       */
      void show() const;
-
+     Matrix copyMatrix(const Matrix & matrixCopy);
+     VPieces copyVPieces(const VPieces & VPiecesCopy);
 
      //getter
      const Matrix  & getChessboard() const;

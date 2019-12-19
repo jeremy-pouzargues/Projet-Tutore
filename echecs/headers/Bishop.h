@@ -16,6 +16,7 @@ class Bishop : public Piece
 public:
     Bishop(){}
     Bishop(const Color & color,const pairCoord & coord);
+    Bishop(const Color & color, const pairCoord & coord, const pairCoord & initCoord);
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix );
 
 

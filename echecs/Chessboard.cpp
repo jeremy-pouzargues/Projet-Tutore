@@ -25,7 +25,7 @@ ChessBoard::ChessBoard() {
         }
     }
 
-  //Roi Blanc
+    //Roi Blanc
     myChessBoard[7][4] = shared_ptr<Piece>(new King(white,pairCoord(7,4)));
     myPiecesW.push_back(myChessBoard[7][4]);
 //    //Roi noir
@@ -596,17 +596,60 @@ const VPieces ChessBoard::getBuffPiecesW (VPieces vPiecesW) const {return vPiece
 const VPieces ChessBoard::getBuffPiecesB (VPieces vPiecesB) const {return vPiecesB;}
 
 
+ChessBoard::ChessBoard(const Matrix & chessBoard, const VPieces & piecesW, const VPieces & PiecesB, const VPieces & deadPiecesW, const VPieces & deadPiecesB)
+{
+    this->myChessBoard = copyMatrix(chessBoard);
+    this->myPiecesW = copyVPieces(piecesW);
+    this->myPiecesB = copyVPieces(PiecesB);
+    this->myDeadPiecesW = copyVPieces(deadPiecesW);
+    this->myDeadPiecesB = copyVPieces(deadPiecesB);
+}
 
-const Matrix & ChessBoard::getChessboard() const {return myChessBoard;}
-const VPieces & ChessBoard::getPiecesW() const {return myPiecesW;}
-const VPieces & ChessBoard::getPiecesB() const {return myPiecesB;}
+
+Matrix ChessBoard::copyMatrix(const Matrix & matrixCopy)
+{
+    Matrix VFinalMatrix;
+    for(vector<shared_ptr<Piece>> VP : matrixCopy)
+    {
+        VFinalMatrix.push_back(copyVPieces(VP));
+    }
+    return  VFinalMatrix;
+}
+
+VPieces ChessBoard::copyVPieces(const VPieces & VPiecesCopy)
+{
+    VPieces VPiecesFinal;
+    for(shared_ptr<Piece> p : VPiecesCopy)
+    {
+        if(p->getName() == "Pawn")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Pawn(p->getColor(),p->getCoord(),p->getInitCoord())));
+        else if (p->getName() == "Bishop")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Bishop(p->getColor(),p->getCoord(),p->getInitCoord())));
+        else if (p->getName() == "Knight")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Knight(p->getColor(),p->getCoord(),p->getInitCoord())));
+        else if (p->getName() == "Rook")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Rook(p->getColor(),p->getCoord(),p->getInitCoord(),p->getCanCastling())));
+        else if(p->getName() == "King")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new King(p->getColor(),p->getCoord(),p->getInitCoord(),p->getCanCastling())));
+        else if(p->getName() == "Queen")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Queen(p->getColor(),p->getCoord(),p->getInitCoord())));
+        else if(p->getName() == "Empty")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Empty(p->getCoord())));
+    }
+    return VPiecesFinal;
+}
+
+
+const Matrix & ChessBoard::getChessboard()    const {return myChessBoard;}
+const VPieces & ChessBoard::getPiecesW()      const {return myPiecesW;}
+const VPieces & ChessBoard::getPiecesB()      const {return myPiecesB;}
 const VPieces & ChessBoard::getMyDeadPieceB() const { return myDeadPiecesB;}
 const VPieces & ChessBoard::getMyDeadPieceW() const { return myDeadPiecesW;}
 
 void ChessBoard::setChessboard (const Matrix & newChessboard) { this->myChessBoard = newChessboard; }
-void ChessBoard::setPiecesW (const VPieces & newVPieceW) { this->myPiecesW = newVPieceW; }
-void ChessBoard::setPiecesB (const VPieces & newVPieceB) { this->myPiecesB = newVPieceB; }
-void ChessBoard::setDeadPieceW(const VPieces &newVDeadPiece)  { this->myPiecesW = newVDeadPiece; }
-void ChessBoard::setDeadPieceB(const VPieces&newVDeadPiece)  { this->myPiecesB = newVDeadPiece; }
+void ChessBoard::setPiecesW (const VPieces & newVPieceW)      { this->myPiecesW = newVPieceW; }
+void ChessBoard::setPiecesB (const VPieces & newVPieceB)      { this->myPiecesB = newVPieceB; }
+void ChessBoard::setDeadPieceW(const VPieces &newVDeadPiece)  { this->myDeadPiecesW = newVDeadPiece; }
+void ChessBoard::setDeadPieceB(const VPieces&newVDeadPiece)   { this->myDeadPiecesB = newVDeadPiece; }
 
 //setters
