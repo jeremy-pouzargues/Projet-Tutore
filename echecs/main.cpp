@@ -145,7 +145,7 @@ void play(ChessBoard & chessboard)
 //======================= TESTS MINMAX ======================
 
 
-            cout << " =====MINMAX==== " << "\n" << minmax(chessboard,5,true) << endl;
+            cout << " =====MINMAX==== " << "\n" << minmax(chessboard,3,true) << endl;
 
 
 //======================= A FINIR ===========================
@@ -196,9 +196,9 @@ void play(ChessBoard & chessboard)
                 throw CException(CHECK,SCHECK);
             }
 
-            chessboard.show();
 
             player = !player;
+            chessboard.show();
         } catch(CException & cexc ) {
             cexc.display();
         }

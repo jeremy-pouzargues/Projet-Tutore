@@ -19,6 +19,7 @@ private:
 public:
     King() {}
     King(const Color & color,const pairCoord & coord);
+    King(const Color & color, const pairCoord & coord, const pairCoord & initCoord, const bool & canCastling);
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix) {}
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
                                               const std::vector<std::vector<pairCoord>> & vEatOpponent);

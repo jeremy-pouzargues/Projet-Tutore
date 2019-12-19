@@ -10,7 +10,16 @@ Rook::Rook(const Color & color,const pairCoord & coord) {
     canCastling = true;
     color == white ? myCarac = KROOKW : myCarac = KROOKB;
 }//Rook()
-
+Rook::Rook(const Color & color, const pairCoord & coord, const pairCoord & initCoord, const bool & canCastling)
+{
+    myColor = color;
+    myCoord = coord;
+    myInitCoord = initCoord;
+    myValue = 500;
+    myName = "Rook";
+    this->canCastling = canCastling;
+    color == white ? myCarac = KROOKW : myCarac = KROOKB;
+}
 
 std::vector<pairCoord> Rook::legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix) {
 

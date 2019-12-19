@@ -13,6 +13,16 @@ Bishop::Bishop(const Color & color,const pairCoord & coord)
     myValue = 300;
 }
 
+Bishop::Bishop(const Color & color, const pairCoord & coord, const pairCoord & initCoord)
+{
+    myColor = color;
+    myCoord = coord;
+    myInitCoord = initCoord;
+    color == white ? myCarac = KBISHOPW : myCarac = KBISHOPB;
+    myName = "Bishop";
+    myValue = 300;
+}
+
 vector<pairCoord> Bishop::legalMoves(const vector<vector<shared_ptr<Piece>>> & matrix ){
 
     vector<pairCoord> VMoves;

@@ -15,6 +15,7 @@ class Rook : public Piece {
 public:
     Rook() {}
     Rook(const Color & color,const pairCoord & coord);
+    Rook(const Color & color, const pairCoord & coord, const pairCoord & initCoord, const bool & canCastling);
 
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix);
 

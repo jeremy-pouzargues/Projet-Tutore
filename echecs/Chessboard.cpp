@@ -17,7 +17,7 @@ ChessBoard::ChessBoard() {
     myPiecesW.resize(0);
     myPiecesB.resize(0);
 
-    for (unsigned i(1); i < 7;++i) {
+    for (unsigned i(0); i < 8;++i) {
         for(unsigned j(0); j < 8; ++j)
         {
             // cases vides
@@ -33,15 +33,15 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][4]);
 
 
-    for (unsigned i(0); i < 8;++i)
-    {
-        // pions blancs
-        myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
-        myPiecesW.push_back(myChessBoard[6][i]);
-        // pions noirs
-        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
-        myPiecesB.push_back(myChessBoard[1][i]);
-    }
+//    for (unsigned i(0); i < 8;++i)
+//    {
+//        // pions blancs
+//        myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
+//        myPiecesW.push_back(myChessBoard[6][i]);
+//        // pions noirs
+//        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
+//        myPiecesB.push_back(myChessBoard[1][i]);
+//    }
 
     // tours blancs
     myChessBoard[7][0] = shared_ptr<Piece>(new Rook(white,pairCoord(7,0)));
@@ -335,6 +335,49 @@ vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & m
             newVector.push_back(matrixCoord[i][j]);
     }
     return newVector;
+}
+
+ChessBoard::ChessBoard(const Matrix & chessBoard, const VPieces & piecesW, const VPieces & PiecesB, const VPieces & deadPiecesW, const VPieces & deadPiecesB)
+{
+    this->myChessBoard = copyMatrix(chessBoard);
+    this->myPiecesW = copyVPieces(piecesW);
+    this->myPiecesB = copyVPieces(PiecesB);
+    this->myDeadPiecesW = copyVPieces(deadPiecesW);
+    this->myDeadPiecesB = copyVPieces(deadPiecesB);
+}
+
+
+Matrix ChessBoard::copyMatrix(const Matrix & matrixCopy)
+{
+    Matrix VFinalMatrix;
+    for(vector<shared_ptr<Piece>> VP : matrixCopy)
+    {
+        VFinalMatrix.push_back(copyVPieces(VP));
+    }
+    return  VFinalMatrix;
+}
+
+VPieces ChessBoard::copyVPieces(const VPieces & VPiecesCopy)
+{
+    VPieces VPiecesFinal;
+    for(shared_ptr<Piece> p : VPiecesCopy)
+    {
+        if(p->getName() == "Pawn")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Pawn(p->getColor(),p->getCoord(),p->getInitCoord())));
+        else if (p->getName() == "Bishop")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Bishop(p->getColor(),p->getCoord(),p->getInitCoord())));
+        else if (p->getName() == "Knight")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Knight(p->getColor(),p->getCoord(),p->getInitCoord())));
+        else if (p->getName() == "Rook")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Rook(p->getColor(),p->getCoord(),p->getInitCoord(),p->getCanCastling())));
+        else if(p->getName() == "King")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new King(p->getColor(),p->getCoord(),p->getInitCoord(),p->getCanCastling())));
+        else if(p->getName() == "Queen")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Queen(p->getColor(),p->getCoord(),p->getInitCoord())));
+        else if(p->getName() == "Empty")
+            VPiecesFinal.push_back(shared_ptr<Piece>(new Empty(p->getCoord())));
+    }
+    return VPiecesFinal;
 }
 
 

@@ -17,6 +17,7 @@ private:
 public:
     Knight() {}
     Knight(const Color & color,const pairCoord & coord);
+    Knight(const Color & color,const pairCoord & coord, const pairCoord & initCoord);
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix);
 
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix,
