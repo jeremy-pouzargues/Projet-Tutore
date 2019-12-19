@@ -101,10 +101,10 @@ int evaluation(const ChessBoard chessboard)
 
 int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlayer)
 {
-     ChessBoard actualChessboard(chessboard.getChessboard(),chessboard.getPiecesW(), chessboard.getPiecesB(), chessboard.getMyDeadPieceW(), chessboard.getMyDeadPieceB());
+
     if (depth == 0 /* ||  la partie n'est pas finie*/)
     {
-        int tmp = evaluation(actualChessboard);
+        int tmp = evaluation(chessboard);
         std::cout << "Evaluation:              " << tmp << std::endl;
         return tmp;
     }
@@ -120,15 +120,15 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
         //On créer un chessboard actuel
 //        ChessBoard actualChessboard(chessboard.getChessboard(),chessboard.getPiecesW(), chessboard.getPiecesB(), chessboard.getMyDeadPieceW(), chessboard.getMyDeadPieceB());
         // pour chaque pieces noires, pour l'instant le joueur maximisant est toujours le noir
-        for(std::shared_ptr<Piece> piece : actualChessboard.getPiecesB())
+        for(std::shared_ptr<Piece> piece : chessboard.getPiecesB())
         {
             // pour chaque coup possible par pièce noires, l'IA
             std::vector<pairCoord> vLegalMoves;
-            piece->getName() != "King" ? vLegalMoves = piece->legalMoves(actualChessboard.getChessboard()) :
-                    vLegalMoves =  piece->legalMoves(actualChessboard.getChessboard(),actualChessboard.getVEatOpponent(actualChessboard.getPiecesW()));
+            piece->getName() != "King" ? vLegalMoves = piece->legalMoves(chessboard.getChessboard()) :
+                    vLegalMoves =  piece->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(chessboard.getPiecesW()));
             for (pairCoord possibleMove : vLegalMoves)
             {
-
+                ChessBoard actualChessboard(chessboard.getChessboard(),chessboard.getPiecesW(), chessboard.getPiecesB(), chessboard.getMyDeadPieceW(), chessboard.getMyDeadPieceB());
                 std::cout << piece->getName() << " " << piece->getCoord().first  << " " << piece->getCoord().second << " "
                           << possibleMove.first << " " << possibleMove.second <<  std::endl;
 
@@ -152,15 +152,15 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
         minEval = INT_MIN; //pseudo +infini
 //        ChessBoard actualChessboard(chessboard.getChessboard(),chessboard.getPiecesW(), chessboard.getPiecesB(), chessboard.getMyDeadPieceW(), chessboard.getMyDeadPieceB());
                // pour chaque pieces blanches, joueur humain
-        for(std::shared_ptr<Piece> piece : actualChessboard.getPiecesW())
+        for(std::shared_ptr<Piece> piece : chessboard.getPiecesW())
         {
             // pour chaque coup possible par pièce noires, l'IA
             std::vector<pairCoord> vLegalMoves;
-            piece->getName() != "King" ? vLegalMoves = piece->legalMoves(actualChessboard.getChessboard()) :
-                    vLegalMoves =  piece->legalMoves(actualChessboard.getChessboard(),actualChessboard.getVEatOpponent(actualChessboard.getPiecesB()));
+            piece->getName() != "King" ? vLegalMoves = piece->legalMoves(chessboard.getChessboard()) :
+                    vLegalMoves =  piece->legalMoves(chessboard.getChessboard(),chessboard.getVEatOpponent(chessboard.getPiecesB()));
             for (pairCoord possibleMove : vLegalMoves)
             {
-
+                ChessBoard actualChessboard(chessboard.getChessboard(),chessboard.getPiecesW(), chessboard.getPiecesB(), chessboard.getMyDeadPieceW(), chessboard.getMyDeadPieceB());
                 std::cout << piece->getName() << " " << piece->getCoord().first  << " " << piece->getCoord().second << " "
                           << possibleMove.first << " " << possibleMove.second <<  std::endl;
 
