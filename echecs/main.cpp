@@ -144,11 +144,7 @@ void play(ChessBoard & chessboard)
 
 //======================= A FINIR ===========================
 
-            VPieces tmpVPiecesW     = chessboard.getPiecesW();
-            VPieces tmpVPiecesB     = chessboard.getPiecesB();
-            VPieces tmpVDeadPiecesW = chessboard.getMyDeadPieceW();
-            VPieces tmpVDeadPiecesB = chessboard.getMyDeadPieceB();
-            Matrix  tmpChessboard   = chessboard.getChessboard();
+            ChessBoard tmpChessboard (chessboard.getChessboard(), chessboard.getPiecesW(), chessboard.getPiecesB(), chessboard.getMyDeadPieceW(), chessboard.getMyDeadPieceB());
 
             // si le joueur déplace le roi le traitement est à part on prend un argument supplementaire
             if(chessboard.getChessboard()[x][y]->getName() == "King")
@@ -181,12 +177,7 @@ void play(ChessBoard & chessboard)
 
             if (chessboard.find(chessboard.matrixToVector(chessboard.getVEatOpponent(vPiecesOpponent)),vPiecesPlayer[0]->getCoord()))
             {
-                chessboard.setPiecesB(tmpVPiecesB);
-                chessboard.setPiecesW(tmpVPiecesW);
-                chessboard.setDeadPieceB(tmpVDeadPiecesB);
-                chessboard.setDeadPieceW(tmpVDeadPiecesW);
-                chessboard.setChessboard(tmpChessboard);
-                chessboard.getChessboard()[x][y]->setCoord(coordPiece);
+                chessboard = tmpChessboard;
                 throw CException(CHECK,SCHECK);
             }
 
