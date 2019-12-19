@@ -30,6 +30,7 @@ private:
 public:
      ChessBoard();
      ChessBoard(const Matrix & chessBoard, const VPieces & piecesW, const VPieces & PiecesB, const VPieces & deadPiecesW, const VPieces & deadPiecesB);
+     ChessBoard & operator= (const ChessBoard & chessboard);
 
      /**
       * @brief affiche la matrice avec les pieces selon leurs coordonnées
