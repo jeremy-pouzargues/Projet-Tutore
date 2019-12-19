@@ -33,7 +33,6 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][4]);
 
 
-<<<<<<< HEAD
         for (unsigned i(0); i < 8;++i)
         {
             // pions blancs
@@ -43,19 +42,6 @@ ChessBoard::ChessBoard() {
             myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
             myPiecesB.push_back(myChessBoard[1][i]);
         }
-=======
-    for (unsigned i(0); i < 8;++i)
-    {
-        // pions blancs
-        myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
-        myPiecesW.push_back(myChessBoard[6][i]);
-        // pions noirs
-        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
-        myPiecesB.push_back(myChessBoard[1][i]);
-    }
-
-
->>>>>>> e25eeb68d1e7445fc4aab497e1e3cdf638355ef3
 
     // tours blancs
     myChessBoard[7][0] = shared_ptr<Piece>(new Rook(white,pairCoord(7,0)));
@@ -154,16 +140,11 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
     {
         swap(coordMove,coordPiece);
     }
-<<<<<<< HEAD
 //    else if (this->myChessBoard[coordPiece.first][coordPiece.second]->getColor() != empty &&
 //             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != empty &&
 //             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != this->myChessBoard[coordPiece.first][coordPiece.second]->getColor())//Si on "mange" une pièce adverse
     else
-=======
-    else if (this->myChessBoard[coordPiece.first][coordPiece.second]->getColor() != empty &&
-             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != empty &&
-             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != this->myChessBoard[coordPiece.first][coordPiece.second]->getColor())//Si on "mange" une pièce adverse
->>>>>>> e25eeb68d1e7445fc4aab497e1e3cdf638355ef3
+
     {
         //on l'enleve du vecteur de piece de sa couleur
         unsigned cpt = 0;
@@ -407,7 +388,7 @@ bool ChessBoard::isCheckMate(const bool & player)
 //                player ? newVPiecesOpponent = tmpChessboard.getPiecesB() : newVPiecesOpponent = tmpChessboard.getPiecesW();
                 if (! find(tmpChessboard.matrixToVector(tmpChessboard.getVEatOpponent(newVPiecesOpponent)), playerKing->getCoord()))
                 {
-                    cout << "Roi : " << playerKing->getCoord().first << playerKing->getCoord().second << " " << piece->getName() << " : " << piece->getCoord().first << piece->getCoord().second << "->" << tryCoord.first << tryCoord.second << endl;
+//                    cout << "Roi : " << playerKing->getCoord().first << playerKing->getCoord().second << " " << piece->getName() << " : " << piece->getCoord().first << piece->getCoord().second << "->" << tryCoord.first << tryCoord.second << endl;
                     return false;
                 }
 
@@ -435,7 +416,7 @@ bool ChessBoard::isCheckMate(const bool & player)
 //                player ? newVPiecesOpponent = this->getPiecesB() : newVPiecesOpponent = this->getPiecesW();
                 if (! find(tmpChessboard.matrixToVector(tmpChessboard.getVEatOpponent(newVPiecesOpponent)), playerKing->getCoord()))
                 {
-                    cout << "Roi : " << playerKing->getCoord().first << playerKing->getCoord().second << " " << piece->getName() << " : " << piece->getCoord().first << piece->getCoord().second << "->" << tryCoord.first << tryCoord.second << endl;
+//                    cout << "Roi : " << playerKing->getCoord().first << playerKing->getCoord().second << " " << piece->getName() << " : " << piece->getCoord().first << piece->getCoord().second << "->" << tryCoord.first << tryCoord.second << endl;
                     return false;
                 }
                 tmpChessboard = bufChessboard;
@@ -511,6 +492,8 @@ ChessBoard::ChessBoard(const Matrix & chessBoard, const VPieces & piecesW, const
 ChessBoard & ChessBoard::operator= (const ChessBoard & chessboard)
 {
     this->myChessBoard = copyMatrix(chessboard.getChessboard());
+    this->myPiecesW.resize(chessboard.getPiecesW().size());
+    this->myPiecesB.resize(chessboard.getPiecesB().size());
 
     unsigned cptW = 1;
     unsigned cptB = 1;
