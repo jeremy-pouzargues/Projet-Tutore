@@ -174,7 +174,9 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
     {
         swap(coordMove,coordPiece);
     }
-    else //Si on "mange" une pièce adverse
+    else if (this->myChessBoard[coordPiece.first][coordPiece.second]->getColor() != empty &&
+             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != empty &&
+             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != this->myChessBoard[coordPiece.first][coordPiece.second]->getColor())//Si on "mange" une pièce adverse
     {
         //on l'enleve du vecteur de piece de sa couleur
         unsigned cpt = 0;
@@ -375,6 +377,9 @@ vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & m
 bool ChessBoard::isCheckMate(const bool & player)
 {
 
+    ChessBoard tmpChessboard(this->getChessboard(), this->getPiecesW(), this->getPiecesB(), this->getMyDeadPieceW(), this->getMyDeadPieceB());
+
+    ChessBoard bufChessboard(this->getChessboard(), this->getPiecesW(), this->getPiecesB(), this->getMyDeadPieceW(), this->getMyDeadPieceB());
 
     VPieces vPieces;
     VPieces vPiecesOpponent;
@@ -382,202 +387,79 @@ bool ChessBoard::isCheckMate(const bool & player)
     VPieces newVPiecesOpponent;
     if (player)
     {
-        vPieces = this->getPiecesW();
-        vPiecesOpponent = this->getPiecesB();
+        vPieces = bufChessboard.getPiecesW();
+        vPiecesOpponent = bufChessboard.getPiecesB();
     }
     else
     {
-        vPieces = this->getPiecesB();
-        vPiecesOpponent = this->getPiecesW();
+        vPieces = bufChessboard.getPiecesB();
+        vPiecesOpponent = bufChessboard.getPiecesW();
     }
-
-    playerKing = vPieces[0];
 
     for (shared_ptr<Piece> piece : vPieces)
     {
-//        ChessBoard tmpChessBoard = this->getBuffChessboard(*this);
         if (piece->getName() == "King")
         {
-            for (pairCoord tryCoord : piece->legalMoves(this->getChessboard(), this->getVEatOpponent(vPiecesOpponent)))
+            for (pairCoord tryCoord : piece->legalMoves(bufChessboard.getChessboard(), bufChessboard.getVEatOpponent(vPiecesOpponent)))
             {
                 // tampon de sauvegarde
-                VPieces tmpVPiecesW = this->getBuffPiecesW(this->getPiecesW());
-                VPieces tmpVPiecesB = this->getBuffPiecesB(this->getPiecesB());
-                VPieces tmpVDeadPiecesW = this->getBuffDeadPieceW(this->getMyDeadPieceW());
-                VPieces tmpVDeadPiecesB = this->getBuffDeadPieceB(this->getMyDeadPieceB());
-                Matrix tmpChessboard = this->getBuffChessboard(this->getChessboard());
-//                pairCoord tmpPieceCoord = piece->getCoord();
-//                ChessBoard tmpChessBoard = this->getBuffChessboard(*this);
+//                ChessBoard tmpChessboard(this->getChessboard(), this->getPiecesW(), this->getPiecesB(), this->getMyDeadPieceW(), this->getMyDeadPieceB());
+                tmpChessboard.move(tryCoord, piece->getCoord());
+                if (player)
+                {
+                    playerKing = tmpChessboard.getPiecesW()[0];
+                    newVPiecesOpponent = tmpChessboard.getPiecesB();
+                }
+                else
+                {
 
-                this->move(tryCoord, piece->getCoord());
-                player ? newVPiecesOpponent = this->getPiecesB() : newVPiecesOpponent = this->getPiecesW();
-                if (! find(this->matrixToVector(this->getVEatOpponent(newVPiecesOpponent)), playerKing->getCoord()))
+                    playerKing = tmpChessboard.getPiecesB()[0];
+                    newVPiecesOpponent = tmpChessboard.getPiecesW();
+
+                }
+//                player ? newVPiecesOpponent = tmpChessboard.getPiecesB() : newVPiecesOpponent = tmpChessboard.getPiecesW();
+                if (! find(tmpChessboard.matrixToVector(tmpChessboard.getVEatOpponent(newVPiecesOpponent)), playerKing->getCoord()))
                 {
                     cout << "Roi : " << playerKing->getCoord().first << playerKing->getCoord().second << " " << piece->getName() << " : " << piece->getCoord().first << piece->getCoord().second << "->" << tryCoord.first << tryCoord.second << endl;
-//                    this->setPiecesW(tmpChessBoard.getPiecesW());
-//                    this->setPiecesB(tmpChessBoard.getPiecesB());
-//                    this->setDeadPieceW(tmpChessBoard.getMyDeadPieceW());
-//                    this->setDeadPieceB(tmpChessBoard.getMyDeadPieceB());
-//                    this->setChessboard(tmpChessBoard.getChessboard());
-//                    piece->setCoord();
-                    this->setPiecesW(tmpVPiecesW);
-                    this->setPiecesB(tmpVPiecesB);
-                    this->setDeadPieceW(tmpVDeadPiecesW);
-                    this->setDeadPieceB(tmpVPiecesB);
-                    this->setChessboard(tmpChessboard);
-//                    piece->setCoord(tmpPieceCoord);
                     return false;
                 }
-//                this->setPiecesW(tmpChessBoard.getPiecesW());
-//                this->setPiecesB(tmpChessBoard.getPiecesB());
-//                this->setDeadPieceW(tmpChessBoard.getMyDeadPieceW());
-//                this->setDeadPieceB(tmpChessBoard.getMyDeadPieceB());
-//                this->setChessboard(tmpChessBoard.getChessboard());
-                this->setPiecesW(tmpVPiecesW);
-                this->setPiecesB(tmpVPiecesB);
-                this->setDeadPieceW(tmpVDeadPiecesW);
-                this->setDeadPieceB(tmpVPiecesB);
-                this->setChessboard(tmpChessboard);
-//                piece->setCoord(tmpPieceCoord);
+
+                tmpChessboard = bufChessboard;
+
 
             }
         }
         else
         {
-            for (pairCoord tryCoord : piece->legalMoves(this->getChessboard()))
+            for (pairCoord tryCoord : piece->legalMoves(bufChessboard.getChessboard()))
             {
                 // tampon de sauvegarde
-//                VPieces tmpVPiecesW = this->getPiecesW();
-//                VPieces tmpVPiecesB = this->getPiecesB();
-//                VPieces tmpVDeadPiecesW = this->getMyDeadPieceW();
-//                VPieces tmpVDeadPiecesB = this->getMyDeadPieceB();
-//                Matrix tmpChessboard = this->getChessboard();
-//                pairCoord tmpPieceCoord = piece->getCoord();
-                VPieces tmpVPiecesW = this->getBuffPiecesW(this->getPiecesW());
-                VPieces tmpVPiecesB = this->getBuffPiecesB(this->getPiecesB());
-                VPieces tmpVDeadPiecesW = this->getBuffDeadPieceW(this->getMyDeadPieceW());
-                VPieces tmpVDeadPiecesB = this->getBuffDeadPieceB(this->getMyDeadPieceB());
-                Matrix tmpChessboard = this->getBuffChessboard(this->getChessboard());
-
-//                ChessBoard tmpChessBoard = this->getBuffChessboard(*this);
-
-                this->move(tryCoord, piece->getCoord());
-                player ? newVPiecesOpponent = this->getPiecesB() : newVPiecesOpponent = this->getPiecesW();
-                if (! find(this->matrixToVector(this->getVEatOpponent(newVPiecesOpponent)), playerKing->getCoord()))
+                tmpChessboard.move(tryCoord, piece->getCoord());
+                if (player)
+                {
+                    playerKing = tmpChessboard.getPiecesW()[0];
+                    newVPiecesOpponent = tmpChessboard.getPiecesB();
+                }
+                else
+                {
+                    playerKing = tmpChessboard.getPiecesB()[0];
+                    newVPiecesOpponent = tmpChessboard.getPiecesW();
+                }
+//                player ? newVPiecesOpponent = this->getPiecesB() : newVPiecesOpponent = this->getPiecesW();
+                if (! find(tmpChessboard.matrixToVector(tmpChessboard.getVEatOpponent(newVPiecesOpponent)), playerKing->getCoord()))
                 {
                     cout << "Roi : " << playerKing->getCoord().first << playerKing->getCoord().second << " " << piece->getName() << " : " << piece->getCoord().first << piece->getCoord().second << "->" << tryCoord.first << tryCoord.second << endl;
-//                    this->setPiecesW(tmpChessBoard.getPiecesW());
-//                    this->setPiecesB(tmpChessBoard.getPiecesB());
-//                    this->setDeadPieceW(tmpChessBoard.getMyDeadPieceW());
-//                    this->setDeadPieceB(tmpChessBoard.getMyDeadPieceB());
-//                    this->setChessboard(tmpChessBoard.getChessboard());
-                    this->setPiecesW(tmpVPiecesW);
-                    this->setPiecesB(tmpVPiecesB);
-                    this->setDeadPieceW(tmpVDeadPiecesW);
-                    this->setDeadPieceB(tmpVPiecesB);
-                    this->setChessboard(tmpChessboard);
-//                    piece->setCoord(tmpPieceCoord);
                     return false;
                 }
-//                this->setPiecesW(tmpChessBoard.getPiecesW());
-//                this->setPiecesB(tmpChessBoard.getPiecesB());
-//                this->setDeadPieceW(tmpChessBoard.getMyDeadPieceW());
-//                this->setDeadPieceB(tmpChessBoard.getMyDeadPieceB());
-//                this->setChessboard(tmpChessBoard.getChessboard());
-//                tmpChessBoard.~ChessBoard();
-
-                this->setPiecesW(tmpVPiecesW);
-                this->setPiecesB(tmpVPiecesB);
-                this->setDeadPieceW(tmpVDeadPiecesW);
-                this->setDeadPieceB(tmpVPiecesB);
-                this->setChessboard(tmpChessboard);
-//                piece->setCoord(tmpPieceCoord);
+                tmpChessboard = bufChessboard;
             }
+
+
+
         }
     }
 
     return true;
-
-//    VPieces vPieces;
-//    VPieces vPiecesOpponent;
-
-//    VPieces tmpVPiecesW = this->getPiecesW();
-//    VPieces tmpVPiecesB = this->getPiecesB();
-//    VPieces tmpVDeadPiecesW = this->getMyDeadPieceW();
-//    VPieces tmpVDeadPiecesB = this->getMyDeadPieceB();
-//    Matrix tmpChessboard = this->getChessboard();
-
-
-//    // si le joueur est blanc on va lui donner les pieces blanches, sinon les pieces noires
-//    if (player)
-//    {
-//        vPieces = this->getPiecesW();
-//        vPiecesOpponent = this->getPiecesB();
-//    }
-//    else
-//    {
-//        vPieces = this->getPiecesB();
-//        vPiecesOpponent = this->getPiecesW();
-//    }
-//    vector<vector<pairCoord>> allLegalMoves;
-//    allLegalMoves.resize(0);
-//    for (shared_ptr<Piece> piece : vPieces/*unsigned i (0); i < vPieces.size(); ++i*/)
-//    {
-//        if (piece->getName() == "King")
-//        {
-//            allLegalMoves.push_back(piece->legalMoves(this->getChessboard(), this->getVEatOpponent(vPiecesOpponent)));
-//        }
-//        else
-//        {
-//            allLegalMoves.push_back(piece->legalMoves(this->getChessboard()));
-//        }
-//    }
-
-
-//    for (vector<pairCoord> interLegalMoves : allLegalMoves/*unsigned i (0); i < allLegalMoves.size(); ++i*/)
-//    {
-//        for (pairCoord coordLegalMove : interLegalMoves)
-//        {
-//            if (player)
-//            {
-//                vPieces = this->getPiecesW();
-//                vPiecesOpponent = this->getPiecesB();
-//            }
-//            else
-//            {
-//                vPieces = this->getPiecesB();
-//                vPiecesOpponent = this->getPiecesW();
-//            }
-//            pairCoord coordPiece = vPieces[i]->getCoord();
-//            cout << piece->getCoord().first << vPieces[i]->getCoord().second << "->";
-//            this->move(coordLegalMove, vPieces[i]->getCoord());
-//            if (this->find(this->matrixToVector(this->getVEatOpponent(vPiecesOpponent)),vPieces[0]->getCoord()))
-//            {
-//                this->setPiecesB(tmpVPiecesB);
-//                this->setPiecesW(tmpVPiecesW);
-//                this->setDeadPieceW(tmpVDeadPiecesW);
-//                this->setDeadPieceB(tmpVDeadPiecesB);
-//                this->setChessboard(tmpChessboard);
-//                this->getChessboard()[coordPiece.first][coordPiece.second]->setCoord(coordPiece);
-//                cout << "rien" << endl;
-//            }
-//            else
-//            {
-
-//                this->setPiecesW(tmpVPiecesW);
-//                this->setPiecesB(tmpVPiecesB);
-//                this->setDeadPieceW(tmpVDeadPiecesW);
-//                this->setDeadPieceB(tmpVDeadPiecesB);
-//                this->setChessboard(tmpChessboard);
-//                this->getChessboard()[coordPiece.first][coordPiece.second]->setCoord(coordPiece);
-//                cout << coordLegalMove.first << coordLegalMove.second << endl;
-//                return false;
-//            }
-
-//        }
-//    }
-
-//    return true;
 }
 
 
@@ -599,12 +481,89 @@ const VPieces ChessBoard::getBuffPiecesB (VPieces vPiecesB) const {return vPiece
 ChessBoard::ChessBoard(const Matrix & chessBoard, const VPieces & piecesW, const VPieces & PiecesB, const VPieces & deadPiecesW, const VPieces & deadPiecesB)
 {
     this->myChessBoard = copyMatrix(chessBoard);
-    this->myPiecesW = copyVPieces(piecesW);
-    this->myPiecesB = copyVPieces(PiecesB);
+    this->myPiecesW.resize(piecesW.size());
+    this->myPiecesB.resize(PiecesB.size());
+
+    unsigned cptW = 1;
+    unsigned cptB = 1;
+    for (vector<shared_ptr<Piece>> lineMatrix : this->myChessBoard)
+    {
+        for (shared_ptr<Piece> piece : lineMatrix)
+        {
+            if (piece->getColor() == white)
+            {
+                if (piece->getName() != "King")
+                {
+                    this->myPiecesW[cptW] = piece;
+                    ++cptW;
+                }
+                else
+                {
+                    this->myPiecesW[0] = piece;
+                }
+            }
+            else if (piece->getColor() == black)
+            {
+                if (piece->getName() != "King")
+                {
+                    this->myPiecesB[cptB] = piece;
+                    ++cptB;
+                }
+                else
+                {
+                    this->myPiecesB[0] = piece;
+                }
+            }
+        }
+    }
+
     this->myDeadPiecesW = copyVPieces(deadPiecesW);
     this->myDeadPiecesB = copyVPieces(deadPiecesB);
 }
 
+ChessBoard & ChessBoard::operator= (const ChessBoard & chessboard)
+{
+    this->myChessBoard = copyMatrix(chessboard.getChessboard());
+    this->myPiecesW.resize(chessboard.getPiecesW().size());
+    this->myPiecesB.resize(chessboard.getPiecesB().size());
+
+    unsigned cptW = 1;
+    unsigned cptB = 1;
+    for (vector<shared_ptr<Piece>> lineMatrix : this->myChessBoard)
+    {
+        for (shared_ptr<Piece> piece : lineMatrix)
+        {
+            if (piece->getColor() == white)
+            {
+                if (piece->getName() != "King")
+                {
+                    this->myPiecesW[cptW] = piece;
+                    ++cptW;
+                }
+                else
+                {
+                    this->myPiecesW[0] = piece;
+                }
+            }
+            else if (piece->getColor() == black)
+            {
+                if (piece->getName() != "King")
+                {
+                    this->myPiecesB[cptB] = piece;
+                    ++cptB;
+                }
+                else
+                {
+                    this->myPiecesB[0] = piece;
+                }
+            }
+        }
+    }
+
+    this->myDeadPiecesW = copyVPieces(chessboard.getMyDeadPieceW());
+    this->myDeadPiecesB = copyVPieces(chessboard.getMyDeadPieceB());
+    return *this;
+}
 
 Matrix ChessBoard::copyMatrix(const Matrix & matrixCopy)
 {
