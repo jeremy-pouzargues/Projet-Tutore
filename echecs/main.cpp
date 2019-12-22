@@ -190,7 +190,7 @@ void play(ChessBoard & chessboard)
             }
             else
             {
-                vector<pairCoord> test = finalMinmax(chessboard,3,true);
+                vector<pairCoord> test = finalMinmax(chessboard,2,true);
                 chessboard.move(test[1],test[0]);
             }
 

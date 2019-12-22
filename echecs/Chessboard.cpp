@@ -33,15 +33,15 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][4]);
 
 
-        for (unsigned i(0); i < 8;++i)
-        {
-            // pions blancs
-            myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
-            myPiecesW.push_back(myChessBoard[6][i]);
-            // pions noirs
-            myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
-            myPiecesB.push_back(myChessBoard[1][i]);
-        }
+//    for (unsigned i(0); i < 8;++i)
+//    {
+//        // pions blancs
+//        myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
+//        myPiecesW.push_back(myChessBoard[6][i]);
+//        // pions noirs
+//        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
+//        myPiecesB.push_back(myChessBoard[1][i]);
+//    }
 
     // tours blancs
     myChessBoard[7][0] = shared_ptr<Piece>(new Rook(white,pairCoord(7,0)));
@@ -122,7 +122,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
 {
     if(getChessboard()[coordPiece.first][coordPiece.second]->getCanCastling() &&
             getChessboard()[coordPiece.first][coordPiece.second]->getName() == "King" &&
-           abs(int(coordMove.second) - int(coordPiece.second)) > 1)
+            abs(int(coordMove.second) - int(coordPiece.second)) > 1)
     {
         if(coordMove.second == 1)
         {
@@ -140,9 +140,9 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
     {
         swap(coordMove,coordPiece);
     }
-//    else if (this->myChessBoard[coordPiece.first][coordPiece.second]->getColor() != empty &&
-//             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != empty &&
-//             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != this->myChessBoard[coordPiece.first][coordPiece.second]->getColor())//Si on "mange" une pièce adverse
+    //    else if (this->myChessBoard[coordPiece.first][coordPiece.second]->getColor() != empty &&
+    //             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != empty &&
+    //             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != this->myChessBoard[coordPiece.first][coordPiece.second]->getColor())//Si on "mange" une pièce adverse
     else
 
     {
@@ -173,7 +173,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
         this->myChessBoard[coordMove.first][coordMove.second] = this->myChessBoard[coordPiece.first][coordPiece.second];
         //On actualise ses coordonées
         this->myChessBoard[coordMove.first][coordMove.second]->setCoord(coordMove);
-        //On créer un objet vide à son ancienne 
+        //On créer un objet vide à son ancienne
         this->myChessBoard[coordPiece.first][coordPiece.second] = shared_ptr<Piece>(new Empty(coordPiece));
 
 
@@ -187,34 +187,42 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
     {
         Color color;
         this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white ? color = white : color = black;
-        string pieceChosen;
-        while(true)
+        if(color == black)
         {
-            cout << "Choisisser une pièce à faire revivre: Tour, Cavalier, Fou, Reine" << endl;
-            getline(cin,pieceChosen);
-            if("Reine" == pieceChosen)
+            myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Queen(black,pairCoord(coordMove.first,coordMove.second)));
+        }
+        else
+        {
+
+            string pieceChosen;
+            while(true)
             {
-                myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Queen(color,pairCoord(coordMove.first,coordMove.second)));
-                break;
-            }
-            else if("Tour" == pieceChosen)
-            {
-                myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Rook(color,pairCoord(coordMove.first,coordMove.second)));
-                break;
-            }
-            else if("Cavalier" == pieceChosen)
-            {
-                myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Knight(color,pairCoord(coordMove.first,coordMove.second)));
-                break;
-            }
-            else if("Fou" == pieceChosen)
-            {
-                myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Bishop(color,pairCoord(coordMove.first,coordMove.second)));
-                break;
-            }
-            else
-            {
-                cout << "Rentrer une pièce valide!" << endl;
+                cout << "Choisisser une pièce à faire revivre: Tour, Cavalier, Fou, Reine" << endl;
+                getline(cin,pieceChosen);
+                if("Reine" == pieceChosen)
+                {
+                    myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Queen(white,pairCoord(coordMove.first,coordMove.second)));
+                    break;
+                }
+                else if("Tour" == pieceChosen)
+                {
+                    myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Rook(white,pairCoord(coordMove.first,coordMove.second)));
+                    break;
+                }
+                else if("Cavalier" == pieceChosen)
+                {
+                    myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Knight(white,pairCoord(coordMove.first,coordMove.second)));
+                    break;
+                }
+                else if("Fou" == pieceChosen)
+                {
+                    myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Bishop(white,pairCoord(coordMove.first,coordMove.second)));
+                    break;
+                }
+                else
+                {
+                    cout << "Rentrer une pièce valide!" << endl;
+                }
             }
         }
         unsigned cpt = 0;
@@ -371,7 +379,7 @@ bool ChessBoard::isCheckMate(const bool & player)
             for (pairCoord tryCoord : piece->legalMoves(bufChessboard.getChessboard(), bufChessboard.getVEatOpponent(vPiecesOpponent)))
             {
                 // tampon de sauvegarde
-//                ChessBoard tmpChessboard(this->getChessboard(), this->getPiecesW(), this->getPiecesB(), this->getMyDeadPieceW(), this->getMyDeadPieceB());
+                //                ChessBoard tmpChessboard(this->getChessboard(), this->getPiecesW(), this->getPiecesB(), this->getMyDeadPieceW(), this->getMyDeadPieceB());
                 tmpChessboard.move(tryCoord, piece->getCoord());
                 if (player)
                 {
@@ -385,10 +393,10 @@ bool ChessBoard::isCheckMate(const bool & player)
                     newVPiecesOpponent = tmpChessboard.getPiecesW();
 
                 }
-//                player ? newVPiecesOpponent = tmpChessboard.getPiecesB() : newVPiecesOpponent = tmpChessboard.getPiecesW();
+                //                player ? newVPiecesOpponent = tmpChessboard.getPiecesB() : newVPiecesOpponent = tmpChessboard.getPiecesW();
                 if (! find(tmpChessboard.matrixToVector(tmpChessboard.getVEatOpponent(newVPiecesOpponent)), playerKing->getCoord()))
                 {
-//                    cout << "Roi : " << playerKing->getCoord().first << playerKing->getCoord().second << " " << piece->getName() << " : " << piece->getCoord().first << piece->getCoord().second << "->" << tryCoord.first << tryCoord.second << endl;
+                    //                    cout << "Roi : " << playerKing->getCoord().first << playerKing->getCoord().second << " " << piece->getName() << " : " << piece->getCoord().first << piece->getCoord().second << "->" << tryCoord.first << tryCoord.second << endl;
                     return false;
                 }
 
@@ -413,10 +421,10 @@ bool ChessBoard::isCheckMate(const bool & player)
                     playerKing = tmpChessboard.getPiecesB()[0];
                     newVPiecesOpponent = tmpChessboard.getPiecesW();
                 }
-//                player ? newVPiecesOpponent = this->getPiecesB() : newVPiecesOpponent = this->getPiecesW();
+                //                player ? newVPiecesOpponent = this->getPiecesB() : newVPiecesOpponent = this->getPiecesW();
                 if (! find(tmpChessboard.matrixToVector(tmpChessboard.getVEatOpponent(newVPiecesOpponent)), playerKing->getCoord()))
                 {
-//                    cout << "Roi : " << playerKing->getCoord().first << playerKing->getCoord().second << " " << piece->getName() << " : " << piece->getCoord().first << piece->getCoord().second << "->" << tryCoord.first << tryCoord.second << endl;
+                    //                    cout << "Roi : " << playerKing->getCoord().first << playerKing->getCoord().second << " " << piece->getName() << " : " << piece->getCoord().first << piece->getCoord().second << "->" << tryCoord.first << tryCoord.second << endl;
                     return false;
                 }
                 tmpChessboard = bufChessboard;
