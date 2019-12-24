@@ -1,8 +1,7 @@
 /**
  * @author Leo
- * @brief  classe de la piece roi fille de Piece
- * @class Roi.h include "headers/King.h"
- * @version 1.0
+ * @file  Roi.h include "headers/King.h"
+ * @version 1.2
  * @date 27/11/19
  */
 
@@ -13,6 +12,10 @@
 #include "Piece.h"
 
 
+/**
+ * @brief classe du roi, dérive de Pièce
+ * @class King : public Piece
+ */
 class King : public Piece
 {
 private:

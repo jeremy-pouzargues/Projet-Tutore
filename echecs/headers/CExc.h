@@ -1,5 +1,5 @@
 /**
- * @file CExc.h
+ * @file CExc.h include "headers/CExc.h"
  * @author Marc Laporte, D Mathieu, Laurent
  * @version 1.1
  * @brief Classe d'exception des tp modifiée pour le jeu d'échecs, dérive de exception
@@ -14,6 +14,11 @@
 
 #include "Const.h" //constantes des codes d'erreurs
 
+
+/**
+ * @class CException
+ * @brief classe CException
+ */
 class CException : public std::exception
 {
         std::string myLibelle;
@@ -36,6 +41,7 @@ class CException : public std::exception
 
 
         virtual const char* what       (void) const                  noexcept;
+
         /**
          * @brief affiche le code d'erreur et son libelle
          */

@@ -174,7 +174,9 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
 
     }
 
-
+    /*
+     * code de la règle si un pion arrive de l'autre côté de l'échiquer il peut se transformer
+     */
     //Un pion noir ne pourra jamais être à la ligne 0 et un pion blanc jamais à la ligne 7
     if(this->getChessboard()[coordMove.first][coordMove.second]->getName() == "Pawn" &&
             (this->getChessboard()[coordMove.first][coordMove.second]->getCoord().first == 0 ||
@@ -338,16 +340,18 @@ vector<pairCoord> ChessBoard::matrixToVector(const vector<vector<pairCoord>> & m
 }
 
 
-const Matrix & ChessBoard::getChessboard()    const {return myChessBoard;}
+//getters
+const Matrix  & ChessBoard::getChessboard()   const {return myChessBoard;}
 const VPieces & ChessBoard::getPiecesW()      const {return myPiecesW;}
 const VPieces & ChessBoard::getPiecesB()      const {return myPiecesB;}
-const VPieces & ChessBoard::getMyDeadPieceB() const { return myDeadPiecesB;}
-const VPieces & ChessBoard::getMyDeadPieceW() const { return myDeadPiecesW;}
+const VPieces & ChessBoard::getMyDeadPieceB() const {return myDeadPiecesB;}
+const VPieces & ChessBoard::getMyDeadPieceW() const {return myDeadPiecesW;}
 
-void ChessBoard::setChessboard (const Matrix & newChessboard) { this->myChessBoard = newChessboard; }
-void ChessBoard::setPiecesW (const VPieces & newVPieceW)      { this->myPiecesW = newVPieceW; }
-void ChessBoard::setPiecesB (const VPieces & newVPieceB)      { this->myPiecesB = newVPieceB; }
+//setters
+
+void ChessBoard::setChessboard (const Matrix & newChessboard) { this->myChessBoard  = newChessboard; }
+void ChessBoard::setPiecesW (const VPieces & newVPieceW)      { this->myPiecesW     = newVPieceW; }
+void ChessBoard::setPiecesB (const VPieces & newVPieceB)      { this->myPiecesB     = newVPieceB; }
 void ChessBoard::setDeadPieceW(const VPieces &newVDeadPiece)  { this->myDeadPiecesW = newVDeadPiece; }
 void ChessBoard::setDeadPieceB(const VPieces&newVDeadPiece)   { this->myDeadPiecesB = newVDeadPiece; }
 
-//setters

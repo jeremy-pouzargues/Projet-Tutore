@@ -1,3 +1,8 @@
+/**
+*@file minmax.hpp
+*@brief algorithme minmax et fonction d'évaluation
+*@author Leo, Laurent
+*/
 #ifndef MINMAX_HPP
 #define MINMAX_HPP
 
@@ -5,7 +10,17 @@
 #include <limits.h>
 #include "headers/Chessboard.h"
 
-
+/**
+ * @brief evaluation du score d'un échiquier
+ * @param chessboard
+ * @return int : evaluation de l'échiquier à une position précise
+ * pour evaluer le score d'une position il y a de nombreux paramètres qui rentrent en compte tel que :
+ * chaque pièce à un niveau différent de part ses mouvements possibles
+ * le niveau de liberté d'une pièce
+ * le nombre de pièces restantes sur l'échiquier par couleur
+ * qui contrôle le centre
+ * ....
+ */
 int evaluation(const ChessBoard chessboard)
 {
     int compteur = 0;
@@ -99,6 +114,14 @@ int evaluation(const ChessBoard chessboard)
     return compteur;
 }
 
+/**
+ * @brief algorithme minmax pour l'IA
+ * @param chessboard, échiquier à une position
+ * @param depth, profondeur de l'arbre que l'on veut créer
+ * @param maximizingPlayer, joueur maximisant
+ * @return retourne le meilleur mouvement possible pour l'IA
+ * TODO détail de l'algo
+ */
 int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlayer)
 {
 

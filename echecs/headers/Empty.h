@@ -1,9 +1,7 @@
 /**
  * @author Leo
- * @file   Empty.h
- * @brief  objet représentant une case vide, fille de la classe Piece
- * @version 1.0
- * @class Empty include "headers/Empty.h"
+ * @file   Empty.h, include "headers/Empty.h"
+ * @version 1.1
  */
 
 #ifndef EMPTY_H
@@ -11,6 +9,12 @@
 
 #include "Piece.h"
 
+
+/**
+ * @class Empty : public Piece
+ * @brief classe pour une les cases vides
+ * puisque que l'échiquier est une matrice de Pieces les cases vides doivent être des pièces elles aussi
+ */
 class Empty : public Piece
 {
 public:

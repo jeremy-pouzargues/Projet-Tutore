@@ -1,8 +1,8 @@
 /**
  * @file     Const.h
  * @authors  Laurent
- * @version  1.2
- * @brief   les differentes constantes, typedefs et enums
+ * @version  1.3
+ * @brief    les differentes constantes, typedefs enums
  **/
 #ifndef CONST_H
 #define CONST_H
@@ -12,8 +12,6 @@
 
 
 typedef std::pair<unsigned,unsigned> pairCoord;
-
-
 
 /*
  *  ERREURS
@@ -70,7 +68,8 @@ const char KKNIGHTB = 'C';
  */
 
 /**
- * @brief Color  enumeration des couleurs
+ * @brief Color enumeration des couleurs
+ * il y une couleur spécial pour les "pièces vides"
  */
 enum Color {white, black, empty};
 
