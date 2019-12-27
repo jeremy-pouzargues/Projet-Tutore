@@ -33,15 +33,15 @@ ChessBoard::ChessBoard() {
     myPiecesB.push_back(myChessBoard[0][4]);
 
 
-//    for (unsigned i(0); i < 8;++i)
-//    {
-//        // pions blancs
-//        myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
-//        myPiecesW.push_back(myChessBoard[6][i]);
-//        // pions noirs
-//        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
-//        myPiecesB.push_back(myChessBoard[1][i]);
-//    }
+    for (unsigned i(0); i < 8;++i)
+    {
+        // pions blancs
+        myChessBoard[6][i] = shared_ptr<Piece>(new Pawn(white,pairCoord(6,i)));
+        myPiecesW.push_back(myChessBoard[6][i]);
+        // pions noirs
+        myChessBoard[1][i] = shared_ptr<Piece>(new Pawn(black,pairCoord(1,i)));
+        myPiecesB.push_back(myChessBoard[1][i]);
+    }
 
     // tours blancs
     myChessBoard[7][0] = shared_ptr<Piece>(new Rook(white,pairCoord(7,0)));

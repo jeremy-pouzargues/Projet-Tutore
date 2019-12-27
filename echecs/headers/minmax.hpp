@@ -6,94 +6,111 @@
 #include "headers/Chessboard.h"
 
 
+int count(const std::vector<pairCoord> & vCoord, const pairCoord & coord)
+{
+    int cpt = 0;
+    for (pairCoord coordTmp : vCoord)
+    {
+        if(coordTmp == coord) ++cpt;
+    }
+    return cpt;
+}
+
 int evaluation(const ChessBoard chessboard)
 {
     int compteur = 0;
-    for(std::shared_ptr<Piece> piece : chessboard.getPiecesB())
+    ChessBoard actualChessboard(chessboard.getChessboard(), chessboard.getPiecesW(), chessboard.getPiecesB(), chessboard.getMyDeadPieceW(), chessboard.getMyDeadPieceB());
+    std::vector<pairCoord> vEatW = actualChessboard.matrixToVector(actualChessboard.getVEatOpponent(actualChessboard.getPiecesW()));
+    std::vector<pairCoord> vEatB = actualChessboard.matrixToVector(actualChessboard.getVEatOpponent(actualChessboard.getPiecesB()));
+    for(std::shared_ptr<Piece> piece : actualChessboard.getPiecesB())
     {
         compteur += piece->getValue();
+        if(piece->getCoord() != piece->getInitCoord())
+            compteur += 40;
+        if(piece->getName() != "King")
+            compteur += 20 * piece->legalMoves(actualChessboard.getChessboard()).size();
+        compteur -= 10 * count(vEatW,piece->getCoord());
     }
-    for(std::shared_ptr<Piece> piece : chessboard.getPiecesW())
+    for(std::shared_ptr<Piece> piece : actualChessboard.getPiecesW())
     {
         compteur -= piece->getValue();
+        if(piece->getCoord() != piece->getInitCoord())
+            compteur -= 40;
+        if(piece->getName() != "King")
+            compteur -= 20 * piece->legalMoves(actualChessboard.getChessboard()).size();
+        compteur += 10 * count(vEatB,piece->getCoord());
     }
 
     //##############################Test######################################
-    //    //Centre haut gauche
-    //    if(chessboard.getChessboard()[3][3]->getColor() == white)
-    //    {
-    //        compteur -= 20;
-    //        if(chessboard.getChessboard()[3][3]->getName() != "Pawn")
-    //        {
-    //            compteur -= 10;
-    //        }
-    //    }
-    //    else if (chessboard.getChessboard()[3][3]->getColor() == black)
-    //    {
-    //        compteur += 20;
-    //        if(chessboard.getChessboard()[3][3]->getName() != "Pawn")
-    //        {
-    //            compteur += 10;
-    //        }
-    //    }
-    //    //Centre haut droit
-    //    if(chessboard.getChessboard()[3][4]->getColor() == white)
-    //    {
-    //        compteur -= 20;
-    //        if(chessboard.getChessboard()[3][4]->getName() != "Pawn")
-    //        {
-    //            compteur -= 10;
-    //        }
-    //    }
-    //    else if (chessboard.getChessboard()[3][4]->getColor() == black)
-    //    {
-    //        compteur += 20;
-    //        if(chessboard.getChessboard()[3][4]->getName() != "Pawn")
-    //        {
-    //            compteur += 10;
-    //        }
-    //    }
-    //    //Centre bas gauche
-    //    if(chessboard.getChessboard()[4][3]->getColor() == white)
-    //    {
-    //        compteur -= 20;
-    //        if(chessboard.getChessboard()[4][3]->getName() != "Pawn")
-    //        {
-    //            compteur -= 10;
-    //        }
-    //    }
-    //    else if (chessboard.getChessboard()[4][3]->getColor() == black)
-    //    {
-    //        compteur += 20;
-    //        if(chessboard.getChessboard()[4][3]->getName() != "Pawn")getPiecesB
-    //        {2147483647
-    //            compteur += 10;
-    //        }getPiecesB
-    //    }
-    //    //Centre bas droitgetPiecesB
-    //    if(chessboard.getChessboard()[4][4]->getColor() == white)
-    //    {
-    //        compteur -= 20;getPiecesB
-    //        if(chessboard.getChessboard()[4][4]->getName() != "Pawn")getPiecesB
-    //        {
-    //            compteur -= 10;
-    //        }getPiecesB
-    //    }
-    //    else if (chessboard.getChessboard()[4][4]->getColor() == black)
-    //    {
-    //        compteur += 20;
-    //        if(chessboard.getChessboard()[4][4]->getName() != "Pawn")
-    //        {
-    //            compteur += 10;
-    //        }
-    //    }
+        //Centre haut gauche
+        if(chessboard.getChessboard()[3][3]->getColor() == white)
+        {
+            compteur -= 50;
+            if(chessboard.getChessboard()[3][3]->getName() != "Pawn")
+            {
+                compteur -= 30;
+            }
+        }
+        else if (chessboard.getChessboard()[3][3]->getColor() == black)
+        {
+            compteur += 50;
+            if(chessboard.getChessboard()[3][3]->getName() != "Pawn")
+            {
+                compteur += 30;
+            }
+        }
+        //Centre haut droit
+        if(chessboard.getChessboard()[3][4]->getColor() == white)
+        {
+            compteur -= 50;
+            if(chessboard.getChessboard()[3][4]->getName() != "Pawn")
+            {
+                compteur -= 30;
+            }
+        }
+        else if (chessboard.getChessboard()[3][4]->getColor() == black)
+        {
+            compteur += 50;
+            if(chessboard.getChessboard()[3][4]->getName() != "Pawn")
+            {
+                compteur += 30;
+            }
+        }
+        //Centre bas gauche
+        if(chessboard.getChessboard()[4][3]->getColor() == white)
+        {
+            compteur -= 50;
+            if(chessboard.getChessboard()[4][3]->getName() != "Pawn")
+            {
+                compteur -= 30;
+            }
+        }
+        else if (chessboard.getChessboard()[4][3]->getColor() == black)
+        {
+            compteur += 50;
+            if(chessboard.getChessboard()[4][3]->getName() != "Pawn")
+            {
+                compteur += 30;
+            }
+        }
+        //Centre bas droit
+        if(chessboard.getChessboard()[4][4]->getColor() == white)
+        {
+            compteur -= 50;
+            if(chessboard.getChessboard()[4][4]->getName() != "Pawn")
+            {
+                compteur -= 30;
+            }
+        }
+        else if (chessboard.getChessboard()[4][4]->getColor() == black)
+        {
+            compteur += 50;
+            if(chessboard.getChessboard()[4][4]->getName() != "Pawn")
+            {
+                compteur += 30;
+            }
+        }
 
-    //    //Pour toutes les pièces noires
-    //    for (std::shared_ptr<Piece> piece : chessboard.getPiecesB())
-    //    {
-    //        if (piece->getCoord() == piece->getInitCoord()){ compteur -= 10;}
-
-    //    }
 
     //###############################################################
     return compteur;
@@ -106,6 +123,7 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
     ChessBoard bufChessboard(chessboard.getChessboard(), chessboard.getPiecesW(), chessboard.getPiecesB(), chessboard.getMyDeadPieceW(), chessboard.getMyDeadPieceB());
     VPieces vPiecesOpponenent;
     VPieces vPieces;
+
     if(!maximizingPlayer)
     {
         vPiecesOpponenent = actualChessboard.getPiecesW();
@@ -116,7 +134,12 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
         vPiecesOpponenent = actualChessboard.getPiecesB();
         vPieces = actualChessboard.getPiecesW();
     }
-    if(actualChessboard.find(actualChessboard.matrixToVector(actualChessboard.getVEatOpponent(vPiecesOpponenent)),vPieces[0]->getCoord()))return INT_MIN;
+
+    if(actualChessboard.find(actualChessboard.matrixToVector(actualChessboard.getVEatOpponent(vPiecesOpponenent)),vPieces[0]->getCoord()))
+    {
+        if(!maximizingPlayer)return INT_MIN;
+        else return INT_MAX;
+    }
 
 //    if (actualChessboard.isCheckMate(maximizingPlayer))
 //    {
@@ -157,10 +180,10 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                 actualChessboard.move(possibleMove,piece->getCoord());
                 // on réévalue l'echiquier après ce déplacement
                 int eval = minmax(actualChessboard,depth-1,!maximizingPlayer);
+                actualChessboard = bufChessboard;
                 // on regarde si le score est plus élevé que le score max actuelle
                 // si oui ce coup est plus intéréssant
                 if(eval > maxEval) maxEval = eval;
-                actualChessboard = bufChessboard;
             }
         }
         return maxEval;
@@ -180,22 +203,18 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
                     vLegalMoves =  piece->legalMoves(actualChessboard.getChessboard(),actualChessboard.getVEatOpponent(actualChessboard.getPiecesB()));
             for (pairCoord possibleMove : vLegalMoves)
             {
-
-
-
 //                if (actualChessboard.isCheckMate(!maximizingPlayer))
 //                {
 //                    std::cout << "Salut mon pote t'as perdu " << std::endl;
 //                    return INT_MIN;
 //                }
-
                 actualChessboard.move(possibleMove,piece->getCoord());
                 // on réévalue l'echiquier après ce déplacement
                 int eval = minmax(actualChessboard,depth-1,!maximizingPlayer);
+                actualChessboard = bufChessboard;
                 // on regarde si le score est plus élevé que le score max actuelle
                 // si oui ce coup est plus intéréssant
-                if(eval < minEval)minEval = eval;
-                actualChessboard = bufChessboard;
+                if(eval < minEval) minEval = eval;
             }
 
         }
