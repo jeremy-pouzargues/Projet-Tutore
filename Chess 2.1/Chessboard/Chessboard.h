@@ -86,8 +86,6 @@ public:
      bool isCheckMate (const bool & player);
 
 
-
-
      void display(QWidget * currentPage,MainWindow * hisMainWindow); //ANCIENNEMENT SHOW //FRANFRAN
 
      void switchClickedSignal();  //FRANFRAN

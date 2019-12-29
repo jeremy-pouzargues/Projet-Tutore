@@ -10,6 +10,12 @@ MessageBox::MessageBox(std::string Name,std::string Text)
                 "font-size:24px;"
                 "color:white;"
                 );
+
+    QIcon iconMainWindow (":/Ressources/Pieces/PawnBlack.png"); //useless avec la frame disparu
+    this->setWindowIcon(iconMainWindow); //useless avec la frame disparu
+
+    this->setWindowTitle("Message");
+
     this->exec();
 }
 

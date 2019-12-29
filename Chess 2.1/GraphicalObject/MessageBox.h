@@ -5,7 +5,7 @@
 #include <QWidget>
 
 #include <QMessageBox>
-
+#include <QIcon>
 #include <QMouseEvent>
 
 class MessageBox : public QMessageBox

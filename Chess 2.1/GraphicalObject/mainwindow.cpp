@@ -29,8 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //    this->setStyleSheet("{background-image: url(:/QtRessources/Pieces/background.png;}");
 
-    //    QIcon iconMainWindow (":/Ressources/Pieces/PawnBlack.png"); //useless avec la frame disparu
-    //    this->setWindowIcon(iconMainWindow); //useless avec la frame disparu
+    QIcon iconMainWindow (":/Ressources/Pieces/PawnBlack.png"); //useless avec la frame disparu
+    this->setWindowIcon(iconMainWindow); //useless avec la frame disparu
 
     this->setWindowTitle("Jeu d'echecs");
 
