@@ -157,9 +157,15 @@ using namespace std;
 //    return 0;
 //}
 
+
+//#include <GraphicalObject/MessageBox.h>
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+//    MessageBox test("test","et merce");
+
     MainWindow w;
     w.setFixedSize(600,800);
     w.show();

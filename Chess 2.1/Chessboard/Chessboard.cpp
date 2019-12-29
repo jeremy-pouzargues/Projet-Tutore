@@ -122,6 +122,7 @@ void ChessBoard::getBoardClear()
                         "border:1px solid black;"
                         );
             hisGraphicalVector[j][i]->setClicked(false);
+            hisGraphicalVector[j][i]->setLegalMoves(false); //zqdzdzqdzqzddzdzdqzqdzzdqz
         }
     }
 
@@ -129,25 +130,41 @@ void ChessBoard::getBoardClear()
 
 void ChessBoard::setGraphicalLegalMoves(std::vector<pairCoord> legalMoves)
 {
-    for (unsigned i(0);i<hisGraphicalVector.size();++i) {
-        for (unsigned j(0);j<hisGraphicalVector.size();++j) {
-            //            for (unsigned k(0);k<legalMoves.size();++k) {
-            //                pairCoord toStore = hisGraphicalVector[j][i]->getHisPiece()->getCoord();
-            for(pairCoord pieceCoord : legalMoves)
-            {
-                if(hisGraphicalVector[j][i]->getHisPiece()->getCoord() == pieceCoord)
-                {
-                    hisGraphicalVector[j][i]->getButton()->setStyleSheet(
-                                "background:blue;"
-                                "border:1px solid black;"
-                                );
-                    //                        connect(hisGraphicalVector[j][i]->getButton(),SIGNAL(clicked()),hisGraphicalVector[j][i]->getButton(),SLOT(clickedLegalMoves));
+//    for (unsigned i(0);i<hisGraphicalVector.size();++i) {
+//        for (unsigned j(0);j<hisGraphicalVector.size();++j) {
+//            //            for (unsigned k(0);k<legalMoves.size();++k) {
+//            //                pairCoord toStore = hisGraphicalVector[j][i]->getHisPiece()->getCoord();
+//            for(pairCoord pieceCoord : legalMoves)
+//            {
+//                if(hisGraphicalVector[j][i]->getHisPiece()->getCoord() == pieceCoord)
+//                {
+//                    hisGraphicalVector[j][i]->getButton()->setStyleSheet(
+//                                "background:blue;"
+//                                "border:1px solid black;"
+//                                );
+//                    //                        connect(hisGraphicalVector[j][i]->getButton(),SIGNAL(clicked()),hisGraphicalVector[j][i]->getButton(),SLOT(clickedLegalMoves));
 
-                    hisGraphicalVector[j][i]->setLegalMoves(true);
-                }
-            }
-            //                pairCoord toCheck = legalMoves[k];
-            //            }
+//                    hisGraphicalVector[j][i]->setLegalMoves(true);
+//                }
+//            }
+//            //                pairCoord toCheck = legalMoves[k];
+//            //            }
+//        }
+//    }
+
+    for(pairCoord pieceCoord : legalMoves)
+    {
+        switch(hisGraphicalVector[pieceCoord.first][pieceCoord.second]->getHisPiece()->getColor()) //SI QQUN FAIT CA EN ENTREPRISE IL SE FAIT VIRER CASH
+        {
+        case white:
+            break;
+        default:
+            hisGraphicalVector[pieceCoord.first][pieceCoord.second]->getButton()->setStyleSheet(
+                                                        "background:blue;"
+                                                        "border:1px solid black;"
+                        );
+            hisGraphicalVector[pieceCoord.first][pieceCoord.second]->setLegalMoves(true);
+            break;
         }
     }
 }
@@ -161,6 +178,11 @@ void ChessBoard::setEndSignal(bool value)
 {
     EndSignal = value;
 }
+
+//std::vector<std::vector<GfxObject *> > ChessBoard::getHisGraphicalVector()
+//{
+//    return hisGraphicalVector;
+//}
 
 ChessBoard::ChessBoard() : switchMove(false) { //FRAN PR LE SWITCHMOVE
 

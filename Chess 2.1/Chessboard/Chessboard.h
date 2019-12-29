@@ -109,6 +109,7 @@ public:
      bool getEndSignal() const; //FRANFRAN
      void setEndSignal(bool value); //FRANFRAN
 
+//     static std::vector<std::vector<GfxObject *> > getHisGraphicalVector();
 };//Echiquier
 
 

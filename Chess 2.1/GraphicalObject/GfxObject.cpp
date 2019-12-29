@@ -248,6 +248,7 @@ QPushButton* GfxObject::getButton()
 
 #include "IA/minmax.hpp" //PROBLEME CYCLIQUE
 #include <QMessageBox>
+#include "GraphicalObject/MessageBox.h"
 
 void GfxObject::Select()
 {
@@ -268,6 +269,14 @@ void GfxObject::Select()
 
                 } else {
                     thisLegalMoves = this->hisPiece->legalMoves(hisBoard->getChessboard());
+
+//                    unsigned cpt = 0;
+//                    for(pairCoord pieceCoord : thisLegalMoves)
+//                    {
+//                        cpt++;
+//                        if(hisBoard->getHisGraphicalVector()[pieceCoord.first][pieceCoord.second]->hisPiece->getColor() == 1);
+//                        qDebug() << pieceCoord;
+//                    }
                 }
                 if(this->hisBoard->getSignal())   //UNE CASE DEJA CLIQUE                                                                                                                       //Si l'echiquier a deja une case de select
                 {
@@ -327,17 +336,18 @@ void GfxObject::Select()
                 else if(checkStatusOfTheGame.find("ERROR") == 0)
                 {
                     this->hisBoard->getBoardClear();
-                    QMessageBox test(this->where);
-                    std::string str = checkStatusOfTheGame.erase(0,5);
-                    QString qstr = QString::fromStdString(str);
-                    test.setText(qstr);
-                    test.setWindowTitle("Problème de déplacement");
-                    test.exec();
+                    MessageBox("Problème de déplacement",checkStatusOfTheGame.erase(0,5));
+//                    QMessageBox test(this->where);
+//                    std::string str = checkStatusOfTheGame.erase(0,5);
+//                    QString qstr = QString::fromStdString(str);
+//                    test.setText(qstr);
+//                    test.setWindowTitle("Problème de déplacement");
+//                    test.exec();
                 }
                 else if(checkStatusOfTheGame.find("ENDGAME") == 0)
                 {
                     this->hisBoard->setEndSignal(true);
-                    QMessageBox test(this->where);
+//                    QMessageBox test(this->where);
                     std::string colorOfthePlayer = "";
                     if(checkStatusOfTheGame.erase(0,7) == "white")
                     {
@@ -348,10 +358,11 @@ void GfxObject::Select()
                         colorOfthePlayer = "noir";
                     }
                     std::string str = "Le joueur " + colorOfthePlayer + " à gagné";
-                    QString qstr = QString::fromStdString(str);
-                    test.setText(qstr);
-                    test.setWindowTitle("Fin de partie");
-                    test.exec();
+//                    QString qstr = QString::fromStdString(str);
+                    MessageBox("Fin de partie",str);
+//                    test.setText(qstr);
+//                    test.setWindowTitle("Fin de partie");
+//                    test.exec();
                     this->hisMainWindow->addNewGameButton();
 
 //                    Matrix newBoardToLoad = this->hisBoard->getChessboard(); //DEBUG ONLY

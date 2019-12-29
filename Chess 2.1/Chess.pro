@@ -18,6 +18,7 @@ SOURCES += \
         GraphicalObject/ChoosePieceWindow.cpp \
         GraphicalObject/Chrono.cpp \
         GraphicalObject/GfxObject.cpp \
+        GraphicalObject/MessageBox.cpp \
         GraphicalObject/creditProfile.cpp \
         GraphicalObject/gameMessageBox.cpp \
         GraphicalObject/mainwindow.cpp \
@@ -88,6 +89,7 @@ HEADERS += \
     GraphicalObject/ChoosePieceWindow.h \
     GraphicalObject/Chrono.h \
     GraphicalObject/GfxObject.h \
+    GraphicalObject/MessageBox.h \
     GraphicalObject/creditProfile.h \
     GraphicalObject/gameMessageBox.h \
     GraphicalObject/mainwindow.h \
