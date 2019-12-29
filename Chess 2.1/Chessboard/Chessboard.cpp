@@ -58,7 +58,7 @@ void ChessBoard::refreshGraphicalVector()
     }
 } //Useless
 
-void ChessBoard::display(QWidget * currentPage)
+void ChessBoard::display(QWidget * currentPage,MainWindow * hisMainWindow)
 {
     hisGraphicalVector.resize(8,vector<GfxObject *>(8));
     for(int i=0 ; i<8 ; ++i)
@@ -69,7 +69,7 @@ void ChessBoard::display(QWidget * currentPage)
             str.push_back(this->myChessBoard[j][i]->getCarac());
             QString qstr = QString::fromStdString(str);
 
-            GfxObject *Current = new GfxObject(currentPage,60+i*60,110+j*60,this->myChessBoard[j][i],qstr,this);
+            GfxObject *Current = new GfxObject(currentPage,60+i*60,110+j*60,this->myChessBoard[j][i],qstr,this,hisMainWindow);
 
             //                std::vector<std::vector< GfxObject * >> ChessBoard::hisGraphicalVecto = 0;
 

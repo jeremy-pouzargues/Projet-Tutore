@@ -1,52 +1,69 @@
 #include "initThread.h"
 
-initThread::initThread(ChessBoard * hisBoard) : hisBoard(hisBoard) /*QObject *parent) : QThread(parent)*/ {}
+initThread::initThread(ChessBoard * hisBoard,Chrono * hisChrono) : hisBoard(hisBoard),hisChrono(hisChrono)/*QObject *parent) : QThread(parent)*/ {}
 
 void initThread::run()
 {
     unsigned int seconds = 00;
     unsigned int minutes = 00;
     //        std::mutex mtx;
-            //            mtx.lock();
-
-    while(!this->hisBoard->getEndSignal())
+    //            mtx.lock();
+    while(true)
     {
-        sleep(1);
-        seconds += 1;
-        if(seconds == 60)
+//        qDebug() << this->hisBoard->getEndSignal();
+//        qDebug() << &this->hisBoard;
+        this->hisBoard = hisChrono->getHisBoard();
+        usleep(100);
+        while(!this->hisBoard->getEndSignal())
         {
-            minutes += 1;
-            seconds -= 60;
-        }
-        if(minutes == 99)
-        {
-            minutes = 0;
-            seconds = 0;
-        }
+            if(hisChrono->getInterpretationSignal())
+            {
+                seconds = 00;
+                minutes = 00;
+                this->hisChrono->setInterpretationSignal(false);
+    //            this->hisBoard->setEndSignal(false);
+            }
+            sleep(1);
+            seconds += 1;
+            if(seconds == 60)
+            {
+                minutes += 1;
+                seconds -= 60;
+            }
+            if(minutes == 99)
+            {
+                minutes = 0;
+                seconds = 0;
+            }
 
-        QString s;
-        QString m;
+            QString s;
+            QString m;
 
-        if(seconds < 10)
-        {
-            s = "0" + QString::number(seconds);
-        }
-        else
-        {
-            s = QString::number(seconds);
-        }
+            if(seconds < 10)
+            {
+                s = "0" + QString::number(seconds);
+            }
+            else
+            {
+                s = QString::number(seconds);
+            }
 
-        if(minutes < 10)
-        {
-            m = "0" + QString::number(minutes);
+            if(minutes < 10)
+            {
+                m = "0" + QString::number(minutes);
+            }
+            else
+            {
+                m = QString::number(minutes);
+            }
+            QString timeToSend = m + ":" + s;
+            emit sendSignal(timeToSend);
         }
-        else
-        {
-            m = QString::number(minutes);
-        }
-
-        QString timeToSend = m + ":" + s;
-        emit sendSignal(timeToSend);
     }
 }
+
+//void initThread::onSignalReceiveFromMainWindow()
+//{
+//    this->InterpretationSignal = true;
+//}
 

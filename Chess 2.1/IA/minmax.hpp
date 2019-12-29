@@ -301,9 +301,10 @@ string play(ChessBoard & chessboard, bool player,int x,int y,unsigned u,unsigned
     {
         if (chessboard.isCheckMate(player))
         {
-            qDebug() << "is Check Mate";
+//            qDebug() << "is Check Mate";
+            endGame = true;
         }
-        endGame = true;
+//        endGame = true; //DEBUG CHECK MAT ONLY
     }
     //============================  Choix de la pièce que l'on veut déplacer  ==============================
     if(player)

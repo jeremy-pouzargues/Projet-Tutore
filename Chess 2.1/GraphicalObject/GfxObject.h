@@ -24,6 +24,10 @@ typedef std::pair<unsigned,unsigned> pairCoord;
 
 class ChessBoard; //A RM SI CICLIQUE AH1
 
+#include "GraphicalObject/mainwindow.h" //A RMMMMMMMMMMMMMMMMM
+class Chrono;
+class MainWindow;
+
 class GfxObject : public QObject
 {
 private:
@@ -36,9 +40,10 @@ private:
 
     QWidget *                   where;
     //    QPixmap*                    hisPicture;
+    MainWindow *                hisMainWindow; //ICIIIIIIIIIIIIIIIIIIIIIII
 
 public:
-    GfxObject(QWidget*where,int x,int y,std::shared_ptr<Piece> SaPiece,QString name,ChessBoard * sonBoard);
+    GfxObject(QWidget*where,int x,int y,std::shared_ptr<Piece> SaPiece,QString name,ChessBoard * sonBoard,MainWindow * hisMainWindow);
     QPushButton *getButton();
 
     bool getClicked() const;

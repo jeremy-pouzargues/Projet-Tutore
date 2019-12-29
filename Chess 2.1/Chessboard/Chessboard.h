@@ -22,7 +22,7 @@ class Piece;                                //A RM SI CICLIQUE AH2
 typedef std::vector<std::vector<std::shared_ptr<Piece>>> Matrix;
 typedef std::vector<std::shared_ptr<Piece>> VPieces;
 
-
+class MainWindow;  // A RMMMMMMMMMMMMMMMMMMM
 
 class ChessBoard {
 private:
@@ -88,7 +88,7 @@ public:
 
 
 
-     void display(QWidget * currentPage); //ANCIENNEMENT SHOW //FRANFRAN
+     void display(QWidget * currentPage,MainWindow * hisMainWindow); //ANCIENNEMENT SHOW //FRANFRAN
 
      void switchClickedSignal();  //FRANFRAN
      bool const & getSignal();  //FRANFRAN

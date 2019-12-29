@@ -5,9 +5,8 @@
 
 #include <mutex>          // std::mutex
 
-#include "Thread/initThread.h"
 
-Chrono::Chrono(QWidget * where,ChessBoard * hisBoard) : status(true),hisBoard(hisBoard) /*: QThread(where)*/
+Chrono::Chrono(QWidget * where,ChessBoard * hisBoard/*,MainWindow * hisMainWindow*/) : status(true),hisBoard(hisBoard),InterpretationSignal(false)/*,hisMainWindow(hisMainWindow)*/ /*: QThread(where)*/
 {
     std::mutex mtx;
     //    mtx.lock();
@@ -86,6 +85,35 @@ void Chrono::onSignalReceive(QString timeToSend) {
     }
 }
 
+void Chrono::onSignalReceiveFromMainWindow()
+{
+    qDebug() << "signal recu";
+    qDebug() << this->InterpretationSignal;
+
+    this->setInterpretationSignal(true);
+    qDebug() << this->InterpretationSignal;
+}
+
+ChessBoard *Chrono::getHisBoard() const
+{
+    return hisBoard;
+}
+
+void Chrono::setHisBoard(ChessBoard *value)
+{
+    hisBoard = value;
+}
+
+bool Chrono::getInterpretationSignal() const
+{
+    return InterpretationSignal;
+}
+
+void Chrono::setInterpretationSignal(bool value)
+{
+    InterpretationSignal = value;
+}
+
 bool Chrono::getStatus() const
 {
     return status;
@@ -97,13 +125,17 @@ void Chrono::setStatus(bool value)
 }
 
 void Chrono::startInNewThread() {
-    initThread *anotherCore = new initThread(this->hisBoard);
+    initThread *anotherCore = new initThread(this->hisBoard,this);
     connect(anotherCore, &initThread::sendSignal,this, &Chrono::onSignalReceive);
+//    connect(this,sendSignalToThread(),anotherCore,onSignalReceiveFromMainWindow());
+//    connect(this,sendSignalToThread(),anotherCore,anotherCore->onSignalReceiveFromMainWindow());
+
 //    connect(anotherCore, SIGNAL(progressChanged(int)),
 //                          SLOT(onProgressChanged(int)));
 //    connect(workerThread, SIGNAL(ended()),
 //            workerThread, SLOT(rmPointeur()));
     anotherCore->start();
+//    this->hisThread = anotherCore;
 }
 
 //void Chrono::start(int itr)

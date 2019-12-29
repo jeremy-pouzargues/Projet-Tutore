@@ -13,6 +13,10 @@
 
 #include <QMessageBox>
 
+#include "Thread/initThread.h"
+
+class Chrono;
+
 namespace Ui {
 class MainWindow;
 }
@@ -24,12 +28,16 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void addNewGameButton();
 private slots:
     void GamePage();
     void HelpPage();
     void CreditPage();
     void endWindow();
     void BackMenu();
+    void NewGame();
+signals:
+    void sendSignalToChrono();
 private:
     Ui::MainWindow *ui;
     QWidget *chessMenu;
@@ -48,6 +56,11 @@ private:
     Chrono * stopwatch;
 
     void closeEvent(QCloseEvent *event);
+
+    ChessBoard * hisChessBoard;
+
+    QPushButton * newGameBtn;
+
 };
 
 #endif // MAINWINDOW_H

@@ -54,7 +54,8 @@ void GfxObject::refreshGraphical()
     this->getButton()->setIconSize(QSize(60,60));
 }
 
-GfxObject::GfxObject(QWidget*where,int x,int y,std::shared_ptr<Piece> SaPiece,QString name,ChessBoard * sonBoard): Clicked(false),hisPiece(SaPiece),hisBoard(sonBoard),legalMoves(false),where(where)
+
+GfxObject::GfxObject(QWidget*where,int x,int y,std::shared_ptr<Piece> SaPiece,QString name,ChessBoard * sonBoard,MainWindow * hisMainWindow): Clicked(false),hisPiece(SaPiece),hisBoard(sonBoard),legalMoves(false),where(where),hisMainWindow(hisMainWindow)
 {
     QPushButton * current = new QPushButton(where);
 
@@ -351,6 +352,7 @@ void GfxObject::Select()
                     test.setText(qstr);
                     test.setWindowTitle("Fin de partie");
                     test.exec();
+                    this->hisMainWindow->addNewGameButton();
 
 //                    Matrix newBoardToLoad = this->hisBoard->getChessboard(); //DEBUG ONLY
 //                    for (unsigned i(0); i < 8; ++i)//DEBUG ONLY
@@ -377,7 +379,7 @@ void GfxObject::Select()
                     deb << endl;
                     //fin bcl
                 }
-                this->hisBoard->display(this->where);
+                this->hisBoard->display(this->where,this->hisMainWindow);
             }
         }
 }

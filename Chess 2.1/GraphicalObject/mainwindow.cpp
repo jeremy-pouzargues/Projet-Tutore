@@ -158,14 +158,25 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ChessBoard * MainGame = new ChessBoard();
 
+    this->hisChessBoard = MainGame;
+
     if(!this->chronoAlreadyStart)
     {
         Chrono * theChrono = new Chrono(chessGameWidget,MainGame); //ICI
         this->stopwatch = theChrono;
+        connect(this, &MainWindow::sendSignalToChrono,theChrono, &Chrono::onSignalReceiveFromMainWindow);
+//        connect(this,sendSignalToChrono(),theChrono,SLOT(onSignalReceiveFromMainWindow()));
     }
 
+//    QPushButton * test = new QPushButton(chessGameWidget);
+//    test->setText("Nouvelle partie");
+//    test->move(200,600);
+//    test->setMinimumWidth(100);
+//    test->setMaximumWidth(100);
+//    test->setMinimumHeight(50);
+//    test->setMaximumHeight(50);
 
-    MainGame->display(this->chessGameWindow);
+    MainGame->display(this->chessGameWindow,this);  ////////ICIIIIIIIIIIIIIIIIIIIIII
     //===========================================//
 
     QWidget *gameHelp = new QWidget();
@@ -351,5 +362,59 @@ void MainWindow::closeEvent (QCloseEvent *event)
 //            event->accept();
 //        }
     }
+}
+
+void MainWindow::addNewGameButton()
+{
+    QPushButton * newGame = new QPushButton(this);
+    newGame->setText("Nouvelle partie");
+    newGame->move(200,600);
+    newGame->setStyleSheet(
+                "border: 0px;"
+                "background-color: rgba(162, 82, 45, 1);"
+                "color:white;"
+                "font-size:24px;"
+                           );
+    newGame->setMinimumSize(QSize(200,50));
+    newGame->setMaximumSize(QSize(200,50));
+
+    newGame->show();
+    this->newGameBtn = newGame;
+    connect(this->newGameBtn,SIGNAL(clicked()),this,SLOT(NewGame()));
+}
+
+void MainWindow::NewGame()
+{
+    ChessBoard * nnew = new ChessBoard;
+    nnew->display(this->widgetStacked->currentWidget(),this);
+    hisChessBoard = nnew;
+
+    this->stopwatch->setHisBoard(nnew);
+
+    this->newGameBtn->hide();
+    delete this->newGameBtn;
+
+//    this->stopwatch->set
+
+//    this->newGameBtn = nullptr;
+
+//    connect(this,sendSignalToChrono(),this->stopwatch->getHisThread(),this->stopwatch->getHisThread()->onSignalReceiveFromMainWindow());
+
+//    connect(this,sendSignalToChrono(),this->stopwatch->getHisThread(),onSignalReceiveFromMainWindow());
+
+//    Chrono * chrn = new Chrono(this->widgetStacked->currentWidget(),this->hisChessBoard);
+//    chrn->startInNewThread();
+
+//    delete this->stopwatch;
+
+    emit sendSignalToChrono();
+    qDebug("signal emit");
+
+    //    this->stopwatch = chrn;
+//    this->stopwatch->move(0,0);
+//    this->stopwatch->startInNewThread();
+//    this->stopwatch->show();
+
+//    this->stopwatch->startInNewThread();
 }
 
