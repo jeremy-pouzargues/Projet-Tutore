@@ -13,13 +13,11 @@ class initThread : public QThread
 public:
     initThread(ChessBoard * hisBoard,Chrono * hisChrono/*QObject * parent*/);
     void run();
-//    void stop();
 private:
     ChessBoard * hisBoard;
     Chrono * hisChrono;
 public slots:
 signals:
-//    void onSignalReceiveFromMainWindow();
     void sendSignal(QString timeToSend);
 };
 

@@ -8,7 +8,6 @@ class windowCommandsButton : QPushButton
     Q_OBJECT
 public:
     windowCommandsButton(QWidget * parent,QWidget * grandpa);
-//    virtual ~windowCommandsButton();
 };
 
 #endif // WINDOWCOMMANDSBUTTON_H

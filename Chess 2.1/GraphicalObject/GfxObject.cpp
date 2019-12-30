@@ -55,18 +55,12 @@ void GfxObject::refreshGraphical()
 }
 
 
-GfxObject::GfxObject(QWidget*where,int x,int y,std::shared_ptr<Piece> SaPiece,QString name,ChessBoard * sonBoard,MainWindow * hisMainWindow): Clicked(false),hisPiece(SaPiece),hisBoard(sonBoard),legalMoves(false),where(where),hisMainWindow(hisMainWindow)
+GfxObject::GfxObject(QWidget*where,int x,int y,std::shared_ptr<Piece> SaPiece,QString name,ChessBoard * sonBoard,MainWindow * hisMainWindow,bool color): Clicked(false),hisPiece(SaPiece),hisBoard(sonBoard),legalMoves(false),where(where),hisMainWindow(hisMainWindow)
 {
     QPushButton * current = new QPushButton(where);
-
-    //        typeid(typeof (hisPiece)).name();
-
     std::string str = typeid (*hisPiece).name();
     str.replace(0,1,"");
     QString qstr = QString::fromStdString(str);
-
-    //        qDebug() << ":/QtRessources/Pieces/" + qstr + hisPiece->getColor() + ".png";
-    //        qDebug() << hisPiece->getColor();
 
     std::string pathToAdd;
     switch(hisPiece->getColor())
@@ -84,23 +78,26 @@ GfxObject::GfxObject(QWidget*where,int x,int y,std::shared_ptr<Piece> SaPiece,QS
 
     QString qPathToAdd = QString::fromStdString(pathToAdd);
 
-    //    qDebug() << qstr;
-    //    qDebug() << qPathToAdd;
-
-    //    qDebug() << ":/Ressources/Pieces/" + qstr + qPathToAdd + ".png";
-
-
     QPixmap test (":/Ressources/Pieces/" + qstr + qPathToAdd + ".png");
     QIcon ButtonIcon(test);
     current->setIcon(ButtonIcon);
     current->setIconSize(QSize(60,60));
 
-    //        current->setText(name);
 
+    if(color)
+    {
     current->setStyleSheet(
-                "background:white;"
+                "background-color: rgba(241, 217, 181, 1);"
                 "border:1px solid black;"
                 );
+    }
+    else
+    {
+        current->setStyleSheet(
+                    "background-color: rgba(181, 136, 99, 1);"
+                    "border:1px solid black;"
+                    );
+    }
     current->move(x,y);
     const QSize sizeCase = QSize(60,60);
     current->setMinimumSize(sizeCase);
@@ -115,138 +112,7 @@ QPushButton* GfxObject::getButton()
     return this->button;
 }
 
-//void GfxObject::Select()
-//{
-//    if(this->getLegalMoves() == false)
-//    {
-
-//        //        std::pair<unsigned,unsigned>
-//        //        this->hisBoard->move(pairCoord(1,1),pairCoord(5,6));
-
-
-//        std::vector<std::pair<unsigned int,unsigned int>> thisLegalMoves;
-
-//        //        qDebug() << "test";
-//        //        qDebug() << "test2";
-
-
-
-//        if(this->hisPiece->getName() != "Empty" && this->hisPiece->getColor() == 0)
-//        {
-//            //        std::string str = this->hisPiece->getName();
-//            //        QString qstr = QString::fromStdString(str);
-//            //        qDebug() << qstr;
-//            //        qDebug() << this->hisPiece->getCoord();
-//            //        qDebug() << this->hisPiece->getCarac();
-
-//            if(this->hisPiece->getName() == "King")
-//            {
-//                thisLegalMoves = this->hisPiece->legalMoves(hisBoard->getChessboard(),this->hisBoard->getVEatOpponent(this->hisBoard->getPiecesB()));
-
-//            } else {
-//                thisLegalMoves = this->hisPiece->legalMoves(hisBoard->getChessboard());
-//            }
-
-//            //            test = this->hisPiece->legalMoves(hisBoard->getChessboard(),hisBoard->getPiecesB()); // a SURTOUT PAS RMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-//            //        for(pairCoord pieceCoord : test)
-//            //        {
-//            //            qDebug() << pieceCoord;
-//            //        }
-
-//            if(this->hisBoard->getSignal()) //Si l'echiquier a deja une case de select
-//            {
-//                if(this->Clicked == false) //Si cette case n'est pas deja cliqué
-//                {
-
-//                    this->hisBoard->getBoardClear(); //DUPLICATA
-
-//                    this->hisBoard->setCoordClicked(this->hisPiece->getCoord()); //met les coords de la piece en selection
-
-//                    this->hisBoard->setGraphicalLegalMoves(thisLegalMoves); //DUPLICATA
-
-
-//                    this->Clicked = true;
-//                    this->button->setStyleSheet(
-//                                "background:red;"
-//                                "border:1px solid black;"
-//                                );
-//                }
-//                else //Si c'est déjà cliqué
-//                {
-//                    this->hisBoard->getBoardClear(); //DUPLICATA
-
-//                    this->hisBoard->setCoordClicked(pairCoord()); //enleve les coords
-
-//                    //                this->hisBoard->setGraphicalLegalMoves(this->hisPiece->legalMoves(hisBoard->getChessboard()));   //DUPLICATA
-
-//                    this->hisBoard->switchClickedSignal(); //deselect
-//                    this->Clicked = false; //fait la bascule de deselection
-//                    this->button->setStyleSheet(
-//                                "background:white;"
-//                                "border:1px solid black;"
-//                                );
-//                }
-//                this->button->show(); //refresh l'ihm
-//            }
-//            else //cas ou y'a rien de select
-//            {
-//                this->hisBoard->getBoardClear(); //DUPLICATA
-
-//                this->hisBoard->setCoordClicked(this->hisPiece->getCoord()); //met les coords de la piece en selection
-
-//                this->hisBoard->setGraphicalLegalMoves(thisLegalMoves); //DUPLICATA
-
-
-//                this->hisBoard->switchClickedSignal(); //passe a select
-//                this->Clicked = true;
-//                this->button->setStyleSheet(
-//                            "background:red;"
-//                            "border:1px solid black;"
-//                            );
-//            }
-//            //            std::cout << "Signal de l'echiquier : ";
-//            //            qDebug() << this->hisBoard->getSignal();
-
-
-////            qDebug() << this->hisBoard->getCoordClicked();
-//        }
-
-//    }
-//    else //clique d'une piece qui correspond aux legalMoves
-//    {
-//        pairCoord coordOfTheClickedPiece = this->hisPiece->getCoord(); //Recupere les coords de la case cliqué
-//        this->hisBoard->move(coordOfTheClickedPiece,hisBoard->getCoordClicked()); //Coord de la case select et move a la case clique d'une case legalMoves
-
-//        Matrix newBoardToLoad = this->hisBoard->getChessboard(); //DEBUG ONLY
-
-//        QDebug deb = qDebug().nospace();//DEBUG ONLY
-
-//        deb << " 0 1 2 3 4 5 6 7"<< endl;//DEBUG ONLY
-//        for (unsigned i(0); i < 8; ++i)//DEBUG ONLY
-//        {
-//            for (unsigned j(0); j < 8; ++j)
-//            {//DEBUG ONLY
-//                if ( j == 0)
-//                    deb  << '|';
-//                deb  << newBoardToLoad[i][j]->getCarac() << '|';//DEBUG ONLY
-//                if ( j == 7)
-//                    deb << i;
-//            }//DEBUG ONLY
-//            deb << endl;
-//            //fin bcl
-//        }
-
-////            qDebug() << this->hisBoard->getCoordClicked();
-////            qDebug() << this->hisBoard->getSignal();
-
-////            qDebug() << "c'est une case legal moves";
-
-//            this->hisBoard->show(this->where);
-//        }
-
-//    }
-
-#include "IA/minmax.hpp" //PROBLEME CYCLIQUE
+#include "IA/minmax.hpp"
 #include <QMessageBox>
 #include "GraphicalObject/MessageBox.h"
 
@@ -269,22 +135,14 @@ void GfxObject::Select()
 
                 } else {
                     thisLegalMoves = this->hisPiece->legalMoves(hisBoard->getChessboard());
-
-//                    unsigned cpt = 0;
-//                    for(pairCoord pieceCoord : thisLegalMoves)
-//                    {
-//                        cpt++;
-//                        if(hisBoard->getHisGraphicalVector()[pieceCoord.first][pieceCoord.second]->hisPiece->getColor() == 1);
-//                        qDebug() << pieceCoord;
-//                    }
                 }
                 if(this->hisBoard->getSignal())   //UNE CASE DEJA CLIQUE                                                                                                                       //Si l'echiquier a deja une case de select
                 {
                     if(this->Clicked == false)                                                                                                                          //Si cette case n'est pas deja cliqué
                     {
-                        this->hisBoard->getBoardClear(); //DUPLICATA
+                        this->hisBoard->getBoardClear();
                         this->hisBoard->setCoordClicked(this->hisPiece->getCoord()); //met les coords de la piece en selection
-                        this->hisBoard->setGraphicalLegalMoves(thisLegalMoves); //DUPLICATA
+                        this->hisBoard->setGraphicalLegalMoves(thisLegalMoves);
                         this->Clicked = true;
                         this->button->setStyleSheet(
                                     "background:red;"
@@ -294,11 +152,12 @@ void GfxObject::Select()
                     else                                                                                                                                                 //Si c'est déjà cliqué
                     {
                         this->hisBoard->getBoardClear();
-                        this->hisBoard->setCoordClicked(pairCoord(9,9)); //Prob
+                        this->hisBoard->setCoordClicked(pairCoord(9,9));
                         this->hisBoard->switchClickedSignal(); //deselect
                         this->Clicked = false; //fait la bascule de deselection
                         this->button->setStyleSheet(
-                                    "background:white;"
+                                    "background-color: rgba(241, 217, 181, 1);"
+//                                    "background:white;"
                                     "border:1px solid black;"
                                     );
                     }
@@ -306,9 +165,9 @@ void GfxObject::Select()
                 }
                 else //AUCUNE CASE CLIQUE AVANT                                                                                                                                                    //cas ou y'a rien de select
                 {
-                    this->hisBoard->getBoardClear(); //DUPLICATA
+                    this->hisBoard->getBoardClear();
                     this->hisBoard->setCoordClicked(this->hisPiece->getCoord()); //met les coords de la piece en selection
-                    this->hisBoard->setGraphicalLegalMoves(thisLegalMoves); //DUPLICATA
+                    this->hisBoard->setGraphicalLegalMoves(thisLegalMoves);
                     this->hisBoard->switchClickedSignal(); //passe a select
                     this->Clicked = true;
                     this->button->setStyleSheet(
@@ -318,14 +177,13 @@ void GfxObject::Select()
                 }
             }
         }
-        else if(this->hisBoard->getCoordClicked() != pairCoord(9,9))/*if(this->hisBoard->getCoordClicked() != NULL) */ //clique d'une piece qui correspond aux legalMoves
+        else if(this->hisBoard->getCoordClicked() != pairCoord(9,9)) //clique d'une piece qui correspond aux legalMoves
         {
                 std::string checkStatusOfTheGame = play(*this->hisBoard,true,hisBoard->getCoordClicked().first,hisBoard->getCoordClicked().second,this->hisPiece->getCoord().first,this->hisPiece->getCoord().second);
                 if(checkStatusOfTheGame == "OK")
                 {
                     play(*this->hisBoard,false,0,0,0,0);
                     pairCoord coordOfTheClickedPiece = this->hisPiece->getCoord(); //Recupere les coords de la case cliqué
-                    //            this->hisBoard->move(coordOfTheClickedPiece,hisBoard->getCoordClicked()); //Coord de la case select et move a la case clique d'une case legalMoves
                     qDebug() << endl;
                     qDebug() << "La piece qui va essayer de bouger :";
                     qDebug() << hisBoard->getCoordClicked();
@@ -337,17 +195,10 @@ void GfxObject::Select()
                 {
                     this->hisBoard->getBoardClear();
                     MessageBox("Problème de déplacement",checkStatusOfTheGame.erase(0,5));
-//                    QMessageBox test(this->where);
-//                    std::string str = checkStatusOfTheGame.erase(0,5);
-//                    QString qstr = QString::fromStdString(str);
-//                    test.setText(qstr);
-//                    test.setWindowTitle("Problème de déplacement");
-//                    test.exec();
                 }
                 else if(checkStatusOfTheGame.find("ENDGAME") == 0)
                 {
                     this->hisBoard->setEndSignal(true);
-//                    QMessageBox test(this->where);
                     std::string colorOfthePlayer = "";
                     if(checkStatusOfTheGame.erase(0,7) == "white")
                     {
@@ -358,21 +209,8 @@ void GfxObject::Select()
                         colorOfthePlayer = "noir";
                     }
                     std::string str = "Le joueur " + colorOfthePlayer + " à gagné";
-//                    QString qstr = QString::fromStdString(str);
                     MessageBox("Fin de partie",str);
-//                    test.setText(qstr);
-//                    test.setWindowTitle("Fin de partie");
-//                    test.exec();
                     this->hisMainWindow->addNewGameButton();
-
-//                    Matrix newBoardToLoad = this->hisBoard->getChessboard(); //DEBUG ONLY
-//                    for (unsigned i(0); i < 8; ++i)//DEBUG ONLY
-//                    {
-//                        for (unsigned j(0); j < 8; ++j)
-//                        {
-
-//                        }
-//                    }
                 }
                 Matrix newBoardToLoad = this->hisBoard->getChessboard(); //DEBUG ONLY
                 QDebug deb = qDebug().nospace();//DEBUG ONLY

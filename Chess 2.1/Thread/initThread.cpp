@@ -6,12 +6,8 @@ void initThread::run()
 {
     unsigned int seconds = 00;
     unsigned int minutes = 00;
-    //        std::mutex mtx;
-    //            mtx.lock();
     while(true)
     {
-//        qDebug() << this->hisBoard->getEndSignal();
-//        qDebug() << &this->hisBoard;
         this->hisBoard = hisChrono->getHisBoard();
         usleep(100);
         while(!this->hisBoard->getEndSignal())
@@ -21,7 +17,6 @@ void initThread::run()
                 seconds = 00;
                 minutes = 00;
                 this->hisChrono->setInterpretationSignal(false);
-    //            this->hisBoard->setEndSignal(false);
             }
             sleep(1);
             seconds += 1;
@@ -61,9 +56,4 @@ void initThread::run()
         }
     }
 }
-
-//void initThread::onSignalReceiveFromMainWindow()
-//{
-//    this->InterpretationSignal = true;
-//}
 

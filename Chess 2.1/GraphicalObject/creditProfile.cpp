@@ -24,9 +24,7 @@ creditProfile::creditProfile(int x,int y,QWidget * window,QString url,QString Na
     label->setStyleSheet(
                 "font-size:18px;"
                 "color:white;"
-//                "border: 1px solid black;"
-//                "text-align: center;"
-                  "background-color: brown;"
+                "background-color: brown;"
                 );
 
     label->setMinimumSize(TEXTSIZE);
@@ -35,7 +33,4 @@ creditProfile::creditProfile(int x,int y,QWidget * window,QString url,QString Na
     label->setAlignment(Qt::AlignCenter);
 
     label->move(x,y+150);
-
-    //    m_ImageLabel->show();
-    //    label->show();
 }

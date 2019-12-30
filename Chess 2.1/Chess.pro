@@ -94,7 +94,6 @@ HEADERS += \
     GraphicalObject/gameMessageBox.h \
     GraphicalObject/mainwindow.h \
     GraphicalObject/windowCommandsButton.h \
-    IA/minmax.h \
     IA/minmax.hpp \
     Pieces/Bishop.h \
     Pieces/Empty.h \

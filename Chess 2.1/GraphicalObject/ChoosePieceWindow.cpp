@@ -16,18 +16,12 @@ ChoosePieceWindow::ChoosePieceWindow(QWidget *parent, ChessBoard * hisChessBoard
     ui(new Ui::ChoosePieceWindow),
     currentGraphicalObject(GraphicalObject)
 {
-//    this->setCoordMove(*coordMoveDD);
-//    this->setCoordPiece(*coordPieceDD);
-//    this->coordMove = coordMoveDD;
-
     ui->setupUi(this);
-
     this->setStyleSheet(
                 "background-color:brown;"
                 "color:white;"
                 "font-size:16px;"
                 );
-
     QLabel * text = new QLabel(this);
 
     QPushButton * firstChoice = new QPushButton(this);
@@ -51,11 +45,7 @@ ChoosePieceWindow::ChoosePieceWindow(QWidget *parent, ChessBoard * hisChessBoard
     QIcon ButtonIcon(hisPic);
     firstChoice->setIcon(ButtonIcon);
     firstChoice->setIconSize(QSize(60,60));
-
-//    QString * pieceOne = new QString("Rook");
     connect(firstChoice,SIGNAL(clicked()),this,SLOT(emitRook()));
-
-
 
     secondChoice->move(110,50);
     secondChoice->setMinimumSize(*sizeBtnChoosed);
@@ -64,9 +54,7 @@ ChoosePieceWindow::ChoosePieceWindow(QWidget *parent, ChessBoard * hisChessBoard
     QIcon ButtonIcon2(hisPic2);
     secondChoice->setIcon(ButtonIcon2);
     secondChoice->setIconSize(QSize(60,60));
-
     connect(secondChoice,SIGNAL(clicked()),this,SLOT(emitKnight()));
-
 
     thirdChoice->move(20,140);
     thirdChoice->setMinimumSize(*sizeBtnChoosed);
@@ -75,11 +63,7 @@ ChoosePieceWindow::ChoosePieceWindow(QWidget *parent, ChessBoard * hisChessBoard
     QIcon ButtonIcon3(hisPic3);
     thirdChoice->setIcon(ButtonIcon3);
     thirdChoice->setIconSize(QSize(60,60));
-
     connect(thirdChoice,SIGNAL(clicked()),this,SLOT(emitBishop()));
-
-
-
 
     fourthChoice->move(110,140);
     fourthChoice->setMinimumSize(*sizeBtnChoosed);
@@ -88,60 +72,9 @@ ChoosePieceWindow::ChoosePieceWindow(QWidget *parent, ChessBoard * hisChessBoard
     QIcon ButtonIcon4(hisPic4);
     fourthChoice->setIcon(ButtonIcon4);
     fourthChoice->setIconSize(QSize(60,60));
-
     connect(fourthChoice,SIGNAL(clicked()),this,SLOT(emitQueen()));
 
-
     this->show();
-
-
-//    Color color;
-//    this->hisBoard->getChessboard()[coordMove.first][coordMove.second]->getColor() == white ? color = white : color = black;
-//    //        string pieceChosen;
-
-
-
-
-//    //        qDebug() << this->getChoosedPiece();
-
-//    Matrix myChessBoard = this->hisBoard->getChessboard();
-
-//    const VPieces myPiecesW = this->hisBoard->getPiecesW();
-
-////        while(true)
-////        {
-//                QString ChoiceOfUser = this->hisBoard->getChoosedPiece();
-//                if("Queen" == ChoiceOfUser)
-//                {
-//                    myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Queen(color,pairCoord(coordMove.first,coordMove.second)));
-//                }
-//                else if("Rook" == ChoiceOfUser)
-//                {
-//                    myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Rook(color,pairCoord(coordMove.first,coordMove.second)));
-//                }
-//                else if("Knight" == ChoiceOfUser)
-//                {
-//                    myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Knight(color,pairCoord(coordMove.first,coordMove.second)));
-//                }
-//                else if("Bishop" == ChoiceOfUser)
-//                {
-//                    myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Bishop(color,pairCoord(coordMove.first,coordMove.second)));
-//                }
-
-//    unsigned cpt = 0;
-//    if(color == white)
-//    {
-//        while(coordMove != myPiecesW[cpt]->getCoord()) {++cpt;}
-//        myPiecesW[cpt] = myChessBoard[coordMove.first][coordMove.second];
-//    }
-//    else
-//    {
-//        while(coordMove != myPiecesB[cpt]->getCoord()) {++cpt;}
-//        myPiecesB[cpt] = myChessBoard[coordMove.first][coordMove.second];
-//    }
-
-
-
 }
 
 ChoosePieceWindow::~ChoosePieceWindow()
@@ -151,7 +84,6 @@ ChoosePieceWindow::~ChoosePieceWindow()
 
 void ChoosePieceWindow::emitKnight()
 {
-//    qDebug() << "Knight";
 
     hisBoard->setChoosedPiece("Knight");
     hisBoard->setSwitchMove(true);
@@ -161,49 +93,27 @@ void ChoosePieceWindow::emitKnight()
 
     hisBoard->setSwitchMove(false);
 
-//    this->hisBoard->move(coordPiece,coordPiece);
-
-    Matrix newBoardToLoad = this->hisBoard->getChessboard(); //DEBUG ONLY
-    QDebug deb = qDebug().nospace();//DEBUG ONLY
-    deb << " 0 1 2 3 4 5 6 7"<< endl;//DEBUG ONLY
-    for (unsigned i(0); i < 8; ++i)//DEBUG ONLY
+    Matrix newBoardToLoad = this->hisBoard->getChessboard();
+    QDebug deb = qDebug().nospace();
+    deb << " 0 1 2 3 4 5 6 7"<< endl;
+    for (unsigned i(0); i < 8; ++i)
     {
         for (unsigned j(0); j < 8; ++j)
-        {//DEBUG ONLY
+        {
             if ( j == 0)
                 deb  << '|';
-            deb  << newBoardToLoad[i][j]->getCarac() << '|';//DEBUG ONLY
+            deb  << newBoardToLoad[i][j]->getCarac() << '|';
             if ( j == 7)
                 deb << i;
-        }//DEBUG ONLY
+        }
         deb << endl;
-        //fin bcl
     }
 
     this->close();
-
-//    hisBoard->setChoosedPiece("Knight");
-
-//    hisBoard->setSwitchMove(true);
-//    qDebug() << this->coordMove;
-//    qDebug() << this->coordPiece;
-//    hisBoard->setSwitchMove(false);
-
-//    qDebug() << hisBoard->getChoosedPiece();
-
-//    this->hide();
-
-//        this->close();
-
-//    exit(1);
 }
 
 void ChoosePieceWindow::emitBishop()
 {
-//    qDebug() << "Bishop";
-//    hisBoard->setChoosedPiece("Bishop");
-//    qDebug() << hisBoard->getChoosedPiece();
-
     hisBoard->setChoosedPiece("Bishop");
     hisBoard->setSwitchMove(true);
     qDebug() << this->coordMove;
@@ -214,24 +124,10 @@ void ChoosePieceWindow::emitBishop()
     hisBoard->getBoardClear();
 
     this->close();
-
-
-//    hisBoard->setSwitchMove(true);
-//    qDebug() << this->coordMove;
-//    qDebug() << this->coordPiece;
-//    hisBoard->move(this->coordMove,this->coordPiece);
-//    hisBoard->setSwitchMove(false);
-
-
-//    this->close();
-    //    this->close();
-
-//    exit(1);
 }
 
 void ChoosePieceWindow::emitQueen()
 {
-//    qDebug() << "Queen";
     hisBoard->setChoosedPiece("Queen");
     hisBoard->setSwitchMove(true);
     qDebug() << this->coordMove;
@@ -242,18 +138,10 @@ void ChoosePieceWindow::emitQueen()
     hisBoard->getBoardClear();
 
     this->close();
-
-    //    hisBoard->move(this->coordMove,this->coordPiece);
-//    qDebug() << hisBoard->getChoosedPiece();
 }
 
 void ChoosePieceWindow::emitRook()
 {
-//    qDebug() << "Rook";
-//    hisBoard->setChoosedPiece("Rook");
-//    qDebug() << hisBoard->getChoosedPiece();
-
-//    this->close();
     hisBoard->setChoosedPiece("Rook");
     hisBoard->setSwitchMove(true);
     qDebug() << this->coordMove;
@@ -264,33 +152,4 @@ void ChoosePieceWindow::emitRook()
     hisBoard->getBoardClear();
 
     this->close();
-
 }
-
-//const pairCoord *ChoosePieceWindow::getCoordPiece() const
-//{
-//    return coordPiece;
-//}
-
-//void ChoosePieceWindow::setCoordPiece(const pairCoord *value)
-//{
-//    coordPiece = value;
-//}
-
-//const pairCoord *ChoosePieceWindow::getCoordMove() const
-//{
-//    return coordMove;
-//}
-
-//void ChoosePieceWindow::setCoordMove(const pairCoord *value)
-//{
-//    coordMove = value;
-//}
-
-//void ChoosePieceWindow::emitPiece(QString *pieceSelected)
-//{
-//    qDebug() << pieceSelected;
-
-////    hisBoard->setChoosedPiece(pieceSelected);
-////    this->close();
-//}

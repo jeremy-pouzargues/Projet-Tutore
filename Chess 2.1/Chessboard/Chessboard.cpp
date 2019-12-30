@@ -9,8 +9,6 @@
 #include "Pieces/Queen.h"
 #include "Pieces/King.h"
 
-
-
 #include "GraphicalObject/ChoosePieceWindow.h"
 #include <GraphicalObject/GfxObject.h>
 
@@ -34,7 +32,6 @@ QString ChessBoard::getChoosedPiece() const
 void ChessBoard::setChoosedPiece(QString value)
 {
     this->choosedPiece = value;
-    //    qDebug() << choosedPiece;
 }
 
 bool ChessBoard::getSwitchMove() const
@@ -53,40 +50,80 @@ void ChessBoard::refreshGraphicalVector()
     {
         for(int j=0 ; j<8;++j)
         {
-            hisGraphicalVector[j][i] = nullptr; // ERREUR ICI #######################################################################################################
+            hisGraphicalVector[j][i] = nullptr;
         }
     }
-} //Useless
+}
 
 void ChessBoard::display(QWidget * currentPage,MainWindow * hisMainWindow)
 {
+    bool color(true);
+    //    bool theColor(true);
     hisGraphicalVector.resize(8,vector<GfxObject *>(8));
     for(int i=0 ; i<8 ; ++i)
     {
+        if(!color)
+        {
+            color =true;
+        }
+        else
+        {
+            color =false;
+        }
         for(int j=0 ; j<8;++j)
         {
             std::string str;
             str.push_back(this->myChessBoard[j][i]->getCarac());
             QString qstr = QString::fromStdString(str);
 
-            GfxObject *Current = new GfxObject(currentPage,60+i*60,110+j*60,this->myChessBoard[j][i],qstr,this,hisMainWindow);
-
-            //                std::vector<std::vector< GfxObject * >> ChessBoard::hisGraphicalVecto = 0;
-
-            //                hisGraphicalVector.push_back(Current);
+            qDebug() << (j+1)*(i+1);
 
 
-            hisGraphicalVector[j][i] = Current; // ERREUR ICI #######################################################################################################
-            //            qDebug() << hisGraphicalVector.size();
-            //            qDebug() << hisGraphicalVector.at(0).size();
-            //            qDebug() << hisGraphicalVector.at(1).size();
+//            if(i+j*i%2 == 0)
+//            if(j+(i)%2 == 0)
+            if(!color)
+            {
+                color =true;
+            }
+            else
+            {
+                color =false;
+            }
+//            if(j%2 == 0)
+//            {
+//                if((j+1)*(i+1)%2 == 0)
+//                {
+//                    color =true;
+//                }
+//                else
+//                {
+//                    color =false;
+//                }
+//            }
+//            else
+//            {
+//                if((j+1)*(i+1)%2 == 1)
+//                {
+//                    color =true;
+//                }
+//                else
+//                {
+//                    color =false;
+//                }
+//            }
 
 
-            //                hisGraphicalVector.push_back(new GfxObject(currentPage,60+i*60,110+j*60,this->myChessBoard[j][i],qstr,this));
+            //            if((j+1)*(i+1)%2 == 0)
+            //            {
+            //                color =true;
+            //            }
+            //            else
+            //            {
+            //                color =false;
+            //            }
 
-
-            //        QPushButton *btnPage2 = new QPushButton(page2);
-            //        btnPage2->move(200,i*50);
+            GfxObject *Current = new GfxObject(currentPage,60+i*60,110+j*60,this->myChessBoard[j][i],qstr,this,hisMainWindow,color);
+            hisGraphicalVector[j][i] = Current;
         }
     }
 }//display()
@@ -111,18 +148,42 @@ bool const & ChessBoard::getSignal()
 
 void ChessBoard::getBoardClear()
 {
+    bool color(true);
+
+
     this->setCoordClicked(pairCoord(0,0)); //rm la case select
-
-//    this->setSwitchMove(false);
-
     for (unsigned i(0);i<hisGraphicalVector.size();++i) {
+
+        if(!color)
+        {
+            color =true;
+        }
+        else
+        {
+            color =false;
+        }
+
         for (unsigned j(0);j<hisGraphicalVector.size();++j) {
-            hisGraphicalVector[j][i]->getButton()->setStyleSheet(
-                        "background:white;"
-                        "border:1px solid black;"
-                        );
+            if(!color)
+            {
+                color =true;
+                hisGraphicalVector[j][i]->getButton()->setStyleSheet(
+                            "background-color: rgba(241, 217, 181, 1);"
+                            "border:1px solid black;"
+                            );
+            }
+            else
+            {
+                color =false;
+                hisGraphicalVector[j][i]->getButton()->setStyleSheet(
+                                "background-color: rgba(181, 136, 99, 1);"
+                                "border:1px solid black;"
+                                );
+            }
+
+
             hisGraphicalVector[j][i]->setClicked(false);
-            hisGraphicalVector[j][i]->setLegalMoves(false); //zqdzdzqdzqzddzdzdqzqdzzdqz
+            hisGraphicalVector[j][i]->setLegalMoves(false);
         }
     }
 
@@ -130,28 +191,6 @@ void ChessBoard::getBoardClear()
 
 void ChessBoard::setGraphicalLegalMoves(std::vector<pairCoord> legalMoves)
 {
-//    for (unsigned i(0);i<hisGraphicalVector.size();++i) {
-//        for (unsigned j(0);j<hisGraphicalVector.size();++j) {
-//            //            for (unsigned k(0);k<legalMoves.size();++k) {
-//            //                pairCoord toStore = hisGraphicalVector[j][i]->getHisPiece()->getCoord();
-//            for(pairCoord pieceCoord : legalMoves)
-//            {
-//                if(hisGraphicalVector[j][i]->getHisPiece()->getCoord() == pieceCoord)
-//                {
-//                    hisGraphicalVector[j][i]->getButton()->setStyleSheet(
-//                                "background:blue;"
-//                                "border:1px solid black;"
-//                                );
-//                    //                        connect(hisGraphicalVector[j][i]->getButton(),SIGNAL(clicked()),hisGraphicalVector[j][i]->getButton(),SLOT(clickedLegalMoves));
-
-//                    hisGraphicalVector[j][i]->setLegalMoves(true);
-//                }
-//            }
-//            //                pairCoord toCheck = legalMoves[k];
-//            //            }
-//        }
-//    }
-
     for(pairCoord pieceCoord : legalMoves)
     {
         switch(hisGraphicalVector[pieceCoord.first][pieceCoord.second]->getHisPiece()->getColor()) //SI QQUN FAIT CA EN ENTREPRISE IL SE FAIT VIRER CASH
@@ -160,8 +199,8 @@ void ChessBoard::setGraphicalLegalMoves(std::vector<pairCoord> legalMoves)
             break;
         default:
             hisGraphicalVector[pieceCoord.first][pieceCoord.second]->getButton()->setStyleSheet(
-                                                        "background:blue;"
-                                                        "border:1px solid black;"
+                        "background:blue;"
+                        "border:1px solid black;"
                         );
             hisGraphicalVector[pieceCoord.first][pieceCoord.second]->setLegalMoves(true);
             break;
@@ -179,13 +218,7 @@ void ChessBoard::setEndSignal(bool value)
     EndSignal = value;
 }
 
-//std::vector<std::vector<GfxObject *> > ChessBoard::getHisGraphicalVector()
-//{
-//    return hisGraphicalVector;
-//}
-
-ChessBoard::ChessBoard() : switchMove(false) { //FRAN PR LE SWITCHMOVE
-
+ChessBoard::ChessBoard() : switchMove(false) {
     myChessBoard.resize(8,vector<shared_ptr<Piece>>(8));
     myPiecesW.resize(0);
     myPiecesB.resize(0);
@@ -258,8 +291,6 @@ ChessBoard::ChessBoard() : switchMove(false) { //FRAN PR LE SWITCHMOVE
     myChessBoard[0][3] = shared_ptr<Piece>(new Queen(black,pairCoord(0,3)));
     myPiecesB.push_back(myChessBoard[0][3]);
 
-
-
 }//ChessBoard ()
 
 void ChessBoard::show() const
@@ -291,127 +322,6 @@ void ChessBoard::swap(const pairCoord &coordMove, const pairCoord &coordPiece)
     this->myChessBoard[coordPiece.first][coordPiece.second]->setCoord(coordPiece);
 }
 
-//void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
-//{
-//    if(this->switchMove == true)
-//    {
-//        Color color;
-
-//        this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white ? color = white : color = black;
-
-//        QString ChoiceOfUser = this->getChoosedPiece();
-//        if("Queen" == ChoiceOfUser)
-//        {
-//            myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Queen(color,pairCoord(coordMove.first,coordMove.second)));
-//        }
-//        else if("Rook" == ChoiceOfUser)
-//        {
-//            myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Rook(color,pairCoord(coordMove.first,coordMove.second)));
-//        }
-//        else if("Knight" == ChoiceOfUser)
-//        {
-//            myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Knight(color,pairCoord(coordMove.first,coordMove.second)));
-//        }
-//        else if("Bishop" == ChoiceOfUser)
-//        {
-//            myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Bishop(color,pairCoord(coordMove.first,coordMove.second)));
-//        }
-
-//        hisGraphicalVector[coordMove.first][coordMove.second]->setHisPiece(myChessBoard[coordMove.first][coordMove.second]);
-//        hisGraphicalVector[coordMove.first][coordMove.second]->refreshGraphical();
-
-
-
-//        unsigned cpt = 0;
-//        if(color == white)
-//        {
-//            while(coordMove != myPiecesW[cpt]->getCoord()) {++cpt;}
-//            myPiecesW[cpt] = myChessBoard[coordMove.first][coordMove.second];
-//        }
-//        else
-//        {
-//            while(coordMove != myPiecesB[cpt]->getCoord()) {++cpt;}
-//            myPiecesB[cpt] = myChessBoard[coordMove.first][coordMove.second];
-//        }
-//        if(getChessboard()[coordMove.first][coordMove.second]->getName() == "King" || getChessboard()[coordMove.first][coordMove.second]->getName() == "Rook")
-//        {
-//            getChessboard()[coordMove.first][coordMove.second]->turnOffCastling();
-//        }
-//    } else {
-//        if(getChessboard()[coordPiece.first][coordPiece.second]->getCanCastling() &&
-//                getChessboard()[coordPiece.first][coordPiece.second]->getName() == "King" &&
-//                abs(int(coordMove.second) - int(coordPiece.second)) > 1)
-//        {
-//            if(coordMove.second == 1)
-//            {
-//                swap(pairCoord(coordPiece.first,2),pairCoord(coordPiece.first,0));
-//                swap(pairCoord(coordPiece.first,1), coordPiece);
-//            }
-//            else
-//            {
-//                swap(pairCoord(coordPiece.first,5), pairCoord(coordPiece.first,7));
-//                swap(pairCoord(coordPiece.first,6), coordPiece);
-//            }
-//        }
-//        //Si la case est vide
-//        else if(this->myChessBoard[coordMove.first][coordMove.second]->getName() == "Empty")
-//        {
-//            swap(coordMove,coordPiece);
-//        }
-//        else //Si on "mange" une pièce adverse
-//        {
-//            //on l'enleve du vecteur de piece de sa couleur
-//            unsigned cpt = 0;
-//            if(this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white)
-//            {
-//                while(coordMove != myPiecesW[cpt]->getCoord()) {++cpt;}
-//                myPiecesW.erase(myPiecesW.begin()+cpt);
-//            }
-//            else
-//            {
-//                while(coordMove != myPiecesB[cpt]->getCoord()) {++cpt;}
-//                myPiecesB.erase(myPiecesB.begin()+cpt);
-//            }
-
-//            //On la place dans la liste des pièces mortes
-//            if(myChessBoard[coordMove.first][coordMove.second]->getColor() == white)
-//            {
-//                this->myDeadPiecesW.push_back(myChessBoard[coordMove.first][coordMove.second]);
-//            }
-//            else
-//            {
-//                this->myDeadPiecesB.push_back(myChessBoard[coordMove.first][coordMove.second]);
-//            }
-
-//            //On remplace la piece mangé par la pièce bougé
-//            this->myChessBoard[coordMove.first][coordMove.second] = this->myChessBoard[coordPiece.first][coordPiece.second];
-//            //On actualise ses coordonées
-//            this->myChessBoard[coordMove.first][coordMove.second]->setCoord(coordMove);
-//            //On créer un objet vide à son ancienne
-//            this->myChessBoard[coordPiece.first][coordPiece.second] = shared_ptr<Piece>(new Empty(coordPiece));
-
-
-//        }
-
-
-//        //        qDebug() << "Test";
-//        //Un pion noir ne pourra jamais être à la ligne 0 et un pion blanc jamais à la ligne 7
-//        if(this->getChessboard()[coordMove.first][coordMove.second]->getName() == "Pawn" &&
-//                (this->getChessboard()[coordMove.first][coordMove.second]->getCoord().first == 0 ||
-//                 this->getChessboard()[coordMove.first][coordMove.second]->getCoord().first == 7))
-//        {
-//            qDebug() << "Coord du move avant le constructeur";
-//            qDebug() << coordMove;
-//            qDebug() << "Coord de la piece avant le constructeur";
-//            qDebug() << coordPiece;
-//            new ChoosePieceWindow(nullptr,this,coordMove,coordPiece,nullptr);
-//        }
-
-//        if(switchMove == true){qDebug() << "FINMOVE";}
-
-//    }
-//}//move()
-
 void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
 {
     if(getChessboard()[coordPiece.first][coordPiece.second]->getCanCastling() &&
@@ -434,11 +344,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
     {
         swap(coordMove,coordPiece);
     }
-    //    else if (this->myChessBoard[coordPiece.first][coordPiece.second]->getColor() != empty &&
-    //             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != empty &&
-    //             this->myChessBoard[coordMove.first][coordMove.second]->getColor() != this->myChessBoard[coordPiece.first][coordPiece.second]->getColor())//Si on "mange" une pièce adverse
     else
-
     {
         //on l'enleve du vecteur de piece de sa couleur
         unsigned cpt = 0;
@@ -469,10 +375,7 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
         this->myChessBoard[coordMove.first][coordMove.second]->setCoord(coordMove);
         //On créer un objet vide à son ancienne
         this->myChessBoard[coordPiece.first][coordPiece.second] = shared_ptr<Piece>(new Empty(coordPiece));
-
-
     }
-
 
     //Un pion noir ne pourra jamais être à la ligne 0 et un pion blanc jamais à la ligne 7
     if(this->getChessboard()[coordMove.first][coordMove.second]->getName() == "Pawn" &&

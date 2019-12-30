@@ -18,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setFixedSize(QSize(600,800));
-    //    setWindowFlags(Qt::Widget | Qt::MSWindowsFixedSizeDialogHint);
     const QPixmap returnPixMap (":/Ressources/Window/arrowWhite.png");
     const QIcon returnQIcon(returnPixMap);
 
@@ -27,29 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
     palette.setBrush(QPalette::Background, bkgnd);
     this->setPalette(palette);
 
-    //    this->setStyleSheet("{background-image: url(:/QtRessources/Pieces/background.png;}");
-
     QIcon iconMainWindow (":/Ressources/Pieces/PawnBlack.png"); //useless avec la frame disparu
     this->setWindowIcon(iconMainWindow); //useless avec la frame disparu
 
     this->setWindowTitle("Jeu d'echecs");
-
-
-    //    QPushButton *btnClose = new QPushButton(this);
-    //    btnClose->setText("X");
-    //    btnClose->move(570,0);
-    //    btnClose->setMaximumSize(BUTTONMENU_SIZE);
-
-
-    //    btnClose->setStyleSheet(
-    //                "border:none;"
-    //                "background:none;"
-    //                "color:white;"
-    //                "font-size:24px;"
-    //                );
-
-    //    connect(btnClose,SIGNAL(clicked()),this,SLOT(endWindow()));
-    //    btnClose->show();
 
     //===========================================//
 
@@ -67,7 +47,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     btnPage1->setStyleSheet(
                 "border: 0px;"
-                //                "background-color: rgba(255, 255, 255, 0);"
                 "font-size:32px;"
                 "color:white;"
                 );
@@ -78,7 +57,6 @@ MainWindow::MainWindow(QWidget *parent) :
     btn2Page1->setText("Aide");
     btn2Page1->move(230,200);
 
-    //    btn2Page1->move(250,500);
     btn2Page1->setMinimumSize(BUTTON_SIZE);
     btn2Page1->setMaximumSize(BUTTON_SIZE);
     btn2Page1->setStyleSheet(
@@ -93,7 +71,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QPushButton *btn3Page1 = new QPushButton(chessMenuWindow);
     btn3Page1->setText("Credit");
     btn3Page1->move(415,200);
-    //    btn3Page1->move(250,600);
     btn3Page1->setMinimumSize(BUTTON_SIZE);
     btn3Page1->setMaximumSize(BUTTON_SIZE);
     btn3Page1->setStyleSheet(
@@ -114,20 +91,6 @@ MainWindow::MainWindow(QWidget *parent) :
                 "font-size:72px;"
                 );
 
-    //    const QSize BUTTONMENU_SIZE = QSize(30,30);
-    //    QPushButton *btnClose = new QPushButton(chessMenuWindow);
-    //    btnClose->setText("X");
-    //    btnClose->move(570,0);
-    //    btnClose->setMaximumSize(BUTTONMENU_SIZE);
-    //    btnClose->setStyleSheet(
-    //                "border:none;"
-    //                "background:none;"
-    //                "color:white;"
-    //                "font-size:24px;"
-    //                );
-    //    connect(btnClose,SIGNAL(clicked()),this,SLOT(endWindow()));
-    //    btnClose->show();
-
     this->chessMenu = chessMenuWindow;
 
     //===========================================//
@@ -142,17 +105,7 @@ MainWindow::MainWindow(QWidget *parent) :
                 "border: 0px;"
                 "background-color: rgba(255, 255, 255, 0);"
                 );
-    //    returnBtn->setText("Retour");
     returnBtn->show();
-
-
-
-    //    QThread * coreTwo = new QThread();
-    //    Chrono * toAdd = new Chrono(chessGameWidget);
-    //    connect(coreTwo, SIGNAL(started()), toAdd, SLOT(start()));
-    //    toAdd->moveToThread(coreTwo);
-    //    coreTwo->start();
-
 
     this->chessGameWindow = chessGameWidget;
 
@@ -165,16 +118,7 @@ MainWindow::MainWindow(QWidget *parent) :
         Chrono * theChrono = new Chrono(chessGameWidget,MainGame); //ICI
         this->stopwatch = theChrono;
         connect(this, &MainWindow::sendSignalToChrono,theChrono, &Chrono::onSignalReceiveFromMainWindow);
-//        connect(this,sendSignalToChrono(),theChrono,SLOT(onSignalReceiveFromMainWindow()));
     }
-
-//    QPushButton * test = new QPushButton(chessGameWidget);
-//    test->setText("Nouvelle partie");
-//    test->move(200,600);
-//    test->setMinimumWidth(100);
-//    test->setMaximumWidth(100);
-//    test->setMinimumHeight(50);
-//    test->setMaximumHeight(50);
 
     MainGame->display(this->chessGameWindow,this);  ////////ICIIIIIIIIIIIIIIIIIIIIII
     //===========================================//
@@ -189,7 +133,6 @@ MainWindow::MainWindow(QWidget *parent) :
                 "border: 0px;"
                 "background-color: rgba(255, 255, 255, 0);"
                 );
-    //    returnBtnHelp->setText("Retour");
     returnBtnHelp->show();
 
     this->gameHelp = gameHelp;
@@ -213,9 +156,6 @@ MainWindow::MainWindow(QWidget *parent) :
     creditProfile(325,100,gameCredit,"https://github.com/jeremy-pouzargues","Jeremy Pouzargues",":/Ressources/Users/jerem.jpg");
     creditProfile(325,400,gameCredit,"https://github.com/laurent-vouriot","Laurent Vouriot",":/Ressources/Users/2lo.jpg");
     creditProfile(50,400,gameCredit,"https://github.com/FrancoisAlHaddad","François Al Haddad",":/Ressources/Users/fran.png");
-
-
-
 
     this->gameCredit = gameCredit;
 
@@ -245,7 +185,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(returnBtnHelp,SIGNAL(clicked()),this,SLOT(BackMenu()));
 
     this->setCentralWidget(this->widgetStacked);
-
 }
 
 
@@ -260,8 +199,6 @@ void MainWindow::GamePage()
         this->chronoAlreadyStart = true;
         this->stopwatch->startInNewThread();
     }
-    //    std::thread x (start());
-    //    _beginthread(this->stopwatch->start());
 }
 
 void MainWindow::HelpPage()
@@ -306,24 +243,12 @@ void MainWindow::closeEvent (QCloseEvent *event)
 {
     if(widgetStacked->currentIndex() == 1) //Si on est dans le widget de jeu
     {
-//        gameMessageBox test("Voulez-vous vraiment quitter ?");
-//        if(test.getChoice())
-//        {
-//            event->accept();
-//        }
-//        else
-//        {
-//            event->ignore();
-//        }
-
-
         QMessageBox messageBox(QMessageBox::Question,
                     tr("Attention"),
                     tr("Voulez-vous quitter ?"),
                     QMessageBox::Yes | QMessageBox::No,
                     this);
             messageBox.setButtonText(QMessageBox::Yes, tr("Oui"));
-//            messageBox->
             messageBox.setButtonText(QMessageBox::No, tr("Non"));
             messageBox.setWindowFlag(Qt::FramelessWindowHint);
         messageBox.exec();
@@ -331,36 +256,6 @@ void MainWindow::closeEvent (QCloseEvent *event)
         {
             event->ignore();
         }
-
-//        QMessageBox box = QMessageBox();
-////        box.setIcon(QtGui.QMessageBox.Question)
-//        box.setWindowTitle("test");
-//        box.setText("Voulez-vous quitter ?");
-//        box.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
-//        QPushbuttonY = box.button(QtGui.QMessageBox.Yes)
-//        buttonY.setText('Evet')
-//        buttonN = box.button(QtGui.QMessageBox.No)
-//        buttonN.setText('Iptal')
-//        box.exec_()
-
-//        if box.clickedButton() == buttonY:
-//            # YES pressed
-//        elif box.clickedButton() == buttonN:
-//            # NO pressed
-//        QMessageBox::StandardButton resBtn =
-//                QMessageBox::question( this, "APP_NAME",tr("You sure?\n"),
-//                                       QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
-//                                       QMessageBox::Yes);
-
-
-        //        if (resBtn != QMessageBox::Yes)
-//        {
-//            event->ignore();
-//        }
-//        else
-//        {
-//            event->accept();
-//        }
     }
 }
 
@@ -394,27 +289,8 @@ void MainWindow::NewGame()
     this->newGameBtn->hide();
     delete this->newGameBtn;
 
-//    this->stopwatch->set
-
-//    this->newGameBtn = nullptr;
-
-//    connect(this,sendSignalToChrono(),this->stopwatch->getHisThread(),this->stopwatch->getHisThread()->onSignalReceiveFromMainWindow());
-
-//    connect(this,sendSignalToChrono(),this->stopwatch->getHisThread(),onSignalReceiveFromMainWindow());
-
-//    Chrono * chrn = new Chrono(this->widgetStacked->currentWidget(),this->hisChessBoard);
-//    chrn->startInNewThread();
-
-//    delete this->stopwatch;
-
     emit sendSignalToChrono();
     qDebug("signal emit");
 
-    //    this->stopwatch = chrn;
-//    this->stopwatch->move(0,0);
-//    this->stopwatch->startInNewThread();
-//    this->stopwatch->show();
-
-//    this->stopwatch->startInNewThread();
 }
 

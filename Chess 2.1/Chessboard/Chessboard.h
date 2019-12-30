@@ -14,32 +14,31 @@
 #include <memory>
 #include "Pieces/Piece.h"
 
-#include <QWidget>                          //FRANFRAN
-#include "GraphicalObject/GfxObject.h"      //A RM SI CYCLIQUE AH1
-class GfxObject;                            //A RM SI CICLIQUE AH1
-class Piece;                                //A RM SI CICLIQUE AH2
+#include <QWidget>
+#include "GraphicalObject/GfxObject.h"
+class GfxObject;
+class Piece;
 
 typedef std::vector<std::vector<std::shared_ptr<Piece>>> Matrix;
 typedef std::vector<std::shared_ptr<Piece>> VPieces;
 
-class MainWindow;  // A RMMMMMMMMMMMMMMMMMMM
+class MainWindow;
 
 class ChessBoard {
 private:
-    Matrix myChessBoard; // matrice de toutes les cases/pieces
-    VPieces myPiecesW; //vecteur des pieces blanches
-    VPieces myPiecesB; //vecteur des pieces noires
+    Matrix myChessBoard;                                                        // matrice de toutes les cases/pieces
+    VPieces myPiecesW;                                                          //vecteur des pieces blanches
+    VPieces myPiecesB;                                                          //vecteur des pieces noires
     VPieces myDeadPiecesW;
     VPieces myDeadPiecesB;
 
-    QString * selectedPiece;                                                    //FRANFRAN //Piece selectionné au clique
-    QString   choosedPiece;                                                     //FRANFRAN //Piece choisi pour la transformation
-    inline static std::vector<std::vector< GfxObject * >> hisGraphicalVector;   //FRANFRAN
-    pairCoord                   CoordClicked; //Pair de l'object cliquer        //FRANFRAN
-    bool                        AnyoneClicked;                                  //FRANFRAN
+    QString * selectedPiece;                                                    //Piece selectionné au clique de l'utilisateur
+    QString   choosedPiece;                                                     //Piece choisi pour la transformation
+    inline static std::vector<std::vector< GfxObject * >> hisGraphicalVector;   //Vecteur d'object graphique
+    pairCoord                   CoordClicked;                                   //Paire de l'objet selectionné
+    bool                        AnyoneClicked;                                  //Si une case est cliqué
     bool                        switchMove;                                     //FRANFRAN
-
-    bool                        EndSignal;                                      //FRANFRAN
+    bool                        EndSignal;                                      //Signal de fin de partie
 
 public:
      ChessBoard();
@@ -85,7 +84,6 @@ public:
 
      bool isCheckMate (const bool & player);
 
-
      void display(QWidget * currentPage,MainWindow * hisMainWindow); //ANCIENNEMENT SHOW //FRANFRAN
 
      void switchClickedSignal();  //FRANFRAN
@@ -102,7 +100,6 @@ public:
      void setSwitchMove(bool value);  //FRANFRAN
 
      void refreshGraphicalVector();  //FRANFRAN
-
 
      bool getEndSignal() const; //FRANFRAN
      void setEndSignal(bool value); //FRANFRAN

@@ -5,7 +5,6 @@
 #include <limits.h>
 #include "Chessboard/Chessboard.h"
 
-
 int count(const std::vector<pairCoord> & vCoord, const pairCoord & coord)
 {
     int cpt = 0;
@@ -301,10 +300,8 @@ string play(ChessBoard & chessboard, bool player,int x,int y,unsigned u,unsigned
     {
         if (chessboard.isCheckMate(player))
         {
-//            qDebug() << "is Check Mate";
             endGame = true;
         }
-//        endGame = true; //DEBUG CHECK MAT ONLY
     }
     //============================  Choix de la pièce que l'on veut déplacer  ==============================
     if(player)
@@ -363,7 +360,6 @@ string play(ChessBoard & chessboard, bool player,int x,int y,unsigned u,unsigned
         }
         else
         {
-            //                    throw CException(BADMOVE,SBADMOVE);
             std::cout << SBADMOVE;
             return "ERROR" + SBADMOVE;
         }
@@ -387,7 +383,6 @@ string play(ChessBoard & chessboard, bool player,int x,int y,unsigned u,unsigned
             chessboard.setDeadPieceW(tmpVDeadPiecesW);
             chessboard.setChessboard(tmpChessboard);
             chessboard.getChessboard()[x][y]->setCoord(coordPiece);
-            //                    throw CException(CHECK,SCHECK);
             std::cout << SCHECK;
             return "ERROR" + SCHECK;
         }
@@ -397,7 +392,6 @@ string play(ChessBoard & chessboard, bool player,int x,int y,unsigned u,unsigned
         vector<pairCoord> test = finalMinmax(chessboard,2,true);
         chessboard.move(test[1],test[0]);
     }
-//    chessboard.getBoardClear();
     chessboard.refreshGraphicalVector();
 
     if(endGame)

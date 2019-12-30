@@ -13,8 +13,6 @@
 
 typedef std::pair<unsigned,unsigned> pairCoord;
 
-
-
 /*
  *  ERREURS
  */

@@ -10,23 +10,17 @@
 
 #include <Chessboard/Chessboard.h>
 
-//class initThread;
-
-//#include "Thread/initThread.h"
-
 class Chrono : public QWidget
 {
     Q_OBJECT
 public:
-    Chrono(QWidget * where,ChessBoard * hisBoard/*,/*MainWindow * hisMainWindow*/);
+    Chrono(QWidget * where,ChessBoard * hisBoard);
     QLabel *getStopwatch() const;
     void setStopwatch(QLabel *value);
     void startInNewThread();
     bool getStatus() const;
     void setStatus(bool value);
     void reset();
-//    initThread *getHisThread() const;
-//    void setHisThread(initThread *value);
 
     bool getInterpretationSignal() const;
     void setInterpretationSignal(bool value);
@@ -38,8 +32,6 @@ public:
 public slots:
     void onSignalReceive(QString timeToSend);
     void onSignalReceiveFromMainWindow();
-signals:
-//    void sendSignalToThread();
 private:
     bool InterpretationSignal;
 
@@ -48,8 +40,6 @@ private:
     int seconds;
     int minute;
     QLabel * stopwatch;
-//    QThread * hisThread;
-//    MainWindow * hisMainWindow;
 };
 
 #endif // CHRONO_H

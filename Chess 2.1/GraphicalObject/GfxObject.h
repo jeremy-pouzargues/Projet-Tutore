@@ -5,26 +5,16 @@
 #include <QDebug>
 
 #include <vector>
-//class Piece;
-//class ChessBoard;
-
-
-//#include "Const.h"
-
-
 
 typedef std::pair<unsigned,unsigned> pairCoord;
-
-//using namespace std;
 
 #include <vector>
 
 #include "Chessboard/Chessboard.h"
-//#include "Pieces/Piece.h"
 
-class ChessBoard; //A RM SI CICLIQUE AH1
+class ChessBoard;
 
-#include "GraphicalObject/mainwindow.h" //A RMMMMMMMMMMMMMMMMM
+#include "GraphicalObject/mainwindow.h"
 class Chrono;
 class MainWindow;
 
@@ -39,11 +29,10 @@ private:
     bool                        legalMoves;
 
     QWidget *                   where;
-    //    QPixmap*                    hisPicture;
-    MainWindow *                hisMainWindow; //ICIIIIIIIIIIIIIIIIIIIIIII
+    MainWindow *                hisMainWindow;
 
 public:
-    GfxObject(QWidget*where,int x,int y,std::shared_ptr<Piece> SaPiece,QString name,ChessBoard * sonBoard,MainWindow * hisMainWindow);
+    GfxObject(QWidget*where,int x,int y,std::shared_ptr<Piece> SaPiece,QString name,ChessBoard * sonBoard,MainWindow * hisMainWindow,bool color);
     QPushButton *getButton();
 
     bool getClicked() const;
