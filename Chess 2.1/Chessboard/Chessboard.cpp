@@ -75,12 +75,6 @@ void ChessBoard::display(QWidget * currentPage,MainWindow * hisMainWindow)
             std::string str;
             str.push_back(this->myChessBoard[j][i]->getCarac());
             QString qstr = QString::fromStdString(str);
-
-            qDebug() << (j+1)*(i+1);
-
-
-//            if(i+j*i%2 == 0)
-//            if(j+(i)%2 == 0)
             if(!color)
             {
                 color =true;
@@ -89,39 +83,6 @@ void ChessBoard::display(QWidget * currentPage,MainWindow * hisMainWindow)
             {
                 color =false;
             }
-//            if(j%2 == 0)
-//            {
-//                if((j+1)*(i+1)%2 == 0)
-//                {
-//                    color =true;
-//                }
-//                else
-//                {
-//                    color =false;
-//                }
-//            }
-//            else
-//            {
-//                if((j+1)*(i+1)%2 == 1)
-//                {
-//                    color =true;
-//                }
-//                else
-//                {
-//                    color =false;
-//                }
-//            }
-
-
-            //            if((j+1)*(i+1)%2 == 0)
-            //            {
-            //                color =true;
-            //            }
-            //            else
-            //            {
-            //                color =false;
-            //            }
-
             GfxObject *Current = new GfxObject(currentPage,60+i*60,110+j*60,this->myChessBoard[j][i],qstr,this,hisMainWindow,color);
             hisGraphicalVector[j][i] = Current;
         }
@@ -149,24 +110,20 @@ bool const & ChessBoard::getSignal()
 void ChessBoard::getBoardClear()
 {
     bool color(true);
-
-
     this->setCoordClicked(pairCoord(0,0)); //rm la case select
     for (unsigned i(0);i<hisGraphicalVector.size();++i) {
-
         if(!color)
         {
-            color =true;
+            color = true;
         }
         else
         {
-            color =false;
+            color = false;
         }
-
         for (unsigned j(0);j<hisGraphicalVector.size();++j) {
             if(!color)
             {
-                color =true;
+                color = true;
                 hisGraphicalVector[j][i]->getButton()->setStyleSheet(
                             "background-color: rgba(241, 217, 181, 1);"
                             "border:1px solid black;"
@@ -174,7 +131,7 @@ void ChessBoard::getBoardClear()
             }
             else
             {
-                color =false;
+                color = false;
                 hisGraphicalVector[j][i]->getButton()->setStyleSheet(
                                 "background-color: rgba(181, 136, 99, 1);"
                                 "border:1px solid black;"
@@ -383,7 +340,16 @@ void ChessBoard::move(const pairCoord & coordMove,const pairCoord & coordPiece)
              this->getChessboard()[coordMove.first][coordMove.second]->getCoord().first == 7))
     {
         Color color;
-        this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white ? color = white : color = black;
+
+        if(this->getChessboard()[coordPiece.first][coordPiece.second]->getColor() == white)
+        {
+            color = white;
+        }
+        else
+        {
+            color = black;
+        }
+//        this->getChessboard()[coordMove.first][coordMove.second]->getColor() == white ? color = white : color = black;
         if(color == black)
         {
             myChessBoard[coordMove.first][coordMove.second] = shared_ptr<Piece>(new Queen(black,pairCoord(coordMove.first,coordMove.second)));

@@ -155,11 +155,13 @@ void GfxObject::Select()
                         this->hisBoard->setCoordClicked(pairCoord(9,9));
                         this->hisBoard->switchClickedSignal(); //deselect
                         this->Clicked = false; //fait la bascule de deselection
-                        this->button->setStyleSheet(
-                                    "background-color: rgba(241, 217, 181, 1);"
-//                                    "background:white;"
-                                    "border:1px solid black;"
-                                    );
+                        this->hisBoard->getBoardClear();
+
+//                        this->button->setStyleSheet(
+//                                    "background-color: rgba(241, 217, 181, 1);"
+////                                    "background:white;"
+//                                    "border:1px solid black;"
+//                                    );
                     }
                     this->button->show(); //refresh l'ihm
                 }
