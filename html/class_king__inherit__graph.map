@@ -1,4 +1,0 @@
-<map id="King" name="King">
-<area shape="rect" id="node1" title="classe du roi, dérive de Pièce" alt="" coords="9,80,59,107"/>
-<area shape="rect" id="node2" href="$class_piece.html" title="classe virtuelle Piece Une pièce est définie par sa couleur, postion, caractère d&#39;affichage...." alt="" coords="5,5,63,32"/>
-</map>

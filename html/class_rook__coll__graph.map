@@ -1,4 +1,0 @@
-<map id="Rook" name="Rook">
-<area shape="rect" id="node1" title="classe la tour" alt="" coords="7,80,61,107"/>
-<area shape="rect" id="node2" href="$class_piece.html" title="classe virtuelle Piece Une pièce est définie par sa couleur, postion, caractère d&#39;affichage...." alt="" coords="5,5,63,32"/>
-</map>
