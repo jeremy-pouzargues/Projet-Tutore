@@ -1,7 +1,7 @@
 /**
  * @file   ChoosePieceInterface.h include "GraphicalObject/ChoosePieceInterface.h"
  * @author François
- * @version 1.0
+ * @version 1.1
  **/
 #ifndef CHOOSEPIECEINTERFACE_H
 #define CHOOSEPIECEINTERFACE_H

@@ -1,7 +1,7 @@
 /**
  * @file mainwindow.h include "GraphicalObject/mainwindow.h"
  * @author François
- * @version 1.0
+ * @version 1.1
  */
   
 #ifndef MAINWINDOW_H

@@ -1,3 +1,9 @@
+/**
+ * @file Chrono.h include "GraphicalObject/Chrono.h"
+ * @author François
+ * @version 1.1
+ */
+
 #ifndef CHRONO_H
 #define CHRONO_H
 

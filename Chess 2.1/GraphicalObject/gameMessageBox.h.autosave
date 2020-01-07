@@ -1,7 +1,7 @@
 /**
  * @file gameMessageBox.h include "GraphicalObject/gameMessageBox.h"
  * @author François
- * @version 1.0
+ * @version 1.1
  */
 #ifndef GAMEMESSAGEBOX_H
 #define GAMEMESSAGEBOX_H

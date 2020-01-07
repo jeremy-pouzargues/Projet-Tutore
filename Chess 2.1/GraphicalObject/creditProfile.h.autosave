@@ -1,7 +1,7 @@
 /**
  * @file creditProfile.h include "GraphicalObject/creditProfile.h"
  * @author François
- * @version 1.0
+ * @version 1.1
  */
 #ifndef CREDITPROFILE_H
 #define CREDITPROFILE_H

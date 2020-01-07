@@ -1,7 +1,7 @@
 /**
  * @file GfxObject.h include "GraphicalObject/GfxObject.h"
  * @author François
- * @version 1.0
+ * @version 1.1
  */
 #ifndef GFXOBJECT_H
 #define GFXOBJECT_H
