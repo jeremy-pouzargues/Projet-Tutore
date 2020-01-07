@@ -9,9 +9,11 @@
 
 using namespace std;
 
+//#include "GraphicalObject/ChoosePieceInterface.h"
+
 int main(int argc, char *argv[])
 {
-    QApplication TheApplication(argc, argv);
+    QApplication TheApplication(argc, argv);    
     MainWindow TheGame;
     TheGame.setFixedSize(600,800);
     TheGame.show();

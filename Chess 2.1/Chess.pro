@@ -15,6 +15,7 @@ QT += widgets
 
 SOURCES += \
         Chessboard/Chessboard.cpp \
+        GraphicalObject/ChoosePieceInterface.cpp \
         GraphicalObject/ChoosePieceWindow.cpp \
         GraphicalObject/Chrono.cpp \
         GraphicalObject/GfxObject.cpp \
@@ -86,6 +87,7 @@ DISTFILES += \
 
 HEADERS += \
     Chessboard/Chessboard.h \
+    GraphicalObject/ChoosePieceInterface.h \
     GraphicalObject/ChoosePieceWindow.h \
     GraphicalObject/Chrono.h \
     GraphicalObject/GfxObject.h \
