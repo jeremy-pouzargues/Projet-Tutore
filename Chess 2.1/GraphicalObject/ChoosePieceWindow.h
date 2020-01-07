@@ -1,3 +1,8 @@
+/**
+ * @file ChoosePieceWindow.h include "GraphicalObject/ChoosePieceWindow.h"
+ * @author François
+ * @version 1.0
+ */
 #ifndef CHOOSEPIECEWINDOW_H
 #define CHOOSEPIECEWINDOW_H
 

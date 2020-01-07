@@ -1,3 +1,8 @@
+/**
+ * @file windowCommandsButton.h include "GraphicalObject/windowCommandButton.h"
+ * @author François
+ * @version 1.0
+ */
 #ifndef WINDOWCOMMANDSBUTTON_H
 #define WINDOWCOMMANDSBUTTON_H
 
