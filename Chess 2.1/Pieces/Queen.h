@@ -1,15 +1,17 @@
 /**
  * @author Leo
- * @file Queen.h
- * @brief  classe de la piece reine, fille de Piece
- * @class Queen include "headers/Queen.h"
- * @version 1.0
+ * @file   Queen.h include "headers/Queen.h"
+ * @version 1.1
  */
 #ifndef QUEEN_H
 #define QUEEN_H
 
 #include "Piece.h"
 
+/**
+ * @brief classe de la reine
+ * @class Queen : public piece
+ */
 class Queen : public Piece
 {
 public:

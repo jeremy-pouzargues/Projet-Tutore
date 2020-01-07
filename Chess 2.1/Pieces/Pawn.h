@@ -1,9 +1,7 @@
 /**
  * @author Jérémy
- * @file Pawn.h
- * @version 1.1
- * @brief classe du pion, fille de Piece
- * @class Pawn include "headers/Pawn.h"
+ * @file Pawn.h include "headers/Pawn.h"
+ * @version 1.3
  */
 #ifndef PAWN_H
 #define PAWN_H
@@ -11,8 +9,9 @@
 #include <iostream>
 #include "Piece.h"
 /**
- * @brief The Pawn class
- * @version 1.0
+ * @brief classe du pion dérive de Piece
+ * @version 1.3
+ * @class Pawn : public Piece
  * @date 20/11/2019
  */
 class Pawn : public Piece

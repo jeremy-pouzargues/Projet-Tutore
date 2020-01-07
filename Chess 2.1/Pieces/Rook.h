@@ -1,9 +1,8 @@
 /**
 * @author Laurent, Leo
-* @file   Rook.h
-* @version 1.0
+* @file   Rook.h include "headers/Rook.h"
+* @version 1.1
 * @date 21/11/2019
-* @brief classe de la tour, fille de Piece
 */
 #ifndef ROOK_H
 #define ROOK_H
@@ -11,6 +10,10 @@
 #include "Utils/Const.h"
 #include "Piece.h"
 
+/**
+ * @brief classe la tour
+ * @class Rook : public Piece
+ */
 class Rook : public Piece {
 public:
     Rook() {}
