@@ -6,8 +6,8 @@
  * @version 1.0
  **/
 
-#ifndef ECHIQUIER_H
-#define ECHIQUIER_H
+#ifndef CHESSBOARD_H
+#define CHESSBOARD_H
 
 #include <iostream>
 #include <vector>
@@ -108,4 +108,4 @@ public:
 };//Echiquier
 
 
-#endif // ECHIQUIER_H
+#endif // CHESSBOARD_H

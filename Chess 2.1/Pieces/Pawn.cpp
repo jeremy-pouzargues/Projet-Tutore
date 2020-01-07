@@ -10,10 +10,7 @@ Pawn::Pawn(const Color & color,const pairCoord & coord)
     myInitCoord = coord;
     myName = "Pawn";
     myValue = 100;
-<<<<<<< HEAD:Chess 2.1/Pieces/Pawn.cpp
     canCastling = false;
-=======
->>>>>>> laurent:echecs/Pawn.cpp
 
     color == white ? myCarac = KPAWNW : myCarac = KPAWNB;
 }//Pawn()
