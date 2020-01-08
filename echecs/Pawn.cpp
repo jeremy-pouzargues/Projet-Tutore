@@ -10,6 +10,7 @@ Pawn::Pawn(const Color & color,const pairCoord & coord)
     myInitCoord = coord;
     myName = "Pawn";
     myValue = 100;
+    canCastling = false;
 
     color == white ? myCarac = KPAWNW : myCarac = KPAWNB;
 }//Pawn()

@@ -12,6 +12,7 @@ Queen::Queen(const Color & color,const pairCoord & coord)
     color == white ? myCarac = KQUEENW : myCarac = KQUEENB;
     myName = "Queen";
     myValue = 900;
+    canCastling = false;
 }
 
 Queen::Queen(const Color & color,const pairCoord & coord, const pairCoord & initCoord)

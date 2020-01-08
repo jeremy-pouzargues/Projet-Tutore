@@ -9,5 +9,8 @@ Empty::Empty(const pairCoord & coord)
     myCoord = coord;
     myColor = empty;
     myName  = "Empty";
+    myValue = 0;
+    myInitCoord = coord;
+    canCastling = false;
 }
 
