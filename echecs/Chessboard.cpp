@@ -274,33 +274,33 @@ vector<vector<pairCoord>> ChessBoard::getVEatOpponent(const VPieces & VPiecesOpp
 
 
             // si le roi n'est pas tout en haut
-            if(line != 0)
+            if(line > 0)
             {
-                if(column != 0 && this->getChessboard()[line-1][column-1]->getColor() != colorPiece )
+                if(column > 0 && this->getChessboard()[line-1][column-1]->getColor() != colorPiece )
                     VMovesKing.push_back(pairCoord(line-1,column-1));
                 if(this->getChessboard()[line-1][column]->getColor() != colorPiece )
                     VMovesKing.push_back(pairCoord(line-1,column));
-                if(column != 7 && this->getChessboard()[line-1][column+1]->getColor() != colorPiece )
+                if(column < 7 && this->getChessboard()[line-1][column+1]->getColor() != colorPiece )
                     VMovesKing.push_back(pairCoord(line-1,column+1));
             }
 
             // pas tout à droite et si le pion à sa droite n'est pas de la même couleur
-            if(column !=7 && this->getChessboard()[line][column+1]->getColor() != colorPiece )
+            if(column < 7 && this->getChessboard()[line][column+1]->getColor() != colorPiece )
                 VMovesKing.push_back(pairCoord(line,column+1));
 
             //tout en bas
-            if(line != 7)
+            if(line < 7)
             {
-                if(column != 7 && this->getChessboard()[line+1][column+1]->getColor() != colorPiece )
+                if(column < 7 && this->getChessboard()[line+1][column+1]->getColor() != colorPiece )
                     VMovesKing.push_back(pairCoord(line+1,column+1));
                 if(this->getChessboard()[line+1][column]->getColor() != colorPiece )
                     VMovesKing.push_back(pairCoord(line+1,column));
-                if(column != 0 && this->getChessboard()[line+1][column-1]->getColor() != colorPiece )
+                if(column > 0 && this->getChessboard()[line+1][column-1]->getColor() != colorPiece )
                     VMovesKing.push_back(pairCoord(line+1, column-1));
             }
 
             // de même qu'à droite mais à gauche merci.
-            if(column != 0 && this->getChessboard()[line][column-1]->getColor() != colorPiece )
+            if(column > 0 && this->getChessboard()[line][column-1]->getColor() != colorPiece )
                 VMovesKing.push_back(pairCoord(line,column-1));
 
             VEatOpponent.push_back(VMovesKing);
@@ -324,9 +324,9 @@ vector<vector<pairCoord>> ChessBoard::getVEatOpponent(const VPieces & VPiecesOpp
                 colorOpponent = white;
             }
             //Ces deux conditions vont regarder si des pièces sont dans les diagonales directes de notre pion afin de pouvoir éventuellement les manger
-            if (column != 7 && this->getChessboard()[newLine][column + 1]->getColor() == colorOpponent)
+            if (column < 7 && this->getChessboard()[newLine][column + 1]->getColor() == colorOpponent)
                 VEatPawn.push_back(this->getChessboard()[newLine][column + 1]->getCoord());
-            if (column != 0 && this->getChessboard()[newLine][column - 1]->getColor() == colorOpponent)
+            if (column > 0 && this->getChessboard()[newLine][column - 1]->getColor() == colorOpponent)
                 VEatPawn.push_back(this->getChessboard()[newLine][column - 1]->getCoord());
             VEatOpponent.push_back(VEatPawn);
         }
@@ -379,7 +379,6 @@ bool ChessBoard::isCheckMate(const bool & player)
             for (pairCoord tryCoord : piece->legalMoves(bufChessboard.getChessboard(), bufChessboard.getVEatOpponent(vPiecesOpponent)))
             {
                 // tampon de sauvegarde
-                //                ChessBoard tmpChessboard(this->getChessboard(), this->getPiecesW(), this->getPiecesB(), this->getMyDeadPieceW(), this->getMyDeadPieceB());
                 tmpChessboard.move(tryCoord, piece->getCoord());
                 if (player)
                 {

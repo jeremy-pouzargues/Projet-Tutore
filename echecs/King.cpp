@@ -85,14 +85,13 @@ vector<pairCoord> King::legalMoves(const vector<vector<shared_ptr<Piece>>> & mat
 }//legalMoves()
 
 
-
 bool King::find(const pairCoord & coordPiece, const vector<vector<pairCoord>> & listMovesOpponent)
 {
-    for (unsigned i(0); i < listMovesOpponent.size(); ++i)
+    for (vector<pairCoord> vMovesOpp : listMovesOpponent)
     {
-        for (unsigned j(0); j < listMovesOpponent[i].size(); ++j)
+        for (pairCoord moveOpp : vMovesOpp)
         {
-            if(coordPiece == listMovesOpponent[i][j]) return true;
+            if(coordPiece == moveOpp) return true;
         }
     }
     return false;
