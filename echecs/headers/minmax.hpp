@@ -247,6 +247,7 @@ std::vector<pairCoord> finalMinmax(ChessBoard & chessboard, const int & depth, c
             pairCoord coordMove = possibleMove;
             actualChessboard.move(possibleMove,piece->getCoord());
             // on réévalue l'echiquier après ce déplacement
+
             int eval = minmax(actualChessboard,depth-1,!maximizingPlayer);
             // on regarde si le score est plus élevé que le score max actuelle
             // si oui ce coup est plus intéréssant
