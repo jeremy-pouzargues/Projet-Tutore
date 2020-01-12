@@ -6,8 +6,7 @@ Projet tutoré de deuxième année IUT informatique AMU.
 2019-2020
 
 ## Screenshots
-Include logo/demo screenshot etc.
-
+<a href="https://gyazo.com/3dc6c7f6dd15d47aaf93dad5e2b32327"><img src="https://i.gyazo.com/3dc6c7f6dd15d47aaf93dad5e2b32327.gif" alt="Image from Gyazo" width="594"/></a>
 ## Langage
 - C++
 
