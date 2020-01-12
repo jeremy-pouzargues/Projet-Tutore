@@ -8,7 +8,7 @@ Projet tutoré de deuxième année IUT informatique AMU.
 ## Screenshots
 Include logo/demo screenshot etc.
 
-##Langage
+## Langage
 - C++
 
 <b>Built with</b>
