@@ -14,7 +14,7 @@ Projet tutoré de deuxième année IUT informatique AMU.
 - [Qt](https://www.qt.io/)
 
 ## Installation
-Provide step by step series of examples and explanations about how to get a development env running.
+Lancer le .pro sur Qt.
 
 ## Credits
 - Laurent Vouriot
