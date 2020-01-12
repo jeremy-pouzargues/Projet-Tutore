@@ -1,16 +1,18 @@
 ## Titre du projet
-Jeu d'echec avec une Intelligence Artificielle implantée.
+Jeu d'echec avec intelligence artificielle algorithme minmax.
 
 ## Motivation
-C'est un projet tutoré de deuxième année de l'IUT informatique d'aix en provence.
+Projet tutoré de deuxième année IUT informatique AMU.
+2019-2020
 
 ## Screenshots
 Include logo/demo screenshot etc.
 
+#Langage
+- C++
+
 <b>Built with</b>
 - [Qt](https://www.qt.io/)
-
-## Features
 
 ## Installation
 Provide step by step series of examples and explanations about how to get a development env running.
@@ -20,7 +22,5 @@ Provide step by step series of examples and explanations about how to get a deve
 - Léo Dalloz
 - Jérémy Pouzargues
 - François Al Haddad-Siderikoudis
-
-#### Anything else that seems useful
 
 ## License
