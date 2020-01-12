@@ -1,9 +1,7 @@
 /**
  * @file Bishop.h
  * @author Léo
- * @brief classe du fou fille de Piece
- * @class Bishop include "headers/Bishop.h"
- * @version 1.0
+ * @version 1.3
  */
 #ifndef BISHOP_H
 #define BISHOP_H
@@ -11,6 +9,10 @@
 #include "Piece.h"
 
 
+/**
+* @brief classe du fou fille de Piece
+* @class Bishop include "headers/Bishop.h"
+**/
 class Bishop : public Piece
 {
 public:

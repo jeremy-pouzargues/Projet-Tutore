@@ -1,0 +1,9 @@
+<map id="Chessboard/Chessboard.h" name="Chessboard/Chessboard.h">
+<area shape="rect" id="node2" href="$_gfx_object_8h_source.html" title="GraphicalObject/GfxObject.h" alt="" coords="5,244,195,271"/>
+<area shape="rect" id="node3" href="$_chrono_8h_source.html" title="GraphicalObject/Chrono.h" alt="" coords="150,87,322,114"/>
+<area shape="rect" id="node5" href="$init_thread_8h_source.html" title="Thread/initThread.h" alt="" coords="346,87,481,114"/>
+<area shape="rect" id="node6" href="$_choose_piece_window_8h_source.html" title="GraphicalObject/ChoosePiece\lWindow.h" alt="" coords="505,80,703,121"/>
+<area shape="rect" id="node7" href="$_choose_piece_interface_8h_source.html" title="GraphicalObject/ChoosePiece\lInterface.h" alt="" coords="727,80,924,121"/>
+<area shape="rect" id="node8" href="$minmax_8hpp.html" title="IA/minmax.hpp" alt="" coords="949,87,1059,114"/>
+<area shape="rect" id="node4" href="$mainwindow_8h_source.html" title="GraphicalObject/mainwindow.h" alt="" coords="149,169,352,196"/>
+</map>

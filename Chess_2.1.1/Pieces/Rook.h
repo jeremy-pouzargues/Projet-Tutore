@@ -3,7 +3,6 @@
 * @file   Rook.h
 * @version 1.0
 * @date 21/11/2019
-* @brief classe de la tour, fille de Piece
 */
 #ifndef ROOK_H
 #define ROOK_H
@@ -11,6 +10,10 @@
 #include "Utils/Const.h"
 #include "Piece.h"
 
+/**
+* @brief classe de la tour, fille de Piece
+* @class Rook, include "Pieces/Rook.h"
+**/
 class Rook : public Piece {
 public:
     Rook() {}

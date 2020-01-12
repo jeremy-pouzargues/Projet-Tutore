@@ -1,9 +1,7 @@
 /**
  * @author Leo
  * @file   Empty.h
- * @brief  objet représentant une case vide, fille de la classe Piece
- * @version 1.0
- * @class Empty include "headers/Empty.h"
+ * @version 1.2
  */
 
 #ifndef EMPTY_H
@@ -11,6 +9,10 @@
 
 #include "Piece.h"
 
+/**
+ * @brief classe de la pièce vide, fille de Piece
+ * @class Empty include "Pieces/Empty.h"
+ */
 class Empty : public Piece
 {
 public:

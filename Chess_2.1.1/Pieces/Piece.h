@@ -1,12 +1,8 @@
 /**
  * @author Jérémy, Laurent, Leo
- * @brief classe abstraite qui definit les pièces avec leur couleur, postion, caractère d'affichage.
- * La fonction virtuelle legalMoves constitue un vecteur de paires de coordonnées, qui représente toutes les cases accessibles par cette pièce
- * selon sa position.
- * @class Piece  "include headers/Piece.h"
- * @version 1.1
  * @file Piece.h
- */
+ * @version 1.8
+ **/
 #ifndef PIECE_H
 #define PIECE_H
 
@@ -15,6 +11,15 @@
 #include <vector>
 #include <memory>
 
+
+/**
+ * @brief classe virutelle Piece
+ * @class Piece  "include Pieces/Piece.h"
+ *
+ * definit les pièces avec leur couleur, leur postion, leur caractère d'affichage, leur coordonnées initiales leur nom et leur valeur (fonction d'évaluation).
+ * La fonction virtuelle legalMoves constitue un vecteur de paires de coordonnées, qui représente toutes les cases accessibles par cette pièce
+ * selon sa position. Elle est surchargée dans toutes les classes filles car toutes les pièces se déplancent différement
+ */
 class Piece {
 protected:
     Color           myColor;
@@ -29,14 +34,10 @@ public:
     virtual ~Piece() {}
 
     /**
-     * @brief fonction abstraite de mouvement des pieces, elle sera derivée et adaptée aux déplacements de la piece
+     * @brief fonction virtuelle de mouvement des pieces, elle sera derivée et adaptée aux déplacements de la piece
      * elle verifie que le deplacement respecte les règles
-     * @param pairCoord coord : coordonnées de déplacement
-     * @return pairCoord
-     */
-    /*
-     *elle pourrait être juste un booleen qui confime si le mouvement est legal ou non.
-     *
+     * @param vector<vector<shared_ptr<Piece>>> & matrix : échiquer à la position P actuelle
+     * @return vector<pairCoord> : listes des mouvements possibles
      */
     virtual std::vector<pairCoord> legalMoves(const std::vector<std::vector<std::shared_ptr<Piece>>> & matrix ) = 0;
 
@@ -60,7 +61,6 @@ public:
 
 
     //getters
-    // il faut qu'on m'explique si on met en const ou pas.
     const Color       & getColor() const;
     const pairCoord   & getCoord() const;
     const pairCoord   & getInitCoord()const;

@@ -1,0 +1,9 @@
+<map id="Chessboard/Chessboard.h" name="Chessboard/Chessboard.h">
+<area shape="rect" id="node5" href="$_piece_8h.html" title="Pieces/Piece.h" alt="" coords="239,80,350,107"/>
+<area shape="rect" id="node9" href="$_gfx_object_8h_source.html" title="GraphicalObject/GfxObject.h" alt="" coords="524,80,713,107"/>
+<area shape="rect" id="node7" href="$_const_8h.html" title="les differentes constantes, typedefs et enums " alt="" coords="108,155,207,181"/>
+<area shape="rect" id="node12" href="$mainwindow_8h_source.html" title="GraphicalObject/mainwindow.h" alt="" coords="917,155,1120,181"/>
+<area shape="rect" id="node17" href="$_chrono_8h_source.html" title="Chrono.h" alt="" coords="1460,229,1535,256"/>
+<area shape="rect" id="node20" href="$credit_profile_8h_source.html" title="creditProfile.h" alt="" coords="649,229,751,256"/>
+<area shape="rect" id="node24" href="$init_thread_8h_source.html" title="Thread/initThread.h" alt="" coords="1559,229,1694,256"/>
+</map>

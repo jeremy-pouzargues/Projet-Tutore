@@ -1,9 +1,7 @@
 /**
  * @file   ChessBoard.h
  * @author Leo, Laurent
- * @brief  classe echiquier avec un vecteur de vecteur de Piece, un matrice, qui represente l'echiquier
- * @class  Echiquier Echiquier.h "include Echiquier.h"
- * @version 1.0
+ * @version 1.5
  **/
 
 #ifndef ECHIQUIER_H
@@ -24,6 +22,10 @@ typedef std::vector<std::shared_ptr<Piece>> VPieces;
 
 class MainWindow;
 
+/**
+* @brief  classe echiquier avec un vecteur de vecteur de Piece, un matrice, qui represente l'echiquier
+* @class  ChessBoard, include "Chessboard/ChessBoard.h"
+**/
 class ChessBoard {
 private:
     Matrix myChessBoard;                                                        // matrice de toutes les cases/pieces
@@ -74,15 +76,47 @@ public:
      void setPiecesW (const VPieces & newVPieceW);
      void setPiecesB (const VPieces & newVPieceB);
 
+
+     /**
+      * @brief déplacement de la pièce
+      * @param Coordonnées de déplacement de la pièce
+      * @param Coordonnées actuels de la pièce
+      */
      void move(const pairCoord & coordMove,const pairCoord & coordPiece);
 
-     void swap(const pairCoord & coordMove,const pairCoord & coordPiece);
-     bool find (const std::vector<pairCoord> & legalMoves, const pairCoord & moveChosen);
-     std::vector<std::vector<pairCoord>> getVEatOpponent(const VPieces & VPiecesOpponent);
 
+     /**
+      * @brief échange la position de 2 pièces (en l'occurence une case vide et une pièce)
+      * @param Coordonnées de déplacement de la pièce
+      * @param Coordonnées actuels de la pièce
+      */
+     void swap(const pairCoord & coordMove,const pairCoord & coordPiece);
+
+     bool find (const std::vector<pairCoord> & legalMoves, const pairCoord & moveChosen);
+     /**
+      * @brief renvoie l'ensemble des pièces qui menaçent les pièces du joueur
+      * @param VPiecesOpponent vecteur des pièces adverses
+      * @return vecteur de vecteur de coordonnées
+      */
+     std::vector<std::vector<pairCoord>> getVEatOpponent(const VPieces & VPiecesOpponent);
+     /**
+      * @brief converti l'échiquier (matrice) en vecteur
+      * @param matrixCoord vecteur de vecteur de paires  de coordonnées qui réprésente l'échiquier
+      * @return un vecteur de paire de coordonnées
+      */
      std::vector<pairCoord> matrixToVector (const std::vector<std::vector<pairCoord>> & matrixCoord);
 
+     /**
+      * @brief verifie si la pièce est en échec et mat
+      * @param player : joueur en cours
+      * @return true si en échec et mats false sinon
+      */
      bool isCheckMate (const bool & player);
+
+
+
+
+//===================================== IHM ================================================================
 
      void display(QWidget * currentPage,MainWindow * hisMainWindow); //ANCIENNEMENT SHOW //FRANFRAN
 

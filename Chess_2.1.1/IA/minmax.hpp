@@ -1,3 +1,9 @@
+/**
+ * @file   minmax.hpp
+ * @author Leo, Laurent
+ * @version 1.7
+ **/
+
 #ifndef MINMAX_HPP
 #define MINMAX_HPP
 
@@ -15,6 +21,12 @@ int count(const std::vector<pairCoord> & vCoord, const pairCoord & coord)
     return cpt;
 }
 
+
+/**
+ * @brief fonction d'évaluation d'un échiquier à une position P
+ * @param chessboard : échiquier à une position P
+ * @return un score qui est calculé selon plusieurs paramètres
+ */
 int evaluation(const ChessBoard chessboard)
 {
     int compteur = 0;
@@ -116,6 +128,13 @@ int evaluation(const ChessBoard chessboard)
 }
 
 
+/**
+ * @brief algorithme minmax
+ * @param chessboard : échiquier
+ * @param depth : pronfondeur de parcours  de l'arborescence de jeu
+ * @param maximizingPlayer : joueur en cours si vrai joueur maximisant sinon joueur minimisant
+ * @return un score
+ */
 int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlayer)
 {
     ChessBoard actualChessboard(chessboard.getChessboard(), chessboard.getPiecesW(), chessboard.getPiecesB(), chessboard.getMyDeadPieceW(), chessboard.getMyDeadPieceB());
@@ -222,6 +241,13 @@ int minmax(ChessBoard & chessboard,const int & depth,const bool & maximizingPlay
 }//minmax()
 
 
+/**
+ * @brief finalMinmax, appelle de manière recursive la fonction minmax()
+ * @param chessboard
+ * @param depth
+ * @param maximizingPlayer
+ * @return le meilleur coup à jouer sous forme de vecteur de coordonnées
+ */
 std::vector<pairCoord> finalMinmax(ChessBoard & chessboard, const int & depth, const bool & maximizingPlayer)
 {
     ChessBoard actualChessboard(chessboard.getChessboard(), chessboard.getPiecesW(), chessboard.getPiecesB(), chessboard.getMyDeadPieceW(), chessboard.getMyDeadPieceB());

@@ -1,0 +1,19 @@
+<map id="Utils/Const.h" name="Utils/Const.h">
+<area shape="rect" id="node2" href="$_piece_8h.html" title="Pieces/Piece.h" alt="" coords="663,80,774,107"/>
+<area shape="rect" id="node13" href="$_rook_8h.html" title="Pieces/Rook.h" alt="" coords="193,155,301,181"/>
+<area shape="rect" id="node18" href="$_c_exc_8h.html" title="Classe d&#39;exception des tp modifiée pour le jeu d&#39;échecs, dérive de exception. " alt="" coords="798,80,895,107"/>
+<area shape="rect" id="node3" href="$_chessboard_8h.html" title="Chessboard/Chessboard.h" alt="" coords="325,155,502,181"/>
+<area shape="rect" id="node11" href="$_pawn_8h.html" title="Pieces/Pawn.h" alt="" coords="526,155,637,181"/>
+<area shape="rect" id="node12" href="$_empty_8h.html" title="Pieces/Empty.h" alt="" coords="661,155,776,181"/>
+<area shape="rect" id="node14" href="$_knight_8h.html" title="Pieces/Knight.h" alt="" coords="800,155,915,181"/>
+<area shape="rect" id="node15" href="$_bishop_8h.html" title="Pieces/Bishop.h" alt="" coords="939,155,1056,181"/>
+<area shape="rect" id="node16" href="$_queen_8h.html" title="Pieces/Queen.h" alt="" coords="1080,155,1195,181"/>
+<area shape="rect" id="node17" href="$_king_8h.html" title="Pieces/King.h" alt="" coords="1219,155,1322,181"/>
+<area shape="rect" id="node4" href="$_gfx_object_8h_source.html" title="GraphicalObject/GfxObject.h" alt="" coords="5,393,195,420"/>
+<area shape="rect" id="node5" href="$_chrono_8h_source.html" title="GraphicalObject/Chrono.h" alt="" coords="150,237,322,263"/>
+<area shape="rect" id="node7" href="$init_thread_8h_source.html" title="Thread/initThread.h" alt="" coords="346,237,481,263"/>
+<area shape="rect" id="node8" href="$_choose_piece_window_8h_source.html" title="GraphicalObject/ChoosePiece\lWindow.h" alt="" coords="505,229,703,271"/>
+<area shape="rect" id="node9" href="$_choose_piece_interface_8h_source.html" title="GraphicalObject/ChoosePiece\lInterface.h" alt="" coords="727,229,924,271"/>
+<area shape="rect" id="node10" href="$minmax_8hpp.html" title="IA/minmax.hpp" alt="" coords="949,237,1059,263"/>
+<area shape="rect" id="node6" href="$mainwindow_8h_source.html" title="GraphicalObject/mainwindow.h" alt="" coords="149,319,352,345"/>
+</map>
